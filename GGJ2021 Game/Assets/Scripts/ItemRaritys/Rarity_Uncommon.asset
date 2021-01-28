@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3989a143945beb143962b15a92661374, type: 3}
   m_Name: Rarity_Uncommon
   m_EditorClassIdentifier: 
-  NameColor: {r: 0, g: 0.7169812, b: 0.0025634407, a: 0}
+  NameColor: {r: 0, g: 0.7169812, b: 0.0025634407, a: 1}
   MaxGoldValue: 0
   MaxStrength: 0
   MaxDurability: 0
