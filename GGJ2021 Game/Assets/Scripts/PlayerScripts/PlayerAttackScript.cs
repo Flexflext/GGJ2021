@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackScript : MonoBehaviour
 {
+    public float DamageMultiplier;
+
     public float CurrentAttackDamage;
     public float CurrentAttackSpeed;
     public float CurrentAttackRange;
