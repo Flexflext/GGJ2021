@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Item : MonoBehaviour
+public class UnusableItem : Item
 {
-    public string Name;
-    public ItemRarity Rarity;
-    public Sprite Icon;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +16,8 @@ public abstract class Item : MonoBehaviour
         
     }
 
-    public abstract void GenerateRandomStats();
+    public override void GenerateRandomStats()
+    {
+        
+    }
 }
