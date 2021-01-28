@@ -9,7 +9,7 @@ public class ItemTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.X))
         {
             var items = generator.GenerateItems(100);
             foreach (var item in items)

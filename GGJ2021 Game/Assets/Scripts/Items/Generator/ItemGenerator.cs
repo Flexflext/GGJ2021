@@ -30,9 +30,15 @@ public class ItemGenerator : MonoBehaviour
 
             var item = new GameObject
             {
-                name = $"{itemName} ({itemRarity.name}, {itemType.name})"
+                name = $"{itemName} ({itemRarity.name}, {itemType.name})",
+                tag = "Item"
             };
-
+            item.transform.localScale = new Vector3(3, 3, 3);
+            
+            var itemCollider = item.AddComponent<BoxCollider2D>();
+            itemCollider.size = new Vector2(0.16F, 0.16F);
+            itemCollider.isTrigger = true;
+            
             var componentClass = Type.GetType(itemType.component);
             var itemComponent = (Item)item.AddComponent(componentClass);
             itemComponent.Name = itemName;
