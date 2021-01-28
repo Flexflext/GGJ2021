@@ -8,4 +8,9 @@ public class SwordItem : Item
     {
         
     }
+    
+    public override string GetItemInfo()
+    {
+        return "";
+    }
 }

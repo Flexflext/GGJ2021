@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3a6b1b3e7d49799054114880c94673, type: 3}
   m_Name: Unusable
   m_EditorClassIdentifier: 
-  spawnProbability: 70
+  spawnProbability: 100
   component: UnusableItem

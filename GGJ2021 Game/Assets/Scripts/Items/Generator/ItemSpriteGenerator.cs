@@ -11,7 +11,24 @@ public class ItemSpriteGenerator
     public static Sprite generateSprite(ItemRarity rarity, ItemType itemType)
     {
         var path = $"ItemSprites/{itemType.name}/{rarity.name}";
+        var generalPath = $"ItemSprites/{itemType.name}/{rarity.name}";
 
+        spriteCache.TryGetValue(path, out var sprites);
+        if (sprites == null)
+        {
+            // There are some sprites that apply for every rarity-level.
+            // We union the rarity-specific and general sprites the rarity-sprites are not loaded yet
+            var raritySprites = GetOrLoadSprites(path);
+            var generalSprites = GetOrLoadSprites($"ItemSprites/{itemType.name}");
+            sprites = raritySprites.Union(generalSprites).ToArray();
+            spriteCache[path] = sprites;
+        }
+        
+        return sprites[Random.Range(0, sprites.Length)];
+    }
+
+    private static Sprite[] GetOrLoadSprites(string path)
+    {
         spriteCache.TryGetValue(path, out var sprites);
         if (sprites == null)
         {
@@ -19,6 +36,6 @@ public class ItemSpriteGenerator
             spriteCache[path] = sprites;
         }
 
-        return sprites[Random.Range(0, sprites.Length)];
+        return sprites;
     }
 }
