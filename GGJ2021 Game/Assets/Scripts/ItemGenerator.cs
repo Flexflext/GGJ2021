@@ -1,44 +1,40 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class ItemGenerator : MonoBehaviour
 {
-    private enum ERarity
+    private IEnumerable<ItemRarity> _itemRarities;
+    private IEnumerable<ItemType> _itemTypes;
+
+    private void Awake()
     {
-        Common,
-        Uncommon,
-        Rare,
-        Epic,
-        Legendary
+        _itemRarities = Resources.LoadAll<ItemRarity>("StructuredObjects/ItemRarities").OrderBy(i => i.SpawnProbability);
+        _itemTypes = Resources.LoadAll<ItemType>("StructuredObjects/ItemTypes").OrderBy(i => i.spawnProbability);
     }
 
-    public enum EItemType
-    {
-        Unusable
-    }
-
-    private readonly Array _itemTypes = Enum.GetValues(typeof(EItemType));
-
-    [SerializeField] private ItemRarity[] itemRarities;
-
-    public List<GameObject> GenerateItems(int amount)
+    public IEnumerable<GameObject> GenerateItems(int amount)
     {
         List<GameObject> items = new List<GameObject>(amount);
         for (int i = 0; i < amount; i++)
         {
-            EItemType itemType = (EItemType) _itemTypes.GetValue(Random.Range(0, _itemTypes.Length));
             var itemName = NameGenerator.generateName();
-            var itemRarity = itemRarities[(int) GenerateRarity()];
+            var itemRarity = GenerateRarity();
+            var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
 
-            var item = new GameObject();
-            item.name = itemName;
+            var item = new GameObject
+            {
+                name = $"{itemName} ({itemRarity.name}, {itemType.name})"
+            };
 
-            var itemComponent = GenerateComponent(item, itemType);
+            var componentClass = Type.GetType(itemType.component);
+            var itemComponent = (Item)item.AddComponent(componentClass);
             itemComponent.Name = itemName;
             itemComponent.Rarity = itemRarity;
             itemComponent.Icon = itemSprite;
@@ -51,46 +47,32 @@ public class ItemGenerator : MonoBehaviour
 
         return items;
     }
-
-    private static Item GenerateComponent(GameObject item, EItemType itemType)
-    {
-        switch (itemType)
-        {
-            case EItemType.Unusable:
-                return item.AddComponent<UnusableItem>();
-            default:
-                throw new NotSupportedException(itemType + " not implemented");
-        }
-    }
-
-    private ERarity GenerateRarity()
+    
+    private ItemRarity GenerateRarity()
     {
         var rarity = Random.Range(0, 100);
-        if (rarity < GetPropability(ERarity.Legendary))
+        foreach (var itemRarity in _itemRarities)
         {
-            return ERarity.Legendary;
+            if (itemRarity.SpawnProbability > rarity)
+            {
+                return itemRarity;
+            }
         }
 
-        if (rarity < GetPropability(ERarity.Epic))
-        {
-            return ERarity.Epic;
-        }
-
-        if (rarity < GetPropability(ERarity.Rare))
-        {
-            return ERarity.Rare;
-        }
-
-        if (rarity < GetPropability(ERarity.Uncommon))
-        {
-            return ERarity.Uncommon;
-        }
-
-        return ERarity.Common;
+        throw new NotSupportedException(rarity + " not spawnable");
     }
 
-    private int GetPropability(ERarity eRarity)
+    private ItemType GenerateItemType()
     {
-        return itemRarities[(int) eRarity].SpawnProbability;
+        var rarity = Random.Range(0, 100);
+        foreach (var itemType in _itemTypes)
+        {
+            if (itemType.spawnProbability > rarity)
+            {
+                return itemType;
+            }
+        }
+
+        throw new NotSupportedException(rarity + " not spawnable");
     }
 }

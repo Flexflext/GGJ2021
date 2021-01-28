@@ -9,12 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3989a143945beb143962b15a92661374, type: 3}
-  m_Name: Rarity_Legendary
+  m_Script: {fileID: 11500000, guid: ce3a6b1b3e7d49799054114880c94673, type: 3}
+  m_Name: Unusable
   m_EditorClassIdentifier: 
-  SpawnProbability: 1
-  NameColor: {r: 0.9528302, g: 0.51531845, b: 0, a: 0}
-  MaxGoldValue: 0
-  MaxStrength: 0
-  MaxDurability: 0
-  MaxUseDurability: 0
+  spawnProbability: 70
+  component: UnusableItem

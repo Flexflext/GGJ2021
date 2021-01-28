@@ -8,9 +8,9 @@ public class ItemSpriteGenerator
 {
     private static Dictionary<string, Sprite[]> spriteCache = new Dictionary<string, Sprite[]>();
 
-    public static Sprite generateSprite(ItemRarity rarity, ItemGenerator.EItemType itemType)
+    public static Sprite generateSprite(ItemRarity rarity, ItemType itemType)
     {
-        var path = $"Items/{itemType.ToString()}/{rarity.name}";
+        var path = $"ItemSprites/{itemType.name}/{rarity.name}";
 
         spriteCache.TryGetValue(path, out var sprites);
         if (sprites == null)
