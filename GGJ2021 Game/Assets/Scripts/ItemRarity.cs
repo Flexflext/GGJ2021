@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newItemRarity", menuName = "ScriptableObjects/ItemRarity")]
 public class ItemRarity : ScriptableObject
 {
+    // Between 0-100%
+    public int SpawnProbability;
+    
     //Color for the item name
     public Color NameColor;
 

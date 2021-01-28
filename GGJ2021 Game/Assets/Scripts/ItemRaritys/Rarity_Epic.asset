@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3989a143945beb143962b15a92661374, type: 3}
   m_Name: Rarity_Epic
   m_EditorClassIdentifier: 
+  SpawnProbability: 3
   NameColor: {r: 0.7075472, g: 0, b: 0.60411376, a: 1}
   MaxGoldValue: 0
   MaxStrength: 0

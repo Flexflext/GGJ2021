@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3989a143945beb143962b15a92661374, type: 3}
   m_Name: Rarity_Legendary
   m_EditorClassIdentifier: 
+  SpawnProbability: 1
   NameColor: {r: 0.9528302, g: 0.51531845, b: 0, a: 0}
   MaxGoldValue: 0
   MaxStrength: 0

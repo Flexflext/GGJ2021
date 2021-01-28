@@ -16,7 +16,13 @@ public class ItemGenerator : MonoBehaviour
         Legendary
     }
 
-    [SerializeField] private Sprite itemSprite;
+    public enum EItemType
+    {
+        Unusable
+    }
+
+    private readonly Array _itemTypes = Enum.GetValues(typeof(EItemType));
+
     [SerializeField] private ItemRarity[] itemRarities;
 
     public List<GameObject> GenerateItems(int amount)
@@ -24,51 +30,67 @@ public class ItemGenerator : MonoBehaviour
         List<GameObject> items = new List<GameObject>(amount);
         for (int i = 0; i < amount; i++)
         {
+            EItemType itemType = (EItemType) _itemTypes.GetValue(Random.Range(0, _itemTypes.Length));
+            var itemName = NameGenerator.generateName();
+            var itemRarity = itemRarities[(int) GenerateRarity()];
+            var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
+
             var item = new GameObject();
-            var itemBehaviour = GenerateBehaviour(item);
-            itemBehaviour.Name = NameGenerator.generateName();
-            itemBehaviour.Rarity = itemRarities[(int) GenerateRarity()];
-            item.name = itemBehaviour.Name;
-            itemBehaviour.Icon = itemSprite;
-            
+            item.name = itemName;
+
+            var itemComponent = GenerateComponent(item, itemType);
+            itemComponent.Name = itemName;
+            itemComponent.Rarity = itemRarity;
+            itemComponent.Icon = itemSprite;
+
             var spriteRenderer = item.AddComponent<SpriteRenderer>();
             spriteRenderer.sprite = itemSprite;
-            spriteRenderer.color = itemBehaviour.Rarity.NameColor;
+            //spriteRenderer.color = itemBehaviour.Rarity.NameColor;
             items.Add(item);
         }
 
         return items;
     }
 
-    private static Item GenerateBehaviour(GameObject item)
+    private static Item GenerateComponent(GameObject item, EItemType itemType)
     {
-        //TODO more item types
-        return item.AddComponent<UnusableItem>();
+        switch (itemType)
+        {
+            case EItemType.Unusable:
+                return item.AddComponent<UnusableItem>();
+            default:
+                throw new NotSupportedException(itemType + " not implemented");
+        }
     }
 
-    private static ERarity GenerateRarity()
+    private ERarity GenerateRarity()
     {
         var rarity = Random.Range(0, 100);
-        if (rarity >= 99)
+        if (rarity < GetPropability(ERarity.Legendary))
         {
             return ERarity.Legendary;
         }
 
-        if (rarity >= 97)
+        if (rarity < GetPropability(ERarity.Epic))
         {
             return ERarity.Epic;
         }
 
-        if (rarity >= 94)
+        if (rarity < GetPropability(ERarity.Rare))
         {
             return ERarity.Rare;
         }
 
-        if (rarity >= 70)
+        if (rarity < GetPropability(ERarity.Uncommon))
         {
             return ERarity.Uncommon;
         }
 
         return ERarity.Common;
+    }
+
+    private int GetPropability(ERarity eRarity)
+    {
+        return itemRarities[(int) eRarity].SpawnProbability;
     }
 }
