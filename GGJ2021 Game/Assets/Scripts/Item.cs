@@ -7,6 +7,7 @@ public abstract class Item : MonoBehaviour
     public string Name;
     public ItemRarity Rarity;
     public Sprite Icon;
+    public int GoldValue;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +20,8 @@ public abstract class Item : MonoBehaviour
     {
         
     }
+
+    public abstract string GetItemInfo();
 
     public abstract void GenerateRandomStats();
 }

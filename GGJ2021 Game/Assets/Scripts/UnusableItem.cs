@@ -4,20 +4,13 @@ using UnityEngine;
 
 public class UnusableItem : Item
 {
-    // Start is called before the first frame update
-    void Start()
+    public override string GetItemInfo()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return "A lost object wating to be found by its owner";
     }
 
     public override void GenerateRandomStats()
     {
-        
+        GoldValue = Random.Range(0, Rarity.MaxGoldValue + 1);
     }
 }
