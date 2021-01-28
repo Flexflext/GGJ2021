@@ -1,4 +1,4 @@
 ﻿public interface Usable
 {
-    public void Use();
+    void Use();
 }
