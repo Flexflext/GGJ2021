@@ -1,57 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 
 public class PotionItem : Item
 {
-    public float healthPercent = 1;
-    public float speedBuffPercent = 2;
-    public float attackBuffPercent = 2;
-    public float timeTillPotionsWearsOff = 10;
-
+    private PlayerBuff _itemBuff;
+    
     public override void GenerateRandomStats()
     {
-        
+        var stats = DistributeStats(4, 10);
+        _itemBuff = new PlayerBuff
+        {
+            HealOverTime = stats[0], 
+            SpeedBuff = stats[1] * 0.3F, 
+            AttackBuff = stats[2], 
+            Duration = stats[3]
+        };
     }
 
-    public override string GetItemInfo()
+    private int[] DistributeStats(int amount, int points)
     {
-        return "";
+        var arr = new int[amount];
+        for (var i = 0; i < points; i++)
+        {
+            arr[Random.Range(0, amount)]++;
+        }
+
+        return arr;
     }
 
     public override void OnPickup(GameObject player)
     {
-        var playerAttack = player.GetComponent<PlayerAttackScript>();
-        var playerMovement = player.GetComponent<PlayerTopDownMovement>();
-        var playerHealth = player.GetComponent<PlayerHealth>();
-
-        StopCoroutine("TimeTillEffectsResets");
-
-        playerAttack.DamageMultiplier *= attackBuffPercent;
-        playerMovement.MovementSpeedMultiplier *= speedBuffPercent;
-
-        if (healthPercent * playerHealth.MaxHealth >= playerHealth.MaxHealth)
-        {
-            playerHealth.CurrentHealth = playerHealth.MaxHealth;
-        }
-        else if (healthPercent * playerHealth.MaxHealth <= 0)
-        {
-            playerHealth.CurrentHealth = 1;
-        }
-        else
-        {
-            playerHealth.CurrentHealth += healthPercent * playerHealth.MaxHealth;
-        }
-
-        StartCoroutine(TimeTillEffectsResets(timeTillPotionsWearsOff, playerAttack, playerMovement));
+        var playerBuffs = player.GetComponent<PlayerBuffScript>();
+        playerBuffs.Activate(_itemBuff);
     }
-
-    private IEnumerator TimeTillEffectsResets(float time, PlayerAttackScript playerAttack, PlayerTopDownMovement playerMovement)
+    
+    public override string GetItemInfo()
     {
-        yield return new WaitForSeconds(time);
-
-        playerAttack.DamageMultiplier = 1;
-        playerMovement.MovementSpeedMultiplier = 1;
+        return _itemBuff.GetBuffInfo();
     }
 }
