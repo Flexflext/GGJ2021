@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -31,19 +32,19 @@ public class ItemGenerator : MonoBehaviour
             var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
 
-            Instantiate(itemPrefab);
             var item = Instantiate(itemPrefab);
             item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";
             
             var componentClass = Type.GetType(itemType.component);
             var itemComponent = (Item)item.AddComponent(componentClass);
             itemComponent.Name = itemName;
+            itemComponent.Light = item.GetComponentInChildren<Light2D>();
             itemComponent.Rarity = itemRarity;
             itemComponent.Icon = itemSprite;
-
             var spriteRenderer = item.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = itemSprite;
             //spriteRenderer.color = itemBehaviour.Rarity.NameColor;
+
             items.Add(item);
         }
 

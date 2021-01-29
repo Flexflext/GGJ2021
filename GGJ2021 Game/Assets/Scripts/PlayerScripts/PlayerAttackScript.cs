@@ -9,6 +9,7 @@ public class PlayerAttackScript : MonoBehaviour
     public float CurrentAttackDamage;
     public float CurrentAttackRange;
 
+    float CurrentAttackCooldown;
     float CurrentAttackSpeed;
 
     WeaponStats Weapon;
@@ -22,14 +23,22 @@ public class PlayerAttackScript : MonoBehaviour
 
     PlayerTopDownMovement Player;
 
+    public bool IsAttacking;
+
+    public Animator WeaponSwingAnim;
+
+    AnimatorStateInfo AnimationInfo;
+
     void Start()
     {
         Player = FindObjectOfType<PlayerTopDownMovement>();
         Weapon = GetComponentInChildren<WeaponStats>();
 
         CurrentAttackDamage = Weapon.Damage;
-       // CurrentAttackSpeed = Weapon.AttackSpeed;
+        CurrentAttackSpeed = Weapon.AttackSpeed;
         CurrentAttackRange = Weapon.AttackRange;
+
+        WeaponSwingAnim.speed = WeaponSwingAnim.speed += CurrentAttackSpeed;
     }
 
     private void Update()
@@ -37,6 +46,16 @@ public class PlayerAttackScript : MonoBehaviour
         PlayerAttack();
 
         PlayerAttackDirection();
+
+        AnimationInfo = WeaponSwingAnim.GetCurrentAnimatorStateInfo(0);
+
+        if (!AnimationInfo.IsName("Idle"))
+        {
+            IsAttacking = true;
+        }
+        else
+            IsAttacking = false;
+
     }
 
 
@@ -93,57 +112,49 @@ public class PlayerAttackScript : MonoBehaviour
                 IsAttackingUpperLeft = false;
             }
         }
-        //if (Player.SwordPivot.transform.rotation.z > 90 && Player.SwordPivot.transform.rotation.z < 180)
-        //{
-        //    Debug.Log("Attack upper Left");
-
-        //    //IsAttackingUpperLeft = true;
-
-        //    //IsAttackingUpperRight = false;
-
-        //    //IsAttackingLowerLeft = false;
-        //    //IsAttackingLowerRight = false;
-        //}
-        //if (Player.SwordPivot.transform.rotation.z < 180 && Player.SwordPivot.transform.rotation.z < -90)
-        //{
-        //    Debug.Log("Attack lower Left");
-
-        //    //IsAttackingLowerLeft = true;
-
-        //    //IsAttackingUpperRight = false;
-        //    //IsAttackingUpperLeft = false;
-
-        //    //IsAttackingLowerRight = false;
-        //}
     }
 
 
     void PlayerAttack()
     {
-        if (CurrentAttackSpeed <= 0 && Input.GetKeyDown(KeyCode.Mouse0))
+        if (CurrentAttackCooldown <= 0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Collider2D[] enemiesToDamage;
-
-            /* 
-             * 90 u. 0 rechts oben
-             * 0 u. -90 rechts unten
-             * 
-             * 180 u. 90 links oben
-             * 180 u. -90 links unten
-             */
 
 
             if (Player.PlayerSprite.flipX == false)
             {
-                    enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
-                    CurrentAttackSpeed = Weapon.AttackSpeed;
-                    //Debug.Log("I attacked right");
+                enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
+                CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
+                //Debug.Log("I attacked right");
+
+                if (IsAttackingUpperRight)
+                {
+                    WeaponSwingAnim.SetTrigger("IsAttackingUpperRight");
+
+                }
+                else if (IsAttackingLowerRight)
+                {
+                    WeaponSwingAnim.SetTrigger("IsAttackingLowerRight");
+
+                }
             }
             else
             {
                 enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
-                CurrentAttackSpeed = Weapon.AttackSpeed;
+                CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
                 //Debug.Log("I attacked left");
+
+                if (IsAttackingUpperLeft)
+                {
+                    WeaponSwingAnim.SetTrigger("IsAttackingUpperLeft");
+
+                }
+                else if (IsAttackingLowerLeft)
+                {
+                    WeaponSwingAnim.SetTrigger("IsAttackingLowerLeft");
+
+                }
             }
             foreach (Collider2D enemy in enemiesToDamage)
             {
@@ -155,15 +166,20 @@ public class PlayerAttackScript : MonoBehaviour
 
                         if (enemy.transform.position.y >= transform.position.y)
                         {
+
                             enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+
                         }
                     }
                     else if (IsAttackingLowerRight)
                     {
                         Debug.Log("Lower Right");
+
                         if (enemy.transform.position.y < transform.position.y)
                         {
+
                             enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+
                         }
                     }
                 }
@@ -175,7 +191,9 @@ public class PlayerAttackScript : MonoBehaviour
 
                         if (enemy.transform.position.y >= transform.position.y)
                         {
+
                             enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+
                         }
                     }
                     else if (IsAttackingLowerLeft)
@@ -184,7 +202,9 @@ public class PlayerAttackScript : MonoBehaviour
 
                         if (enemy.transform.position.y < transform.position.y)
                         {
+
                             enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+
                         }
                     }
                 }
@@ -196,7 +216,7 @@ public class PlayerAttackScript : MonoBehaviour
         }
         else
         {
-            CurrentAttackSpeed -= Time.deltaTime;
+            CurrentAttackCooldown -= Time.deltaTime;
         }
     }
 
@@ -204,11 +224,6 @@ public class PlayerAttackScript : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, CurrentAttackRange);
-
-        //Gizmos.DrawCube(Weapon.transform.position,  Weapon.WeaponBounds);
-        //Gizmos.matrix = Matrix4x4.TRS(Weapon.transform.position, Quaternion.Euler(Weapon.transform.rotation.x, Weapon.transform.rotation.y, Weapon.transform.rotation.z), Vector3.one);
-        //Gizmos.DrawWireCube(Weapon.transform.position, Weapon.WeaponBounds);
-
     }
 
 }
