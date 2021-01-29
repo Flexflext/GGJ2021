@@ -165,7 +165,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - {fileID: 11400000, guid: 7ba979ea713c17140914c540d19dc73b, type: 2}
+  - {fileID: 11400000, guid: 056f7d65eb28cc444b293a8cd440dab0, type: 2}
+  - {fileID: 11400000, guid: c9c300bfc05d24a40a0292a7d05900b0, type: 2}
+  - {fileID: 11400000, guid: e0f89c1da60058145ad186f19cdd8fe3, type: 2}
+  - {fileID: 11400000, guid: 0e7c69b25ca4d4942ac31de0645cb1cf, type: 2}
+  - {fileID: 11400000, guid: 8be80304e44c3cd4490fdf024737eded, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
+  - {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 11400000, guid: 3942f44d8efc2684aacf8984ff96f061, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1130090413
 GameObject:
   m_ObjectHideFlags: 0

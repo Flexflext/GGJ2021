@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         //    Destroy(this);
         //}
         
-        // for every Sound in the SoundsArray a AudioSource is added to the GameManager
+        // for every Sound in the SoundsArray a AudioSource is added to the AudioManager
         foreach (Sound s in sounds)
         {
             s.source = gameObject.AddComponent<AudioSource>();
@@ -67,21 +67,21 @@ public class AudioManager : MonoBehaviour
     /// Plays Sound, string parameter
     /// </summary>
     /// <param name="name"></param>
-    public void PlaySound(string name)
-    {
-        Sound s = Array.Find(sounds, sound => sound.name == name);
-        if(s == null)
-        {
-            Debug.Log("Sound '" + name + "' not found");
-            return;
-        }
-        else if(s.source == null)
-        {
-            Debug.Log("No Sound source");
-            return;
-        }
-        s.source.Play();
-    }
+    //public void PlaySound(string name)
+    //{
+    //    Sound s = Array.Find(sounds, sound => sound.name == name);
+    //    if(s == null)
+    //    {
+    //        Debug.Log("Sound '" + name + "' not found");
+    //        return;
+    //    }
+    //    else if(s.source == null)
+    //    {
+    //        Debug.Log("No Sound source");
+    //        return;
+    //    }
+    //    s.source.Play();
+    //}
 
 
 }
