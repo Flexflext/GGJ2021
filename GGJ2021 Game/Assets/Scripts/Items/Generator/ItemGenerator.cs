@@ -31,7 +31,6 @@ public class ItemGenerator : MonoBehaviour
             var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
 
-            Instantiate(itemPrefab);
             var item = Instantiate(itemPrefab);
             item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";
             

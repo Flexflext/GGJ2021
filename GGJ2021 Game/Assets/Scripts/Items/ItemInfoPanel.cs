@@ -17,12 +17,15 @@ public class ItemInfoPanel : MonoBehaviour
 
     private Item DisplayedItem;
 
+    private List<Item> NearbyItemList;
+
     private Backpack PlayerBackpack;
 
     // Start is called before the first frame update
     void Start()
     {
         CloseInfo();
+        NearbyItemList = new List<Item>();
         PlayerBackpack = GetComponent<Backpack>();
     }
 
@@ -30,10 +33,19 @@ public class ItemInfoPanel : MonoBehaviour
     {
         //ToDo check NearbyItemList
 
-        if (Input.GetKeyDown(KeyCode.E) && DisplayedItem)
+        if (Input.GetKeyDown(KeyCode.E) && NearbyItemList.Count > 0)
         {
-            DisplayedItem.gameObject.SetActive(!PlayerBackpack.AddItem(DisplayedItem));
-            CloseInfo();
+            NearbyItemList[0].gameObject.SetActive(!PlayerBackpack.AddItem(NearbyItemList[0]));
+            //NearbyItemList.RemoveAt(0);
+
+            if (NearbyItemList.Count > 0)
+            {
+                DisplayInfo(NearbyItemList[0]);
+            }
+            else
+            {
+                CloseInfo();
+            }
         }
     }
 
@@ -53,22 +65,24 @@ public class ItemInfoPanel : MonoBehaviour
     */
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //ToDp add item to NearbyItemList
+        //ToDo add item to NearbyItemList
+
 
         if (collision.gameObject.CompareTag("Item") && DisplayedItem == null)
         {
             DisplayInfo(collision.gameObject.GetComponent<Item>());
+            NearbyItemList.Add(collision.gameObject.GetComponent<Item>());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         //ToDo remove item from NearbyItemList
-
+        NearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
         CloseInfo();
     }
 
-    private void CloseInfo()
+    public void CloseInfo()
     {
         PanelObject.SetActive(false);
         DisplayedItem = null;
@@ -76,16 +90,19 @@ public class ItemInfoPanel : MonoBehaviour
 
     public void DisplayInfo(Item _item)
     {
-        DisplayedItem = _item;
+        if (_item)
+        {
+            DisplayedItem = _item;
 
-        PanelObject.SetActive(true);
+            PanelObject.SetActive(true);
 
-        NameText.text = _item.Name;
-        NameText.color = _item.Rarity.NameColor;
+            NameText.text = _item.Name;
+            NameText.color = _item.Rarity.NameColor;
 
-        DescriptionText.text = _item.GetItemInfo();
+            DescriptionText.text = _item.GetItemInfo();
 
-        ItemIcon.sprite = _item.Icon;
-        //this.transform.position = _item.transform.position;
+            ItemIcon.sprite = _item.Icon;
+            //this.transform.position = _item.transform.position;
+        }
     }
 }
