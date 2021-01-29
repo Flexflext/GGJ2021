@@ -27,7 +27,6 @@ public class InventoryUI : MonoBehaviour
             btn = InventoryItemDropButtons[i].GetComponent<Button>();
             btn.onClick.AddListener(OnClickDropItem);
         }
-
     }
 
     public void OnClickUseItem()
