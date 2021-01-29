@@ -41,4 +41,46 @@ public class Backpack : MonoBehaviour
 
         Inventory[_slot] = null;
     }
+
+    public void UseItem(int _slot)
+    {
+        if (Inventory[_slot] is IUsable usable)
+        {
+            usable.Use(this);
+        }
+    }
+
+    public void EquipItem(Item _item)
+    {
+        int slot = GetInventorySlot(_item);
+
+        if (slot != -1)
+        {
+            
+        }
+    }
+
+    public void DestroyItem(Item _item)
+    {
+        int slot = GetInventorySlot(_item);
+
+        if (slot != -1)
+        {
+            Inventory[slot] = null;
+            Destroy(_item.gameObject);
+        }
+    }
+
+    private int GetInventorySlot(Item _item)
+    {
+        for (int i = 0; i < Inventory.Length; i++)
+        {
+            if (Inventory[i] == _item)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }
