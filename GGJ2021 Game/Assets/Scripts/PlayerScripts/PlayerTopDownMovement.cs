@@ -13,7 +13,9 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private Rigidbody2D m_rB;
 
-    SpriteRenderer PlayerSprite;
+    public SpriteRenderer PlayerSprite;
+
+    SpriteRenderer WeaponSprite;
 
     Camera PlayerCam;
 
@@ -21,6 +23,7 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private void Awake()
     {
+        WeaponSprite = GetComponentInChildren<WeaponStats>().GetComponent<SpriteRenderer>();
         PlayerSprite = GetComponent<SpriteRenderer>();
         PlayerCam = GetComponentInChildren<Camera>();
         m_rB = GetComponent<Rigidbody2D>();
@@ -57,10 +60,12 @@ public class PlayerTopDownMovement : MonoBehaviour
         if (lookDir.x < 0)
         {
             PlayerSprite.flipX = true;
+            WeaponSprite.flipY = true;
         }
         else
         {
             PlayerSprite.flipX = false;
+            WeaponSprite.flipY = false;
         }
     }
 

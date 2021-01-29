@@ -15,13 +15,12 @@ public abstract class Item : MonoBehaviour
         GenerateRandomStats();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public abstract string GetItemInfo();
 
     public abstract void GenerateRandomStats();
+
+    public virtual void OnPickup(GameObject player)
+    {
+      
+    }
 }
