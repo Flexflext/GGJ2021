@@ -17,30 +17,41 @@ public class InventoryUI : MonoBehaviour
     
     void Start()
     {
+        Backpack backpack = Game.Instance.Player.GetComponent<Backpack>();
         for (int i = 0; i < InventoryItemButtons.Length; i++)
         {
+            RemoveItem(i);
+            
             var slotId = i;
             Button itemButton = InventoryItemButtons[i];
             itemButton.onClick.AddListener(() =>
             {
                 Debug.Log("Use Item " + slotId);
+                backpack.UseItem(slotId);
+            });
+            
+            Button itemDropButton = InventoryItemDropButtons[i];
+            itemDropButton.onClick.AddListener(() =>
+            {
+                Debug.Log("Drop Item " + slotId);
+                backpack.DropItem(slotId);
             });
             
             OnPointer onPointer = itemButton.gameObject.AddComponent<OnPointer>();
             onPointer.AddEnterListener(e =>
             {
-                Debug.Log("Mouse entered " + slotId);
+                //Debug.Log("Mouse entered " + slotId);
+                var item = backpack.GetItem(slotId);
+                var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+                itemInfoPanel.SetDisplayItem(item, true);
             });
             onPointer.AddExitListener(e =>
             {
-                Debug.Log("Mouse exit " + slotId);
+                //Debug.Log("Mouse exit " + slotId);
+                var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+                itemInfoPanel.SetDisplayItem(null, true);
             });
 
-            Button itemDropButton = InventoryItemDropButtons[i];
-            itemDropButton.onClick.AddListener(() =>
-            {
-                Debug.Log("Drop Item " + slotId);
-            });
         }
     }
 

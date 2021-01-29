@@ -11,18 +11,25 @@ public class ItemInfoPanel : MonoBehaviour
     [SerializeField] private Image ItemIcon;
 
     private Item _currentlyDisplayed;
+    private bool mouseSelected = false;
 
     void Start()
     {
-        SetDisplayItem(null);
+        SetDisplayItem(null, false);
     }
 
-    public void SetDisplayItem(Item toSet)
+    public void SetDisplayItem(Item toSet, bool mouse)
     {
+        if (mouseSelected && !mouse)
+        {
+            return;
+        }
+
         if (toSet == null)
         {
             gameObject.SetActive(false);
             _currentlyDisplayed = null;
+            mouseSelected = false;
         }
         else if (toSet != _currentlyDisplayed)
         {
@@ -36,6 +43,8 @@ public class ItemInfoPanel : MonoBehaviour
             DescriptionText.text = toSet.GetItemInfo();
 
             ItemIcon.sprite = toSet.Icon;
+
+            mouseSelected = mouse;
         }
     }
 }

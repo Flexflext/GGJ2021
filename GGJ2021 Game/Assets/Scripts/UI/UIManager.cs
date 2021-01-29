@@ -14,5 +14,4 @@ public class UIManager : MonoBehaviour
 
     [Space]
     public InventoryUI InventoryUI;
-
 }

@@ -28,12 +28,12 @@ public class Backpack : MonoBehaviour
             }
             else
             {
-                itemInfoPanel.SetDisplayItem(nearest);
+                itemInfoPanel.SetDisplayItem(nearest, false);
             }
         }
         else
         {
-            itemInfoPanel.SetDisplayItem(null);
+            itemInfoPanel.SetDisplayItem(null, false);
         }
     }
 
@@ -66,7 +66,7 @@ public class Backpack : MonoBehaviour
         return false;
     }
 
-    public void RemoveItem(int _slot)
+    public void DropItem(int _slot)
     {
         Game.Instance.UIManager.InventoryUI.RemoveItem(_slot);
 
@@ -100,7 +100,7 @@ public class Backpack : MonoBehaviour
         if (slot != -1)
         {
             var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
-            itemInfoPanel.SetDisplayItem(null);
+            itemInfoPanel.SetDisplayItem(null, false);
 
             Game.Instance.UIManager.InventoryUI.RemoveItem(slot);
 
@@ -120,6 +120,10 @@ public class Backpack : MonoBehaviour
         }
         return -1;
     }
-    
-    
+
+
+    public Item GetItem(int slotId)
+    {
+        return Inventory[slotId];
+    }
 }
