@@ -50,6 +50,9 @@ public class PlayerBuffScript : MonoBehaviour
 
         playerAttack.DamageMultiplier += playerBuff.AttackBuff;
         playerMovement.MovementSpeedMultiplier += playerBuff.SpeedBuff;
+
+        var buffPanel = Game.Instance.UIManager.BuffPanel.GetComponent<BuffPanelScript>();
+        buffPanel.addBuff(playerBuff);
     }
 
     private void OnRemove(PlayerBuff toRemove)
