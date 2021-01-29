@@ -10,8 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject InventoryPanel;
     public GameObject InfoPanel;
 
-    [Space,SerializeField]
-    private InventoryUI InventoryUI;
+    [Space]
+    public InventoryUI InventoryUI;
 
     public void SwitchInventoryActive()
     {
@@ -23,5 +23,11 @@ public class UIManager : MonoBehaviour
         {
             InventoryPanel.SetActive(true);
         }
+    }
+
+
+    void DoSOmething()
+    {
+
     }
 }
