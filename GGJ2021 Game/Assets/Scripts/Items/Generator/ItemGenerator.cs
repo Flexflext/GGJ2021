@@ -9,6 +9,9 @@ using Random = UnityEngine.Random;
 
 public class ItemGenerator : MonoBehaviour
 {
+    [SerializeField]
+    private GameObject itemPrefab;
+    
     private IEnumerable<ItemRarity> _itemRarities;
     private IEnumerable<ItemType> _itemTypes;
 
@@ -28,16 +31,9 @@ public class ItemGenerator : MonoBehaviour
             var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
 
-            var item = new GameObject
-            {
-                name = $"{itemName} ({itemRarity.name}, {itemType.name})",
-                tag = "Item"
-            };
-            item.transform.localScale = new Vector3(3, 3, 3);
-            
-            var itemCollider = item.AddComponent<BoxCollider2D>();
-            itemCollider.size = new Vector2(0.16F, 0.16F);
-            itemCollider.isTrigger = true;
+            Instantiate(itemPrefab);
+            var item = Instantiate(itemPrefab);
+            item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";
             
             var componentClass = Type.GetType(itemType.component);
             var itemComponent = (Item)item.AddComponent(componentClass);
@@ -45,7 +41,7 @@ public class ItemGenerator : MonoBehaviour
             itemComponent.Rarity = itemRarity;
             itemComponent.Icon = itemSprite;
 
-            var spriteRenderer = item.AddComponent<SpriteRenderer>();
+            var spriteRenderer = item.GetComponent<SpriteRenderer>();
             spriteRenderer.sprite = itemSprite;
             //spriteRenderer.color = itemBehaviour.Rarity.NameColor;
             items.Add(item);

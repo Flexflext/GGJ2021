@@ -1,38 +1,56 @@
 ﻿using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
-public class PotionItem : Item
+public class PotionItem : Item, IUsable
 {
     private PlayerBuff _itemBuff;
-    
+
     public override void GenerateRandomStats()
     {
-        var stats = DistributeStats(4, 10);
+        var stats = new int[4];
+        DistributeStats(stats, (int) Rarity.MaxStrength, true, 1);
+
+        var kissCurse = Random.Range(0, 5);
+        DistributeStats(stats, kissCurse, false, -1);
+        DistributeStats(stats, kissCurse, false, 1);
+
         _itemBuff = new PlayerBuff
         {
-            HealOverTime = stats[0], 
-            SpeedBuff = stats[1] * 0.3F, 
-            AttackBuff = stats[2], 
+            HealOverTime = stats[0],
+            SpeedBuff = stats[1] * 0.3F,
+            AttackBuff = stats[2],
             Duration = stats[3]
         };
     }
 
-    private int[] DistributeStats(int amount, int points)
+    private void DistributeStats(int[] arr, int points, bool withPrefer, int amount)
     {
-        var arr = new int[amount];
+        var prefer = Random.Range(0, arr.Length);
+
         for (var i = 0; i < points; i++)
         {
-            arr[Random.Range(0, amount)]++;
+            if (withPrefer && Random.Range(0, 3) == 0)
+            {
+                arr[prefer] += amount;
+            }
+            else
+            {
+                arr[Random.Range(0, arr.Length)] += amount;
+            }
         }
+    }
 
-        return arr;
+    public void Use(Backpack backpack)
+    {
+        var playerBuffs = backpack.gameObject.GetComponent<PlayerBuffScript>();
+        playerBuffs.Activate(_itemBuff);
+        //backpack.Destroy(this);
     }
 
     public override void OnPickup(GameObject player)
     {
-        var playerBuffs = player.GetComponent<PlayerBuffScript>();
-        playerBuffs.Activate(_itemBuff);
     }
-    
+
     public override string GetItemInfo()
     {
         return _itemBuff.GetBuffInfo();
