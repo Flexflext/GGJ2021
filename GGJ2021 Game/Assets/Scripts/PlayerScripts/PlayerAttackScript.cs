@@ -168,7 +168,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y >= transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
 
                         }
                     }
@@ -179,7 +179,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y < transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
 
                         }
                     }
@@ -193,7 +193,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y >= transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
 
                         }
                     }
@@ -204,7 +204,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y < transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_MOCK>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
 
                         }
                     }
