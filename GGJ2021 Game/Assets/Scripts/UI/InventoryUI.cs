@@ -8,6 +8,7 @@ public class InventoryUI : MonoBehaviour
     [Header("Inventory SpriteArrays")]
     public Image[] EquipmentSprites;
     public Image[] InventorySprites;
+    public Image[] InventoryDropSprites;
 
     [Space, Header("Inventory ButtonArrays")]
     [SerializeField] private Button[] InventoryItemButtons;
