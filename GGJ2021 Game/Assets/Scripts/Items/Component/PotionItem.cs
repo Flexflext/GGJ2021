@@ -45,7 +45,7 @@ public class PotionItem : Item, IUsable
     {
         var playerBuffs = backpack.gameObject.GetComponent<PlayerBuffScript>();
         playerBuffs.Activate(_itemBuff);
-        //backpack.Destroy(this);
+        backpack.DestroyItem(this);
     }
 
     public override void OnPickup(GameObject player)

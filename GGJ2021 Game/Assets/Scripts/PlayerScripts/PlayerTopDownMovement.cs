@@ -21,8 +21,11 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     public GameObject SwordPivot;
 
+    private Animator PlayerAnim;
+
     private void Awake()
     {
+        PlayerAnim = GetComponent<Animator>();
         WeaponSprite = GetComponentInChildren<WeaponStats>().GetComponent<SpriteRenderer>();
         PlayerSprite = GetComponent<SpriteRenderer>();
         PlayerCam = GetComponentInChildren<Camera>();
@@ -80,5 +83,9 @@ public class PlayerTopDownMovement : MonoBehaviour
     private void Move()
     {
         m_rB.velocity = new Vector2(m_moveDir.x * m_MovementSpeed, m_moveDir.y * m_MovementSpeed);
+
+        PlayerAnim.SetFloat("Horizontal", m_moveDir.x);
+        PlayerAnim.SetFloat("Vertical", m_moveDir.y);
+        PlayerAnim.SetFloat("Speed", m_moveDir.sqrMagnitude);
     }
 }

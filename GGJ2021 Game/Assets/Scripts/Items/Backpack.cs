@@ -8,6 +8,9 @@ public class Backpack : MonoBehaviour
     private Item[] Inventory;
     public Sprite Icon;
 
+    [SerializeField]
+    private ItemSlot[] ItemSlots;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +23,8 @@ public class Backpack : MonoBehaviour
         {
             if (!Inventory[i])
             {
+                ItemSlots[i].StoredItem = _item;
+
                 Inventory[i] = _item;
                 Game.Instance.UIManager.InventoryUI.InventorySprites[i].enabled = true;
                 Game.Instance.UIManager.InventoryUI.InventoryDropSprites[i].enabled = true;
@@ -33,6 +38,8 @@ public class Backpack : MonoBehaviour
 
     public void RemoveItem(int _slot)
     {
+        ItemSlots[_slot].StoredItem = null;
+
         Game.Instance.UIManager.InventoryUI.InventorySprites[_slot].enabled = false;
         Game.Instance.UIManager.InventoryUI.InventoryDropSprites[_slot].enabled = false;
 
@@ -66,6 +73,12 @@ public class Backpack : MonoBehaviour
 
         if (slot != -1)
         {
+            ItemSlots[slot].StoredItem = null;
+            ItemSlots[slot].InfoPanel.CloseInfo();
+
+            Game.Instance.UIManager.InventoryUI.InventorySprites[slot].enabled = false;
+            Game.Instance.UIManager.InventoryUI.InventoryDropSprites[slot].enabled = false;
+
             Inventory[slot] = null;
             Destroy(_item.gameObject);
         }
