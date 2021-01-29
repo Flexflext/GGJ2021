@@ -1,13 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public abstract class Item : MonoBehaviour
 {
     public string Name;
-    public ItemRarity Rarity;
+
+    private ItemRarity rarity;
+    public ItemRarity Rarity
+    {
+        get { return rarity; }
+        set
+        {
+            rarity = value;
+            if (Light)
+            {
+                Light.color = rarity.NameColor;
+            }
+        }
+    }
+
     public Sprite Icon;
     public int GoldValue;
+    public Light2D Light;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +37,5 @@ public abstract class Item : MonoBehaviour
 
     public virtual void OnPickup(GameObject player)
     {
-      
     }
 }

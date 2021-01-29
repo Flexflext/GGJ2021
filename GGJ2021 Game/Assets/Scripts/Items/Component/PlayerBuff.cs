@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using UnityEngine;
 
 public class PlayerBuff
 {
@@ -20,6 +21,8 @@ public class PlayerBuff
 
     // How often did the buff tick (relevant for hots)
     public int Ticked = -1;
+    
+    public Sprite Icon = null;
 
     public string GetBuffInfo()
     {
