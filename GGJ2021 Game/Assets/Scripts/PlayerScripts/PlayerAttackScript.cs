@@ -54,8 +54,9 @@ public class PlayerAttackScript : MonoBehaviour
             IsAttacking = true;
         }
         else
+        {
             IsAttacking = false;
-
+        }
     }
 
 
@@ -128,12 +129,12 @@ public class PlayerAttackScript : MonoBehaviour
                 CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
                 //Debug.Log("I attacked right");
 
-                if (IsAttackingUpperRight)
+                if (IsAttackingUpperRight && !IsAttacking)
                 {
                     WeaponSwingAnim.SetTrigger("IsAttackingUpperRight");
 
                 }
-                else if (IsAttackingLowerRight)
+                else if (IsAttackingLowerRight && !IsAttacking)
                 {
                     WeaponSwingAnim.SetTrigger("IsAttackingLowerRight");
 
@@ -145,12 +146,12 @@ public class PlayerAttackScript : MonoBehaviour
                 CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
                 //Debug.Log("I attacked left");
 
-                if (IsAttackingUpperLeft)
+                if (IsAttackingUpperLeft && !IsAttacking)
                 {
                     WeaponSwingAnim.SetTrigger("IsAttackingUpperLeft");
 
                 }
-                else if (IsAttackingLowerLeft)
+                else if (IsAttackingLowerLeft && !IsAttacking)
                 {
                     WeaponSwingAnim.SetTrigger("IsAttackingLowerLeft");
 
