@@ -10,25 +10,8 @@ public class UIManager : MonoBehaviour
     public GameObject InventoryPanel;
     public GameObject InfoPanel;
     public GameObject BuffPanel;
+    public GameObject ItemInfoPanel;
 
     [Space]
     public InventoryUI InventoryUI;
-
-    public void SwitchInventoryActive()
-    {
-        if (InventoryPanel.activeSelf)
-        {
-            InventoryPanel.SetActive(false);
-        }
-        else
-        {
-            InventoryPanel.SetActive(true);
-        }
-    }
-
-
-    void DoSOmething()
-    {
-
-    }
 }

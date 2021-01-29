@@ -8,6 +8,8 @@ public class Game : MonoBehaviour
     [SerializeField]
     private UIManager m_UIManager;
 
+    public GameObject Player;
+    
     public UIManager UIManager
     {
         get { return m_UIManager; }

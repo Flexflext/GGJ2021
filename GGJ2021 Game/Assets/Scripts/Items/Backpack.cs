@@ -6,29 +6,59 @@ public class Backpack : MonoBehaviour
 {
     public int Size;
     private Item[] Inventory;
-    public Sprite Icon;
+    private List<Item> NearbyItemList;
 
-    [SerializeField]
-    private ItemSlot[] ItemSlots;
-
-    // Start is called before the first frame update
     void Start()
     {
         Inventory = new Item[Size];
+        NearbyItemList = new List<Item>();
+    }
+
+    private void Update()
+    {
+        var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+        if (NearbyItemList.Count > 0)
+        {
+            Item nearest = NearbyItemList[0];
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                bool success = AddItem(nearest);
+                nearest.gameObject.SetActive(!success);
+                NearbyItemList.Remove(nearest);
+            }
+            else
+            {
+                itemInfoPanel.SetDisplayItem(nearest, false);
+            }
+        }
+        else
+        {
+            itemInfoPanel.SetDisplayItem(null, false);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Item"))
+        {
+            NearbyItemList.Add(collision.gameObject.GetComponent<Item>());
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        NearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
     }
 
     public bool AddItem(Item _item)
     {
-        for (int i = 0; i < Inventory.Length; i++)
+        for (var i = 0; i < Inventory.Length; i++)
         {
             if (!Inventory[i])
             {
-                ItemSlots[i].StoredItem = _item;
-
                 Inventory[i] = _item;
-                Game.Instance.UIManager.InventoryUI.InventorySprites[i].enabled = true;
-                Game.Instance.UIManager.InventoryUI.InventoryDropSprites[i].enabled = true;
-                Game.Instance.UIManager.InventoryUI.InventorySprites[i].sprite = _item.Icon;
+                
+                Game.Instance.UIManager.InventoryUI.SetItem(i, _item);
                 return true;
             }
         }
@@ -36,15 +66,12 @@ public class Backpack : MonoBehaviour
         return false;
     }
 
-    public void RemoveItem(int _slot)
+    public void DropItem(int _slot)
     {
-        ItemSlots[_slot].StoredItem = null;
-
-        Game.Instance.UIManager.InventoryUI.InventorySprites[_slot].enabled = false;
-        Game.Instance.UIManager.InventoryUI.InventoryDropSprites[_slot].enabled = false;
+        Game.Instance.UIManager.InventoryUI.RemoveItem(_slot);
 
         Inventory[_slot].gameObject.SetActive(true);
-        Inventory[_slot].gameObject.transform.position = this.transform.position;
+        Inventory[_slot].gameObject.transform.position = transform.position;
 
         Inventory[_slot] = null;
     }
@@ -63,7 +90,6 @@ public class Backpack : MonoBehaviour
 
         if (slot != -1)
         {
-            
         }
     }
 
@@ -73,11 +99,10 @@ public class Backpack : MonoBehaviour
 
         if (slot != -1)
         {
-            ItemSlots[slot].StoredItem = null;
-            ItemSlots[slot].InfoPanel.CloseInfo();
+            var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+            itemInfoPanel.SetDisplayItem(null, false);
 
-            Game.Instance.UIManager.InventoryUI.InventorySprites[slot].enabled = false;
-            Game.Instance.UIManager.InventoryUI.InventoryDropSprites[slot].enabled = false;
+            Game.Instance.UIManager.InventoryUI.RemoveItem(slot);
 
             Inventory[slot] = null;
             Destroy(_item.gameObject);
@@ -93,7 +118,12 @@ public class Backpack : MonoBehaviour
                 return i;
             }
         }
-
         return -1;
+    }
+
+
+    public Item GetItem(int slotId)
+    {
+        return Inventory[slotId];
     }
 }
