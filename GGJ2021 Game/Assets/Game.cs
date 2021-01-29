@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
     public static Game Instance;
     [SerializeField]
     private UIManager m_UIManager;
+
     public UIManager UIManager
     {
         get { return m_UIManager; }

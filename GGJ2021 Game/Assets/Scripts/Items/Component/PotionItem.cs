@@ -16,6 +16,7 @@ public class PotionItem : Item, IUsable
 
         _itemBuff = new PlayerBuff
         {
+            Icon = Icon,
             HealOverTime = stats[0],
             SpeedBuff = stats[1] * 0.3F,
             AttackBuff = stats[2],

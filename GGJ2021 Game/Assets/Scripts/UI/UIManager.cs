@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [Header("Panels")]
     public GameObject InventoryPanel;
     public GameObject InfoPanel;
+    public GameObject BuffPanel;
 
     [Space]
     public InventoryUI InventoryUI;

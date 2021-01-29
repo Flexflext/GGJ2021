@@ -16,7 +16,7 @@ TagManager:
   - 
   - 
   - EnemyLayer
-  - 
+  - MapConfiner
   - 
   - 
   - 
@@ -42,4 +42,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Items
+    uniqueID: 264191715
     locked: 0

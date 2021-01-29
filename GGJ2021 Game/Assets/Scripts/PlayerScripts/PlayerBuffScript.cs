@@ -10,7 +10,7 @@ public class PlayerBuffScript : MonoBehaviour
     private PlayerTopDownMovement playerMovement;
     private PlayerAttackScript playerAttack;
 
-    private List<PlayerBuff> activeBuffs = new List<PlayerBuff>();
+    public List<PlayerBuff> activeBuffs = new List<PlayerBuff>();
 
     private void Awake()
     {
@@ -50,6 +50,9 @@ public class PlayerBuffScript : MonoBehaviour
 
         playerAttack.DamageMultiplier += playerBuff.AttackBuff;
         playerMovement.MovementSpeedMultiplier += playerBuff.SpeedBuff;
+
+        var buffPanel = Game.Instance.UIManager.BuffPanel.GetComponent<BuffPanelScript>();
+        buffPanel.addBuff(playerBuff);
     }
 
     private void OnRemove(PlayerBuff toRemove)

@@ -5,7 +5,7 @@ using UnityEngine;
 public class WeaponStats : MonoBehaviour
 {
     public float Damage;
-    public float AttackSpeed;
+    public float AttackCooldownSpeed;
     public float AttackRange;
-
+    public float AttackSpeed;
 }
