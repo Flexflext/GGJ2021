@@ -10,7 +10,7 @@ public class PlayerBuffScript : MonoBehaviour
     private PlayerTopDownMovement playerMovement;
     private PlayerAttackScript playerAttack;
 
-    private List<PlayerBuff> activeBuffs = new List<PlayerBuff>();
+    public List<PlayerBuff> activeBuffs = new List<PlayerBuff>();
 
     private void Awake()
     {
