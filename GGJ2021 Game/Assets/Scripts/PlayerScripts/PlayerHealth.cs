@@ -18,7 +18,7 @@ public class PlayerHealth : MonoBehaviour
             if (_maxHealth != value)
             {
                 _maxHealth = value;
-                _currentHealth = Math.Min(_maxHealth, _currentHealth);
+                _currentHealth = Math.Max(_maxHealth, _currentHealth);
                 Game.Instance.UIManager.HeartUiManager.OnHealthChange(_currentHealth, _maxHealth);
             }
         }
@@ -49,7 +49,7 @@ public class PlayerHealth : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
-            int regen = Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.HealthRegen);
+            float regen = 0.3F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.HealthRegen);
             CurrentHealth = Mathf.Clamp(CurrentHealth + regen, 1, MaxHealth);
         }
     }
@@ -72,5 +72,10 @@ public class PlayerHealth : MonoBehaviour
         // {
         //     MaxHealth += 1;
         // }
+    }
+
+    public void OnStatUpdated(PlayerStatScript statScript)
+    {
+        MaxHealth = 3 + statScript.GetStatValue(ItemStat.Health);
     }
 }

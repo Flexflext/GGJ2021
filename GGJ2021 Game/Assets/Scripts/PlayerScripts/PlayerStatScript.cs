@@ -31,6 +31,7 @@ public class PlayerStatScript : MonoBehaviour
         _playerStats = playerStats;
 
         Game.Instance.UIManager.InventoryUI.PlayerStatText.SetText(StatValueVisualizer.ToString(playerStats));
+        Game.Instance.PlayerManager.Health.OnStatUpdated(this);
     }
 
     private static void SumStat(EquipmentItem item, IList<int> playerStats)
@@ -40,7 +41,7 @@ public class PlayerStatScript : MonoBehaviour
             SumStat(item.StatValues, playerStats);
         }
     }
-    
+
     private static void SumStat(IReadOnlyList<int> statValues, IList<int> playerStats)
     {
         for (int stat = 0; stat < statValues.Count; stat++)
