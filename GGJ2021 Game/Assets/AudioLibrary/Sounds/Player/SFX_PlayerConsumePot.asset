@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aacecdf70ddbc17489e19316da50ee9e, type: 3}
-  m_Name: SFX_PlayerAttack
+  m_Name: SFX_PlayerConsumePot
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: de3aa566084021f42a79da33ecab387d, type: 3}
+  clip: {fileID: 8300000, guid: 31f17c7fd773c564d8ff79353a27a4cc, type: 3}
   volume: 0.1
-  pitch: 1.5
+  pitch: 1
   source: {fileID: 0}

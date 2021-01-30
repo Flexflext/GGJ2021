@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacecdf70ddbc17489e19316da50ee9e, type: 3}
   m_Name: SFX_PlayerPickUp
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 808fae07a18f4a14e8bf75843c547e83, type: 3}
+  clip: {fileID: 8300000, guid: 1521d7409d1702e468f41217e62570f4, type: 3}
   volume: 0.1
   pitch: 1
   source: {fileID: 0}
