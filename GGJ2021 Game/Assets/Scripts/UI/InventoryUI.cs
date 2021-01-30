@@ -1,17 +1,21 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("Inventory SpriteArrays")] public Image[] EquipmentSprites;
+    [Header("Inventory SpriteArrays")] 
+    public Image[] EquipmentSprites;
     public Image[] InventorySprites;
     public Image[] InventoryDropSprites;
 
-    [Space, Header("Inventory ButtonArrays")] [SerializeField]
-    private Button[] InventoryItemButtons;
-
+    [Space, Header("Inventory ButtonArrays")] 
+    [SerializeField] private Button[] InventoryItemButtons;
     [SerializeField] private Button[] InventoryItemDropButtons;
+    
+    [Space, Header("Misc")]
+    public TMP_Text PlayerStatText;
     [SerializeField] private GameObject inventoryUi;
 
     void Start()

@@ -9,24 +9,38 @@ public class PlayerStatScript : MonoBehaviour
 
     private readonly List<PlayerBuff> _activeBuffs = new List<PlayerBuff>();
 
+    // private void Awake()
+    // {
+    //     RecalculateStats();
+    // }
+
     public void RecalculateStats()
     {
         int[] playerStats = new int[Item.StatEnums.Length];
 
         var backpack = gameObject.GetComponent<Backpack>();
-        SumStat(backpack.GetEquippedHead().StatValues,playerStats);
-        SumStat(backpack.GetEquippedChest().StatValues,playerStats);
-        SumStat( backpack.GetEquippedWeapon().StatValues,playerStats);
-        
+        SumStat(backpack.GetEquippedHead(), playerStats);
+        SumStat(backpack.GetEquippedChest(), playerStats);
+        SumStat(backpack.GetEquippedWeapon(), playerStats);
+
         foreach (PlayerBuff buff in _activeBuffs)
         {
-            SumStat(buff.StatValues,playerStats);
+            SumStat(buff.StatValues, playerStats);
         }
 
         _playerStats = playerStats;
-        
+
+        Game.Instance.UIManager.InventoryUI.PlayerStatText.SetText(StatValueVisualizer.ToString(playerStats));
     }
 
+    private static void SumStat(EquipmentItem item, IList<int> playerStats)
+    {
+        if (item)
+        {
+            SumStat(item.StatValues, playerStats);
+        }
+    }
+    
     private static void SumStat(IReadOnlyList<int> statValues, IList<int> playerStats)
     {
         for (int stat = 0; stat < statValues.Count; stat++)

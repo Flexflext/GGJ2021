@@ -21,7 +21,7 @@ public class Game : MonoBehaviour
         {
             Instance = this;
         }
-        else
+        else if (Instance != this)
             Destroy(this);
     }
 }
