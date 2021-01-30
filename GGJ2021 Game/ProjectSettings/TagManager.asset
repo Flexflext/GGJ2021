@@ -7,6 +7,10 @@ TagManager:
   - Potion
   - Item
   - Wall
+  - Up
+  - Down
+  - Left
+  - Right
   layers:
   - Default
   - TransparentFX
