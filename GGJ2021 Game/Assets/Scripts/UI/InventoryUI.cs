@@ -16,11 +16,10 @@ public class InventoryUI : MonoBehaviour
     
     [Space, Header("Misc")]
     public TMP_Text PlayerStatText;
-    [SerializeField] private GameObject inventoryUi;
 
     void Start()
     {
-        Backpack backpack = Game.Instance.Player.GetComponent<Backpack>();
+        Backpack backpack = Game.Instance.PlayerManager.Backpack;
         for (int i = 0; i < InventoryItemButtons.Length; i++)
         {
             SetItem(i, null);
@@ -90,24 +89,16 @@ public class InventoryUI : MonoBehaviour
 
     public void SetItem(int slot, Item item)
     {
-        if (item == null)
-        {
-            InventorySprites[slot].enabled = false;
-            InventoryDropSprites[slot].enabled = false;
-        }
-        else
+        if (item)
         {
             InventorySprites[slot].enabled = true;
             InventoryDropSprites[slot].enabled = true;
             InventorySprites[slot].sprite = item.Icon;
         }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        else
         {
-            inventoryUi.SetActive(!inventoryUi.activeSelf);
+            InventorySprites[slot].enabled = false;
+            InventoryDropSprites[slot].enabled = false;
         }
     }
 

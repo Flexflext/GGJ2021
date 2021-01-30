@@ -476,6 +476,7 @@ GameObject:
   - component: {fileID: 5786872702734884249}
   - component: {fileID: 4547619040880432893}
   - component: {fileID: 1077297384373713420}
+  - component: {fileID: 8582324692753812966}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -628,7 +629,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c9cbc8f42c61a46b44ce8c65325b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeedMultiplier: 0
   m_MovementSpeed: 10
   PlayerSprite: {fileID: 7040449921079689377}
   SwordPivot: {fileID: 7040449921936839893}
@@ -644,7 +644,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2a2d1d0ab8dff459c5db80fc8e81de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageMultiplier: 0
   CurrentAttackDamage: 10
   CurrentAttackRange: 0
   EnemyLayer:
@@ -691,6 +690,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1d33d9112e4f20a411b2e5beae247f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8582324692753812966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040449921079689381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9a886f733264f4482dba30556afd16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Backpack: {fileID: 0}
+  PlayerStat: {fileID: 0}
 --- !u!1 &7040449921936839893
 GameObject:
   m_ObjectHideFlags: 0

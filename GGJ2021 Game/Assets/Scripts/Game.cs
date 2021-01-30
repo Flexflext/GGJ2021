@@ -7,13 +7,12 @@ public class Game : MonoBehaviour
     public static Game Instance;
     [SerializeField]
     private UIManager m_UIManager;
+    [SerializeField]
+    private PlayerManager m_PlayerManager;
 
-    public GameObject Player;
+    public PlayerManager PlayerManager => m_PlayerManager;
     
-    public UIManager UIManager
-    {
-        get { return m_UIManager; }
-    }
+    public UIManager UIManager => m_UIManager;
 
     private void Awake()
     {
