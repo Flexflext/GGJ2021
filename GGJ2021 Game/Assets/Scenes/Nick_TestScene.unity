@@ -1512,7 +1512,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_UIManager: {fileID: 584845575}
-  Player: {fileID: 0}
+  m_PlayerManager: {fileID: 0}
 --- !u!114 &584845575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1525,10 +1525,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3477f5af64fab6645bb8bd117a41f1bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventoryPanel: {fileID: 1008416863}
   InfoPanel: {fileID: 1526732835}
   BuffPanel: {fileID: 146644954}
   ItemInfoPanel: {fileID: 0}
+  HeartUiManager: {fileID: 0}
   InventoryUI: {fileID: 1735975455}
 --- !u!1 &607973462
 GameObject:
@@ -12414,7 +12414,6 @@ MonoBehaviour:
   - {fileID: 2123971625}
   - {fileID: 675292993}
   PlayerStatText: {fileID: 0}
-  inventoryUi: {fileID: 0}
 --- !u!114 &1750346945 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1750346945, guid: 9618e1cc730500d4c8cedb756e4387d8,
