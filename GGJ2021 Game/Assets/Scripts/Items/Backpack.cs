@@ -101,7 +101,7 @@ public class Backpack : MonoBehaviour
             _equippedHead = head;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
-            Game.Instance.Player.GetComponent<PlayerStatScript>().RecalculateStats();
+            Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
         }
         else if (item is ChestItem chest)
         {
@@ -109,7 +109,7 @@ public class Backpack : MonoBehaviour
             _equippedChest = chest;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
-            Game.Instance.Player.GetComponent<PlayerStatScript>().RecalculateStats();
+            Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
         }
         else if (item is WeaponItem weapon)
         {
@@ -117,7 +117,7 @@ public class Backpack : MonoBehaviour
             _equippedWeapon = weapon;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Weapon, item);
-            Game.Instance.Player.GetComponent<PlayerStatScript>().RecalculateStats();
+            Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
         }
     }
 

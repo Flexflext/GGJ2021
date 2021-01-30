@@ -9,10 +9,10 @@ public class PlayerStatScript : MonoBehaviour
 
     private readonly List<PlayerBuff> _activeBuffs = new List<PlayerBuff>();
 
-    // private void Awake()
-    // {
-    //     RecalculateStats();
-    // }
+    private void Start()
+    {
+        RecalculateStats();
+    }
 
     public void RecalculateStats()
     {
