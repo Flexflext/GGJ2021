@@ -1,16 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static DungeonRoom;
 using static DungeonRoom.Connection;
-using static UnityEngine.GameObject;
 using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    private static readonly Connection[] AllConnections =
+        Enum.GetValues(typeof(Connection)).Cast<Connection>().ToArray();
+
     private const int XOFFSET = 32;
     private const int YOFFSET = 22;
+
 
     [SerializeField] private Vector3 DungeonStartPos;
     [SerializeField] private Transform ParentTransform;
@@ -32,13 +35,15 @@ public class DungeonGenerator : MonoBehaviour
     [ContextMenu("GenerateDungeon")]
     public void GenerateDungeon()
     {
-        foreach (Transform child in ParentTransform) {
+        foreach (Transform child in ParentTransform)
+        {
             Destroy(child.gameObject);
         }
+
         DungeonRooms.Clear();
         OpenRooms.Clear();
 
-        DungeonRoom startRoom = CreateRoom(Down, DungeonStartPos);
+        DungeonRoom startRoom = CreateRoom(Up, DungeonStartPos);
         startRoom.IsStart = true;
 
         while (OpenRooms.Count != 0)
@@ -62,11 +67,12 @@ public class DungeonGenerator : MonoBehaviour
         OpenRooms.Remove(_thisroom);
     }
 
-    private DungeonRoom CreateRoom(Connection origin, Vector3 originPos)
+    private DungeonRoom CreateRoom(Connection direction, Vector3 originPos)
     {
-        Vector3 newPos = GetAdjacentRoomPos(originPos, origin);
-        var endRoom = DungeonRooms.Count <= MinimalRoomAmount;
-        GameObject[] roomPrefabs = GetRoomPrefabs(InvertConnection(origin), endRoom);
+        Connection origin = InvertConnection(direction);
+        Vector3 newPos = GetAdjacentRoomPos(originPos, direction);
+        bool endRoom = DungeonRooms.Count >= MinimalRoomAmount;
+        GameObject[] roomPrefabs = GetRoomPrefabs(origin, endRoom);
 
         var existingRoom = GetRoomAt(newPos);
         if (existingRoom)
@@ -76,33 +82,67 @@ public class DungeonGenerator : MonoBehaviour
             return null;
         }
 
-        GameObject rndRoomPrefab;
-        do
-        {
-            rndRoomPrefab = roomPrefabs[Random.Range(0, roomPrefabs.Length)];
-        } while (!DoesRoomFit(newPos, rndRoomPrefab, origin));
 
-        GameObject room = Instantiate(rndRoomPrefab, newPos, Quaternion.identity, ParentTransform);
+        GameObject fittingRoom = FindFittingRoom(roomPrefabs, newPos, origin);
+        if (fittingRoom == null)
+        {
+            roomPrefabs = GetRoomPrefabs(origin, !endRoom);
+            fittingRoom = FindFittingRoom(roomPrefabs, newPos, origin);
+            if (fittingRoom)
+            {
+                Debug.LogError(
+                    $"failed to find room after for ({origin}, {roomPrefabs.Length}, {newPos})"
+                );
+                return null;
+            }
+        }
+
+        GameObject room = Instantiate(fittingRoom, newPos, Quaternion.identity, ParentTransform);
         DungeonRoom droom = room.GetComponent<DungeonRoom>();
         droom.Origin = origin;
 
         DungeonRooms.Add(droom);
         OpenRooms.Add(droom);
+
         return droom;
+    }
+
+    private GameObject FindFittingRoom(IEnumerable<GameObject> roomPrefabs, Vector3 newPos, Connection origin)
+    {
+        foreach (GameObject roomPrefab in roomPrefabs)
+        {
+            if (DoesRoomFit(newPos, roomPrefab, origin))
+            {
+                return roomPrefab;
+            }
+        }
+
+        return null;
     }
 
     private bool DoesRoomFit(Vector3 wantedPos, GameObject rndRoom, Connection origin)
     {
         DungeonRoom droom = rndRoom.GetComponent<DungeonRoom>();
-        foreach (Connection roomConnection in droom.Connections)
+
+        foreach (Connection connection in AllConnections)
         {
-            if (roomConnection == origin) continue;
-            DungeonRoom adjacent = GetRoomAt(GetAdjacentRoomPos(wantedPos, roomConnection));
-            if (adjacent && !ConnectsTo(adjacent, InvertConnection(roomConnection)))
+            if (connection == origin) continue;
+            DungeonRoom adjacent = GetRoomAt(GetAdjacentRoomPos(wantedPos, connection));
+            if (adjacent)
             {
+                bool weConnect = ConnectsTo(droom, connection);
+                bool heConnects = ConnectsTo(adjacent, InvertConnection(connection));
+
+                if (!weConnect && !heConnects || weConnect && heConnects)
+                {
+                    // Entweder es klickt, oder es klickt halt nicht
+                    continue;
+                }
+
                 return false;
             }
         }
+
         return true;
     }
 
@@ -157,19 +197,26 @@ public class DungeonGenerator : MonoBehaviour
 
     private GameObject[] GetRoomPrefabs(Connection direction, bool endRoom)
     {
+        GameObject[] prefabs;
         switch (direction)
         {
             case Down:
-                return endRoom ? UpRoomPrefabs : new[] {EndRoomsPrefabs[(int) Down]};
+                prefabs = !endRoom ? DownRoomPrefabs : new[] {EndRoomsPrefabs[(int) Down]};
+                break;
             case Left:
-                return endRoom ? RightRoomPrefabs : new[] {EndRoomsPrefabs[(int) Left]};
+                prefabs = !endRoom ? LeftRoomPrefabs : new[] {EndRoomsPrefabs[(int) Left]};
+                break;
             case Up:
-                return endRoom ? DownRoomPrefabs : new[] {EndRoomsPrefabs[(int) Up]};
+                prefabs = !endRoom ? UpRoomPrefabs : new[] {EndRoomsPrefabs[(int) Up]};
+                break;
             case Right:
-                return endRoom ? LeftRoomPrefabs : new[] {EndRoomsPrefabs[(int) Right]};
+                prefabs = !endRoom ? RightRoomPrefabs : new[] {EndRoomsPrefabs[(int) Right]};
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
         }
+
+        return prefabs.OrderBy(x => Random.Range(0F, 10F)).ToArray();
     }
 
     private Connection InvertConnection(Connection _connection)
@@ -184,10 +231,8 @@ public class DungeonGenerator : MonoBehaviour
                 return Down;
             case Right:
                 return Left;
-            case None:
-                return None;
             default:
-                return None;
+                throw new ArgumentOutOfRangeException(nameof(_connection), _connection, null);
         }
     }
 }
