@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
         Backpack backpack = Game.Instance.PlayerManager.Backpack;
         for (int i = 0; i < InventoryItemButtons.Length; i++)
         {
-            SetItem(i, null);
+            SetItem(i, backpack.GetItem(i));
 
             var slotId = i;
             Button itemButton = InventoryItemButtons[i];
@@ -92,8 +92,8 @@ public class InventoryUI : MonoBehaviour
         if (item)
         {
             InventorySprites[slot].enabled = true;
-            InventoryDropSprites[slot].enabled = true;
             InventorySprites[slot].sprite = item.Icon;
+            InventoryDropSprites[slot].enabled = true;
         }
         else
         {

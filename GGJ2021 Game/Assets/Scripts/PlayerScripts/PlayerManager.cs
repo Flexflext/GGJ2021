@@ -7,10 +7,12 @@ public class PlayerManager : MonoBehaviour
 {
     public Backpack Backpack { get; private set; }
     public PlayerStatScript PlayerStat { get; private set; }
+    public PlayerHealth Health { get; private set; }
 
     private void Awake()
     {
         Backpack = GetComponent<Backpack>();
         PlayerStat = GetComponent<PlayerStatScript>();
+        Health = GetComponent<PlayerHealth>();
     }
 }

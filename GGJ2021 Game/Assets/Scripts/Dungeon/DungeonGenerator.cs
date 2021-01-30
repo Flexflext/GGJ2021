@@ -88,7 +88,7 @@ public class DungeonGenerator : MonoBehaviour
         {
             roomPrefabs = GetRoomPrefabs(origin, !endRoom);
             fittingRoom = FindFittingRoom(roomPrefabs, newPos, origin);
-            if (fittingRoom)
+            if (fittingRoom == null)
             {
                 Debug.LogError(
                     $"failed to find room after for ({origin}, {roomPrefabs.Length}, {newPos})"

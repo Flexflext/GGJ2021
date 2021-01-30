@@ -12,9 +12,9 @@ public class HeartUiManager : MonoBehaviour
 
     public void OnHealthChange(float current, float max)
     {
-        while (transform.childCount - max > 0)
+        for (int x = transform.childCount - 1; x >= max; x--)
         {
-            Destroy(transform.GetChild(0));
+            Destroy(transform.GetChild(x).gameObject);
         }
 
         while (transform.childCount - max < 0)
@@ -22,6 +22,7 @@ public class HeartUiManager : MonoBehaviour
             Instantiate(heartPrefab, transform);
         }
 
+        
         for (int i = 0; i < max; i++)
         {
             Image image = transform.GetChild(i).GetComponent<Image>();
@@ -30,8 +31,7 @@ public class HeartUiManager : MonoBehaviour
 
         RectTransform rectTransform = GetComponent<RectTransform>();
         int maxPerRow = 20;
-        int childCount = transform.childCount;
-        rectTransform.sizeDelta = new Vector2(32 + 64 * Math.Min(childCount, maxPerRow),
-            ((childCount - 1) / maxPerRow + 1) * 96);
+        rectTransform.sizeDelta = new Vector2(32 + 64 * Math.Min(max, maxPerRow),
+            ((max - 1) / maxPerRow + 1) * 96);
     }
 }
