@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class SwordItem : WeaponItem
+﻿public class ChestItem : Item
 {
     public override void GenerateRandomStats()
     {

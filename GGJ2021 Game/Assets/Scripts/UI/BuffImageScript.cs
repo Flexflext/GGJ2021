@@ -1,10 +1,12 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class BuffImageScript : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
+    [SerializeField] private TextMeshProUGUI text;
 
     public PlayerBuff buff;
 
@@ -18,8 +20,8 @@ public class BuffImageScript : MonoBehaviour
                 Destroy(this);
             }
 
-            gameObject.GetComponent<SpriteRenderer>().sprite = buff.Icon;
-            text.GetComponent<TextMeshPro>().SetText($"{remaining:0.00}");
+            gameObject.GetComponent<Image>().sprite = buff.Icon;
+            text.SetText($"{remaining:0.00}");
         }
     }
 }

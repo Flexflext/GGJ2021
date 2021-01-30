@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SwordItem : WeaponItem
+public class HeadItem : Item
 {
     public override void GenerateRandomStats()
     {

@@ -10,7 +10,7 @@ public class PlayerBuffScript : MonoBehaviour
     private PlayerTopDownMovement playerMovement;
     private PlayerAttackScript playerAttack;
 
-    public List<PlayerBuff> activeBuffs = new List<PlayerBuff>();
+    private List<PlayerBuff> ActiveBuffs = new List<PlayerBuff>();
 
     private void Awake()
     {
@@ -21,9 +21,9 @@ public class PlayerBuffScript : MonoBehaviour
 
     void Update()
     {
-        for (var i = 0; i < activeBuffs.Count; i++)
+        for (var i = 0; i < ActiveBuffs.Count; i++)
         {
-            var activeBuff = activeBuffs[i];
+            var activeBuff = ActiveBuffs[i];
             var timeElapsed = (DateTime.Now - activeBuff.ActiveSince).TotalSeconds;
             var ticks = (int) timeElapsed;
             if (activeBuff.Ticked != ticks)
@@ -37,7 +37,7 @@ public class PlayerBuffScript : MonoBehaviour
 
             if (timeElapsed > activeBuff.Duration)
             {
-                activeBuffs.RemoveAt(i);
+                ActiveBuffs.RemoveAt(i);
                 OnRemove(activeBuff);
             }
         }
@@ -46,7 +46,7 @@ public class PlayerBuffScript : MonoBehaviour
     public void Activate(PlayerBuff playerBuff)
     {
         playerBuff.ActiveSince = DateTime.Now;
-        activeBuffs.Add(playerBuff);
+        ActiveBuffs.Add(playerBuff);
 
         playerAttack.DamageMultiplier += playerBuff.AttackBuff;
         playerMovement.MovementSpeedMultiplier += playerBuff.SpeedBuff;

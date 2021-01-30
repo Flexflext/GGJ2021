@@ -1,30 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static InventoryUI.EquipmentSlot;
 
 public class Backpack : MonoBehaviour
 {
     public int Size;
     private Item[] Inventory;
-    private List<Item> NearbyItemList;
+
+    private Item _equippedHead;
+    private Item _equippedChest;
+    private Item _equippedWeapon;
+
+    private List<Item> _nearbyItemList;
 
     void Start()
     {
         Inventory = new Item[Size];
-        NearbyItemList = new List<Item>();
+        _nearbyItemList = new List<Item>();
     }
 
     private void Update()
     {
         var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
-        if (NearbyItemList.Count > 0)
+        if (_nearbyItemList.Count > 0)
         {
-            Item nearest = NearbyItemList[0];
+            Item nearest = _nearbyItemList[0];
             if (Input.GetKeyDown(KeyCode.E))
             {
                 bool success = AddItem(nearest);
                 nearest.gameObject.SetActive(!success);
-                NearbyItemList.Remove(nearest);
+                _nearbyItemList.Remove(nearest);
             }
             else
             {
@@ -41,24 +47,22 @@ public class Backpack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Item"))
         {
-            NearbyItemList.Add(collision.gameObject.GetComponent<Item>());
+            _nearbyItemList.Add(collision.gameObject.GetComponent<Item>());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        NearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
+        _nearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
     }
 
-    public bool AddItem(Item _item)
+    private bool AddItem(Item _item)
     {
         for (var i = 0; i < Inventory.Length; i++)
         {
             if (!Inventory[i])
             {
-                Inventory[i] = _item;
-                
-                Game.Instance.UIManager.InventoryUI.SetItem(i, _item);
+                setItem(_item, i);
                 return true;
             }
         }
@@ -66,9 +70,17 @@ public class Backpack : MonoBehaviour
         return false;
     }
 
+    private Item setItem(Item _item, int i)
+    {
+        var previous = Inventory[i];
+        Inventory[i] = _item;
+        Game.Instance.UIManager.InventoryUI.SetItem(i, _item);
+        return previous;
+    }
+
     public void DropItem(int _slot)
     {
-        Game.Instance.UIManager.InventoryUI.RemoveItem(_slot);
+        Game.Instance.UIManager.InventoryUI.SetItem(_slot, null);
 
         Inventory[_slot].gameObject.SetActive(true);
         Inventory[_slot].gameObject.transform.position = transform.position;
@@ -78,18 +90,31 @@ public class Backpack : MonoBehaviour
 
     public void UseItem(int _slot)
     {
-        if (Inventory[_slot] is IUsable usable)
+        Item item = Inventory[_slot];
+        if (item is IUsable usable)
         {
             usable.Use(this);
         }
-    }
-
-    public void EquipItem(Item _item)
-    {
-        int slot = GetInventorySlot(_item);
-
-        if (slot != -1)
+        else if (item is HeadItem)
         {
+            setItem(_equippedHead, _slot);
+            _equippedHead = item;
+
+            Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
+        }
+        else if (item is ChestItem)
+        {
+            setItem(_equippedChest, _slot);
+            _equippedChest = item;
+
+            Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
+        }
+        else if (item is WeaponItem)
+        {
+            setItem(_equippedWeapon, _slot);
+            _equippedWeapon = item;
+
+            Game.Instance.UIManager.InventoryUI.SetEquipped(Weapon, item);
         }
     }
 
@@ -102,7 +127,7 @@ public class Backpack : MonoBehaviour
             var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
             itemInfoPanel.SetDisplayItem(null, false);
 
-            Game.Instance.UIManager.InventoryUI.RemoveItem(slot);
+            Game.Instance.UIManager.InventoryUI.SetItem(slot, null);
 
             Inventory[slot] = null;
             Destroy(_item.gameObject);
@@ -118,9 +143,9 @@ public class Backpack : MonoBehaviour
                 return i;
             }
         }
+
         return -1;
     }
-
 
     public Item GetItem(int slotId)
     {

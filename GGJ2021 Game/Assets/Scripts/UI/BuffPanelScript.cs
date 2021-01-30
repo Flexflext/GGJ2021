@@ -21,7 +21,7 @@ public class BuffPanelScript : MonoBehaviour
 
     public void addBuff(PlayerBuff playerBuff)
     {
-        var buffImage = Instantiate(BuffImagePrefab);
+        var buffImage = Instantiate(BuffImagePrefab, gameObject.transform);
         buffImage.GetComponent<BuffImageScript>().buff = playerBuff;
     }
 }
