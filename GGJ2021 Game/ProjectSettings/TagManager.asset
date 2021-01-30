@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Potion
   - Item
+  - Up
+  - Down
+  - Left
+  - Right
   layers:
   - Default
   - TransparentFX
