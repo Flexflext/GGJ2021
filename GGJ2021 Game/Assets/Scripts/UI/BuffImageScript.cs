@@ -1,10 +1,13 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+using Image = UnityEngine.UI.Image;
 
 public class BuffImageScript : MonoBehaviour
 {
-    [SerializeField] private GameObject text;
+    [SerializeField] 
+    private TMP_Text text;
 
     public PlayerBuff buff;
 
@@ -12,14 +15,14 @@ public class BuffImageScript : MonoBehaviour
     {
         if (buff != null)
         {
-            var remaining = buff.Duration - (buff.ActiveSince - DateTime.Now).TotalSeconds;
+            var remaining = buff.Duration - (DateTime.Now - buff.ActiveSince).TotalSeconds;
             if (remaining <= 0)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
 
-            gameObject.GetComponent<SpriteRenderer>().sprite = buff.Icon;
-            text.GetComponent<TextMeshPro>().SetText($"{remaining:0.00}");
+            gameObject.GetComponent<Image>().sprite = buff.Icon;
+            text.SetText($"{remaining:0.0}");
         }
     }
 }

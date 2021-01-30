@@ -10,6 +10,17 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         CurrentHealth = MaxHealth;
+        StartCoroutine(nameof(RegenerateHealth));
+    }
+
+    private IEnumerator RegenerateHealth()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            int regen = Game.Instance.Player.GetComponent<PlayerStatScript>().GetStatValue(ItemStat.HealthRegen);
+            CurrentHealth = Mathf.Clamp(CurrentHealth + regen, 1, MaxHealth);
+        }
     }
 
 

@@ -6,12 +6,11 @@ using Random = UnityEngine.Random;
 
 public class ItemSpriteGenerator
 {
-    private static Dictionary<string, Sprite[]> spriteCache = new Dictionary<string, Sprite[]>();
+    private static readonly Dictionary<string, Sprite[]> spriteCache = new Dictionary<string, Sprite[]>();
 
-    public static Sprite generateSprite(ItemRarity rarity, ItemType itemType)
+    public static Sprite GenerateSprite(ItemRarity rarity, ItemType itemType)
     {
         var path = $"ItemSprites/{itemType.name}/{rarity.name}";
-        var generalPath = $"ItemSprites/{itemType.name}/{rarity.name}";
 
         spriteCache.TryGetValue(path, out var sprites);
         if (sprites == null)
@@ -19,7 +18,7 @@ public class ItemSpriteGenerator
             // There are some sprites that apply for every rarity-level.
             // We union the rarity-specific and general sprites the rarity-sprites are not loaded yet
             var raritySprites = GetOrLoadSprites(path);
-            var generalSprites = GetOrLoadSprites($"ItemSprites/{itemType.name}");
+            var generalSprites = GetOrLoadSprites($"ItemSprites/{itemType.name}/General");
             sprites = raritySprites.Union(generalSprites).ToArray();
             spriteCache[path] = sprites;
         }
@@ -27,7 +26,7 @@ public class ItemSpriteGenerator
         return sprites[Random.Range(0, sprites.Length)];
     }
 
-    private static Sprite[] GetOrLoadSprites(string path)
+    private static IEnumerable<Sprite> GetOrLoadSprites(string path)
     {
         spriteCache.TryGetValue(path, out var sprites);
         if (sprites == null)

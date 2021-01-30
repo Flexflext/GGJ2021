@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Potion
   - Item
+  - Wall
   - Up
   - Down
   - Left
@@ -21,7 +22,7 @@ TagManager:
   - 
   - EnemyLayer
   - MapConfiner
-  - 
+  - Wall
   - 
   - 
   - 

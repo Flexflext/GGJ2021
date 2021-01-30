@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public abstract class Item : MonoBehaviour
 {
+    public static ItemStat[] StatEnums = Enum.GetValues(typeof(ItemStat)).Cast<ItemStat>().ToArray();
+
     public string Name;
+    
+    public Sprite Icon;
+    public int GoldValue;
+    public Light2D Light;
 
     private ItemRarity rarity;
     public ItemRarity Rarity
@@ -21,11 +29,6 @@ public abstract class Item : MonoBehaviour
         }
     }
 
-    public Sprite Icon;
-    public int GoldValue;
-    public Light2D Light;
-
-    // Start is called before the first frame update
     void Start()
     {
         GenerateRandomStats();
@@ -34,8 +37,4 @@ public abstract class Item : MonoBehaviour
     public abstract string GetItemInfo();
 
     public abstract void GenerateRandomStats();
-
-    public virtual void OnPickup(GameObject player)
-    {
-    }
 }

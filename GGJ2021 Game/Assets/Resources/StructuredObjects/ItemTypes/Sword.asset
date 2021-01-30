@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3a6b1b3e7d49799054114880c94673, type: 3}
   m_Name: Sword
   m_EditorClassIdentifier: 
-  spawnProbability: 30
+  spawnProbability: 70
   component: SwordItem

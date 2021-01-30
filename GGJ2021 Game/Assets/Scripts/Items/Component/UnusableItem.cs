@@ -6,7 +6,7 @@ public class UnusableItem : Item
 {
     public override string GetItemInfo()
     {
-        return "A lost object wating to be found by its owner";
+        return "A lost object waiting to be found by its owner";
     }
 
     public override void GenerateRandomStats()
