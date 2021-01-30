@@ -1,11 +1,19 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using static DungeonRoom;
+using static DungeonRoom.Connection;
+using Random = UnityEngine.Random;
 
 public class DungeonGenerator : MonoBehaviour
 {
+    private static readonly Connection[] AllConnections =
+        Enum.GetValues(typeof(Connection)).Cast<Connection>().ToArray();
+
     private const int XOFFSET = 32;
     private const int YOFFSET = 22;
+
 
     [SerializeField] private Vector3 DungeonStartPos;
     [SerializeField] private Transform ParentTransform;
@@ -15,8 +23,6 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private GameObject[] UpRoomPrefabs;
     [SerializeField] private GameObject[] RightRoomPrefabs;
     [SerializeField] private GameObject[] EndRoomsPrefabs;
-
-    private int RoomCount = 0;
 
     private List<DungeonRoom> OpenRooms = new List<DungeonRoom>();
     private List<DungeonRoom> DungeonRooms = new List<DungeonRoom>();
@@ -29,11 +35,16 @@ public class DungeonGenerator : MonoBehaviour
     [ContextMenu("GenerateDungeon")]
     public void GenerateDungeon()
     {
-        int rnd = Random.Range(0, DownRoomPrefabs.Length);
-        DungeonRoom startroom = CreateRoom(DownRoomPrefabs[rnd], DungeonStartPos, DungeonRoom.Connection.Down, true);
-        OpenRooms.Add(startroom);
-        DungeonRooms.Add(startroom);
-        startroom.IsStart = true;
+        foreach (Transform child in ParentTransform)
+        {
+            Destroy(child.gameObject);
+        }
+
+        DungeonRooms.Clear();
+        OpenRooms.Clear();
+
+        DungeonRoom startRoom = CreateRoom(Up, DungeonStartPos);
+        startRoom.IsStart = true;
 
         while (OpenRooms.Count != 0)
         {
@@ -44,273 +55,184 @@ public class DungeonGenerator : MonoBehaviour
         }
     }
 
-    private DungeonRoom CreateRoom(GameObject _prefab, Vector3 _pos, DungeonRoom.Connection _origin)
+    private void AddRoom(DungeonRoom _thisroom)
     {
-        return CreateRoom(_prefab, _pos, _origin, false);
+        Vector3 roomPos = _thisroom.transform.position;
+        for (int i = 0; i < _thisroom.Connections.Length; i++)
+        {
+            if (_thisroom.Origin == _thisroom.Connections[i]) continue;
+            CreateRoom(_thisroom.Connections[i], roomPos);
+        }
+
+        OpenRooms.Remove(_thisroom);
     }
-    private DungeonRoom CreateRoom(GameObject _prefab, Vector3 _pos, DungeonRoom.Connection _origin, bool _isstart)
+
+    private DungeonRoom CreateRoom(Connection direction, Vector3 originPos)
     {
-        GameObject room;
-        DungeonRoom droom;
-        room = Instantiate(_prefab, _pos, Quaternion.identity, ParentTransform);
-        droom = room.GetComponent<DungeonRoom>();
-        droom.IsStart = _isstart;
-        droom.Origin = _origin;
+        Connection origin = InvertConnection(direction);
+        Vector3 newPos = GetAdjacentRoomPos(originPos, direction);
+        bool endRoom = DungeonRooms.Count >= MinimalRoomAmount;
+        GameObject[] roomPrefabs = GetRoomPrefabs(origin, endRoom);
+
+        var existingRoom = GetRoomAt(newPos);
+        if (existingRoom)
+        {
+            // A room already exists here, so we don't even have to start searching for a fitting one
+            // Maybe check connections and throw error if something doesn't add up?
+            return null;
+        }
+
+
+        GameObject fittingRoom = FindFittingRoom(roomPrefabs, newPos, origin);
+        if (fittingRoom == null)
+        {
+            roomPrefabs = GetRoomPrefabs(origin, !endRoom);
+            fittingRoom = FindFittingRoom(roomPrefabs, newPos, origin);
+            if (fittingRoom)
+            {
+                Debug.LogError(
+                    $"failed to find room after for ({origin}, {roomPrefabs.Length}, {newPos})"
+                );
+                return null;
+            }
+        }
+
+        GameObject room = Instantiate(fittingRoom, newPos, Quaternion.identity, ParentTransform);
+        DungeonRoom droom = room.GetComponent<DungeonRoom>();
+        droom.Origin = origin;
+
         DungeonRooms.Add(droom);
-        RoomCount += droom.Connections.Length;
+        OpenRooms.Add(droom);
 
         return droom;
     }
 
-    private void AddRoom(DungeonRoom _thisroom)
+    private GameObject FindFittingRoom(IEnumerable<GameObject> roomPrefabs, Vector3 newPos, Connection origin)
     {
-        if (_thisroom == null)
-            return;
-        for (int i = 0; i < _thisroom.OpenConnections.Count; i++)
+        foreach (GameObject roomPrefab in roomPrefabs)
         {
-            int rnd = 0;
-            Vector3 newpos = _thisroom.transform.position;
-            switch (_thisroom.OpenConnections[i])
+            if (DoesRoomFit(newPos, roomPrefab, origin))
             {
-                case DungeonRoom.Connection.Down:
-                    if (_thisroom.Origin != _thisroom.OpenConnections[i])
-                    {
-                        newpos.y -= YOFFSET;
-                        if (RoomCount <= MinimalRoomAmount)
-                        {
-                            DungeonRoom newroom = null;
-                            while (!CheckNextRooms(CreateRoom(UpRoomPrefabs[rnd], newpos, DungeonRoom.Connection.Up), newpos))
-                            {
-                                rnd = Random.Range(0, UpRoomPrefabs.Length);
-                                newroom = CreateRoom(UpRoomPrefabs[rnd], newpos, DungeonRoom.Connection.Up);
-                            }
-                            OpenRooms.Add(newroom);
-                        }
-                        else
-                        {
-                            CreateRoom(EndRoomsPrefabs[0], newpos, DungeonRoom.Connection.Up);
-                        }
-                    }
-                    break;
-                case DungeonRoom.Connection.Left:
-                    if (_thisroom.Origin == _thisroom.Connections[i])
-                        break;
-                    newpos.x -= XOFFSET;
-                    if (RoomCount <= MinimalRoomAmount)
-                    {
-                        DungeonRoom newroom = null;
-                        while (!CheckNextRooms(newroom, newpos))
-                        {
-                            rnd = Random.Range(0, RightRoomPrefabs.Length);
-                            newroom = CreateRoom(RightRoomPrefabs[rnd], newpos, DungeonRoom.Connection.Right);
-                        }
-                        OpenRooms.Add(newroom);
-                    }
-                    else
-                    {
-                        CreateRoom(EndRoomsPrefabs[1], newpos, DungeonRoom.Connection.Right);
-                    }
-                    break;
-                case DungeonRoom.Connection.Up:
-                    if (_thisroom.Origin == _thisroom.Connections[i])
-                        break;
-                    newpos.y += YOFFSET;
-                    if (RoomCount <= MinimalRoomAmount)
-                    {
-                        DungeonRoom newroom = null;
-                        while (!CheckNextRooms(newroom, newpos))
-                        {
-                            rnd = Random.Range(0, DownRoomPrefabs.Length);
-                            newroom = CreateRoom(DownRoomPrefabs[rnd], newpos, DungeonRoom.Connection.Down);
-                        }
-                        OpenRooms.Add(newroom);
-                    }
-                    else
-                    {
-                        CreateRoom(EndRoomsPrefabs[2], newpos, DungeonRoom.Connection.Down);
-                    }
-                    break;
-                case DungeonRoom.Connection.Right:
-                    if (_thisroom.Origin == _thisroom.Connections[i])
-                        break;
-                    newpos.x += XOFFSET;
-                    if (RoomCount <= MinimalRoomAmount)
-                    {
-                        DungeonRoom newroom = null;
-                        while (!CheckNextRooms(newroom, newpos))
-                        {
-                            rnd = Random.Range(0, LeftRoomPrefabs.Length);
-                            newroom = CreateRoom(LeftRoomPrefabs[rnd], newpos, DungeonRoom.Connection.Left);
-                        }
-                        OpenRooms.Add(newroom);
-                    }
-                    else
-                    {
-                        CreateRoom(EndRoomsPrefabs[3], newpos, DungeonRoom.Connection.Left);
-                    }
-                    break;
-                default:
-                    break;
+                return roomPrefab;
             }
-
         }
-        OpenRooms.Remove(_thisroom);
+
+        return null;
     }
 
-    private bool CheckNextRooms(DungeonRoom _thisroom, Vector3 _pos)
+    private bool DoesRoomFit(Vector3 wantedPos, GameObject rndRoom, Connection origin)
     {
-        bool result = false;
-        //Vector3 nextpos = _pos;
-        if (_thisroom == null)
-        {
-            return false;
-        }
+        DungeonRoom droom = rndRoom.GetComponent<DungeonRoom>();
 
-        for (int i = 0; i < _thisroom.Connections.Length; i++)
+        foreach (Connection connection in AllConnections)
         {
-            Vector3 nextpos = _pos;
-            if (_thisroom.Connections[i] == DungeonRoom.Connection.Down)
+            if (connection == origin) continue;
+            DungeonRoom adjacent = GetRoomAt(GetAdjacentRoomPos(wantedPos, connection));
+            if (adjacent)
             {
-                nextpos.y -= YOFFSET;
-                if (_thisroom.Origin != _thisroom.Connections[i])
-                {
-                    for (int y = 0; y < DungeonRooms.Count; y++)
-                    {
-                        if (nextpos == DungeonRooms[y].transform.position)
-                        {
-                            for (int z = 0; z < DungeonRooms[y].Connections.Length; z++)
-                            {
-                                if (DungeonRooms[y].Connections[z] != InvertConnection(_thisroom.Connections[i]))
-                                {
-                                    result = false;
-                                }
-                                else
-                                {
-                                    DungeonRooms[y].OpenConnections.Remove(DungeonRooms[y].Connections[z]);
-                                    if (DungeonRooms[y].OpenConnections.Count == 0)
-                                    {
-                                        OpenRooms.Remove(DungeonRooms[y]);
-                                    }
-                                }
+                bool weConnect = ConnectsTo(droom, connection);
+                bool heConnects = ConnectsTo(adjacent, InvertConnection(connection));
 
-                            }
-                        }
-                        else
-                            result = true;
-                    }
-                }
-            }
-            else if (_thisroom.Connections[i] == DungeonRoom.Connection.Left)
-            {
-                nextpos.x -= XOFFSET;
-                if (_thisroom.Origin != _thisroom.Connections[i])
+                if (!weConnect && !heConnects || weConnect && heConnects)
                 {
-                    for (int y = 0; y < DungeonRooms.Count; y++)
-                    {
-                        if (nextpos == DungeonRooms[y].transform.position)
-                        {
-                            for (int z = 0; z < DungeonRooms[y].Connections.Length; z++)
-                            {
-                                if (DungeonRooms[y].Connections[z] != InvertConnection(_thisroom.Connections[i]))
-                                {
-                                    result = false;
-                                }
-                                else
-                                {
-                                    DungeonRooms[y].OpenConnections.Remove(DungeonRooms[y].Connections[z]);
-                                    if (DungeonRooms[y].OpenConnections.Count == 0)
-                                    {
-                                        OpenRooms.Remove(DungeonRooms[y]);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                            result = true;
-                    }
+                    // Entweder es klickt, oder es klickt halt nicht
+                    continue;
                 }
-            }
-            else if (_thisroom.Connections[i] == DungeonRoom.Connection.Up)
-            {
-                nextpos.y += YOFFSET;
-                if (_thisroom.Origin != _thisroom.Connections[i])
-                {
-                    for (int y = 0; y < DungeonRooms.Count; y++)
-                    {
-                        if (nextpos == DungeonRooms[y].transform.position)
-                        {
-                            for (int z = 0; z < DungeonRooms[y].Connections.Length; z++)
-                            {
-                                if (DungeonRooms[y].Connections[z] != InvertConnection(_thisroom.Connections[i]))
-                                {
-                                    result = false;
-                                }
-                                else
-                                {
-                                    DungeonRooms[y].OpenConnections.Remove(DungeonRooms[y].Connections[z]);
-                                    if (DungeonRooms[y].OpenConnections.Count == 0)
-                                    {
-                                        OpenRooms.Remove(DungeonRooms[y]);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                            result = true;
-                    }
-                }
-            }
-            else if (_thisroom.Connections[i] == DungeonRoom.Connection.Right)
-            {
-                nextpos.x += YOFFSET;
-                if (_thisroom.Origin != _thisroom.Connections[i])
-                {
-                    for (int y = 0; y < DungeonRooms.Count; y++)
-                    {
-                        if (nextpos == DungeonRooms[y].transform.position)
-                        {
-                            for (int z = 0; z < DungeonRooms[y].Connections.Length; z++)
-                            {
-                                if (DungeonRooms[y].Connections[z] != InvertConnection(_thisroom.Connections[i]))
-                                {
-                                    result = false;
-                                }
-                                else
-                                {
-                                    DungeonRooms[y].OpenConnections.Remove(DungeonRooms[y].Connections[z]);
-                                    if (DungeonRooms[y].OpenConnections.Count == 0)
-                                    {
-                                        OpenRooms.Remove(DungeonRooms[y]);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                            result = true;
-                    }
-                }
+
+                return false;
             }
         }
 
-        return result;
+        return true;
     }
 
-    private DungeonRoom.Connection InvertConnection(DungeonRoom.Connection _connection)
+    private static bool ConnectsTo(DungeonRoom adjacent, Connection conn)
+    {
+        foreach (Connection adjacentConnection in adjacent.Connections)
+        {
+            if (adjacentConnection == conn)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private DungeonRoom GetRoomAt(Vector3 newPos)
+    {
+        foreach (DungeonRoom dungeonRoom in DungeonRooms)
+        {
+            if (dungeonRoom.transform.position == newPos)
+            {
+                return dungeonRoom;
+            }
+        }
+
+        return null;
+    }
+
+    private static Vector3 GetAdjacentRoomPos(Vector3 pos, Connection direction)
+    {
+        switch (direction)
+        {
+            case Down:
+                pos.y -= YOFFSET;
+                break;
+            case Left:
+                pos.x -= XOFFSET;
+                break;
+            case Up:
+                pos.y += YOFFSET;
+                break;
+            case Right:
+                pos.x += XOFFSET;
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+        }
+
+        return pos;
+    }
+
+    private GameObject[] GetRoomPrefabs(Connection direction, bool endRoom)
+    {
+        GameObject[] prefabs;
+        switch (direction)
+        {
+            case Down:
+                prefabs = !endRoom ? DownRoomPrefabs : new[] {EndRoomsPrefabs[(int) Down]};
+                break;
+            case Left:
+                prefabs = !endRoom ? LeftRoomPrefabs : new[] {EndRoomsPrefabs[(int) Left]};
+                break;
+            case Up:
+                prefabs = !endRoom ? UpRoomPrefabs : new[] {EndRoomsPrefabs[(int) Up]};
+                break;
+            case Right:
+                prefabs = !endRoom ? RightRoomPrefabs : new[] {EndRoomsPrefabs[(int) Right]};
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
+        }
+
+        return prefabs.OrderBy(x => Random.Range(0F, 10F)).ToArray();
+    }
+
+    private Connection InvertConnection(Connection _connection)
     {
         switch (_connection)
         {
-            case DungeonRoom.Connection.Down:
-                return DungeonRoom.Connection.Up;
-            case DungeonRoom.Connection.Left:
-                return DungeonRoom.Connection.Right;
-            case DungeonRoom.Connection.Up:
-                return DungeonRoom.Connection.Down;
-            case DungeonRoom.Connection.Right:
-                return DungeonRoom.Connection.Left;
-            case DungeonRoom.Connection.None:
-                return DungeonRoom.Connection.None;
+            case Down:
+                return Up;
+            case Left:
+                return Right;
+            case Up:
+                return Down;
+            case Right:
+                return Left;
             default:
-                return DungeonRoom.Connection.None;
+                throw new ArgumentOutOfRangeException(nameof(_connection), _connection, null);
         }
     }
 }
