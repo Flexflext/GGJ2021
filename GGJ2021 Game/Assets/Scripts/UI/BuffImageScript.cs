@@ -7,7 +7,7 @@ using Image = UnityEngine.UI.Image;
 public class BuffImageScript : MonoBehaviour
 {
     [SerializeField] 
-    private TextMeshProUGUI text;
+    private TMP_Text text;
 
     public PlayerBuff buff;
 

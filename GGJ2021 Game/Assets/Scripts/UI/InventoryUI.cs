@@ -1,22 +1,25 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    [Header("Inventory SpriteArrays")] public Image[] EquipmentSprites;
+    [Header("Inventory SpriteArrays")] 
+    public Image[] EquipmentSprites;
     public Image[] InventorySprites;
     public Image[] InventoryDropSprites;
 
-    [Space, Header("Inventory ButtonArrays")] [SerializeField]
-    private Button[] InventoryItemButtons;
-
+    [Space, Header("Inventory ButtonArrays")] 
+    [SerializeField] private Button[] InventoryItemButtons;
     [SerializeField] private Button[] InventoryItemDropButtons;
-    [SerializeField] private GameObject inventoryUi;
+    
+    [Space, Header("Misc")]
+    public TMP_Text PlayerStatText;
 
     void Start()
     {
-        Backpack backpack = Game.Instance.Player.GetComponent<Backpack>();
+        Backpack backpack = Game.Instance.PlayerManager.Backpack;
         for (int i = 0; i < InventoryItemButtons.Length; i++)
         {
             SetItem(i, null);
@@ -86,24 +89,16 @@ public class InventoryUI : MonoBehaviour
 
     public void SetItem(int slot, Item item)
     {
-        if (item == null)
-        {
-            InventorySprites[slot].enabled = false;
-            InventoryDropSprites[slot].enabled = false;
-        }
-        else
+        if (item)
         {
             InventorySprites[slot].enabled = true;
             InventoryDropSprites[slot].enabled = true;
             InventorySprites[slot].sprite = item.Icon;
         }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
+        else
         {
-            inventoryUi.SetActive(!inventoryUi.activeSelf);
+            InventorySprites[slot].enabled = false;
+            InventoryDropSprites[slot].enabled = false;
         }
     }
 
