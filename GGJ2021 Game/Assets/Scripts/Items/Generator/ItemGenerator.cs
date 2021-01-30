@@ -30,7 +30,7 @@ public class ItemGenerator : MonoBehaviour
             var itemName = NameGenerator.generateName();
             var itemRarity = GenerateRarity();
             var itemType = GenerateItemType();
-            var itemSprite = ItemSpriteGenerator.generateSprite(itemRarity, itemType);
+            var itemSprite = ItemSpriteGenerator.GenerateSprite(itemRarity, itemType);
 
             var item = Instantiate(itemPrefab);
             item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";

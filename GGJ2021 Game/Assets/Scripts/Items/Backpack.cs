@@ -8,9 +8,9 @@ public class Backpack : MonoBehaviour
     public int Size;
     private Item[] Inventory;
 
-    private Item _equippedHead;
-    private Item _equippedChest;
-    private Item _equippedWeapon;
+    private HeadItem _equippedHead;
+    private ChestItem _equippedChest;
+    private WeaponItem _equippedWeapon;
 
     private List<Item> _nearbyItemList;
 
@@ -95,24 +95,24 @@ public class Backpack : MonoBehaviour
         {
             usable.Use(this);
         }
-        else if (item is HeadItem)
+        else if (item is HeadItem head)
         {
             setItem(_equippedHead, _slot);
-            _equippedHead = item;
+            _equippedHead = head;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
         }
-        else if (item is ChestItem)
+        else if (item is ChestItem chest)
         {
             setItem(_equippedChest, _slot);
-            _equippedChest = item;
+            _equippedChest = chest;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
         }
-        else if (item is WeaponItem)
+        else if (item is WeaponItem weapon)
         {
             setItem(_equippedWeapon, _slot);
-            _equippedWeapon = item;
+            _equippedWeapon = weapon;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Weapon, item);
         }
@@ -150,5 +150,20 @@ public class Backpack : MonoBehaviour
     public Item GetItem(int slotId)
     {
         return Inventory[slotId];
+    }
+
+    public WeaponItem GetEquippedWeapon()
+    {
+        return _equippedWeapon;
+    }
+
+    public ChestItem GetEquippedChest()
+    {
+        return _equippedChest;
+    }
+
+    public HeadItem GetEquippedHead()
+    {
+        return _equippedHead;
     }
 }

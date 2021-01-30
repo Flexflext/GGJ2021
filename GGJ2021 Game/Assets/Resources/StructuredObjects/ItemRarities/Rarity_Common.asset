@@ -15,6 +15,6 @@ MonoBehaviour:
   SpawnProbability: 100
   NameColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   MaxGoldValue: 5
-  MaxStrength: 5
+  MaxStrength: 3
   MaxDurability: 10
   MaxUseDurability: 2

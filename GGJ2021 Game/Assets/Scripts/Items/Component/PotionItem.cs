@@ -7,49 +7,20 @@ public class PotionItem : Item, IUsable
 
     public override void GenerateRandomStats()
     {
-        var stats = new int[4];
-        DistributeStats(stats, (int) Rarity.MaxStrength, true, 1);
-
-        var kissCurse = Random.Range(0, 5);
-        DistributeStats(stats, kissCurse, false, -1);
-        DistributeStats(stats, kissCurse, false, 1);
-
+        var statValues = ItemStatGenerator.GenerateRandomStats(this);
         _itemBuff = new PlayerBuff
         {
             Icon = Icon,
-            HealOverTime = stats[0],
-            SpeedBuff = stats[1] * 0.3F,
-            AttackBuff = stats[2],
-            Duration = stats[3]
+            Duration = Random.Range(2,10),
+            StatValues = statValues
         };
-    }
-
-    private void DistributeStats(int[] arr, int points, bool withPrefer, int amount)
-    {
-        var prefer = Random.Range(0, arr.Length);
-
-        for (var i = 0; i < points; i++)
-        {
-            if (withPrefer && Random.Range(0, 3) == 0)
-            {
-                arr[prefer] += amount;
-            }
-            else
-            {
-                arr[Random.Range(0, arr.Length)] += amount;
-            }
-        }
     }
 
     public void Use(Backpack backpack)
     {
-        var playerBuffs = backpack.gameObject.GetComponent<PlayerBuffScript>();
-        playerBuffs.Activate(_itemBuff);
+        var playerStats = backpack.gameObject.GetComponent<PlayerStatScript>();
+        playerStats.ActivateBuff(_itemBuff);
         backpack.DestroyItem(this);
-    }
-
-    public override void OnPickup(GameObject player)
-    {
     }
 
     public override string GetItemInfo()

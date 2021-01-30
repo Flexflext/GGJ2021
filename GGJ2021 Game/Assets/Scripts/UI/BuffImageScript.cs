@@ -6,7 +6,8 @@ using Image = UnityEngine.UI.Image;
 
 public class BuffImageScript : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI text;
+    [SerializeField] 
+    private TextMeshProUGUI text;
 
     public PlayerBuff buff;
 
@@ -14,14 +15,14 @@ public class BuffImageScript : MonoBehaviour
     {
         if (buff != null)
         {
-            var remaining = buff.Duration - (buff.ActiveSince - DateTime.Now).TotalSeconds;
+            var remaining = buff.Duration - (DateTime.Now - buff.ActiveSince).TotalSeconds;
             if (remaining <= 0)
             {
-                Destroy(this);
+                Destroy(gameObject);
             }
 
             gameObject.GetComponent<Image>().sprite = buff.Icon;
-            text.SetText($"{remaining:0.00}");
+            text.SetText($"{remaining:0.0}");
         }
     }
 }

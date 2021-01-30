@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
@@ -10,7 +8,7 @@ public class ItemInfoPanel : MonoBehaviour
     [SerializeField] private TMP_Text DescriptionText;
     [SerializeField] private Image ItemIcon;
 
-    private Item _currentlyDisplayed;
+    private object _currentlyDisplayed;
     private bool mouseSelected = false;
 
     void Start()
@@ -18,7 +16,7 @@ public class ItemInfoPanel : MonoBehaviour
         SetDisplayItem(null, false);
     }
 
-    public void SetDisplayItem(Item toSet, bool mouse)
+    public void SetDisplayItem(object toSet, bool mouse)
     {
         if (mouseSelected && !mouse)
         {
@@ -36,15 +34,24 @@ public class ItemInfoPanel : MonoBehaviour
             _currentlyDisplayed = toSet;
 
             gameObject.SetActive(true);
-
-            NameText.text = toSet.Name;
-            NameText.color = toSet.Rarity.NameColor;
-
-            DescriptionText.text = toSet.GetItemInfo();
-
-            ItemIcon.sprite = toSet.Icon;
-
             mouseSelected = mouse;
+
+            switch (toSet)
+            {
+                case Item item:
+                    NameText.text = item.Name;
+                    NameText.color = item.Rarity.NameColor;
+
+                    DescriptionText.text = item.GetItemInfo();
+
+                    ItemIcon.sprite = item.Icon;
+                    break;
+                case PlayerBuff buff:
+                    NameText.text = null;
+                    ItemIcon.sprite = buff.Icon;
+                    DescriptionText.text = buff.GetBuffInfo();
+                    break;
+            }
         }
     }
 }
