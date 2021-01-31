@@ -63,12 +63,4 @@ public class PlayerTopDownMovement : MonoBehaviour
             PlayerAnim.SetBool("IsWalking", false);
         }
     }
-
-    private int GetDirection(Vector2 v)
-    {
-        if (v.x > 0) return 3;
-        if (v.x < 0) return 1;
-        if (v.y > 0) return 2;
-        return 0;
-    }
 }
