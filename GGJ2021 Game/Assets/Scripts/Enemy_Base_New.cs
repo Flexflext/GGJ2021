@@ -96,16 +96,10 @@ public class Enemy_Base_New : MonoBehaviour
 
     protected virtual void Attack()
     {
-        //transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, CurrentSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, CurrentSpeed * Time.deltaTime);
 
-
-        //float speed = Vector2.SqrMagnitude(transform.position);
-
-        Rb.MovePosition(transform.position + Player.transform.position * CurrentSpeed * Time.deltaTime);
 
         EnemyAnim.SetFloat("Speed", CurrentSpeed);
-        //EnemyAnim.SetFloat("Horizontal", (StartPos.x + transform.position.x));
-        //EnemyAnim.SetFloat("Vertical", (StartPos.y + transform.position.y));
 
 
 
