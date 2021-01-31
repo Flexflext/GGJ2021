@@ -7,6 +7,7 @@ TagManager:
   - Potion
   - Item
   - Wall
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - 
   - EnemyLayer
   - MapConfiner
-  - Wall
+  - BlockingLayer
   - 
   - 
   - 
