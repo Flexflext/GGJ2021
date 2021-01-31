@@ -7,7 +7,7 @@ public class ItemStatGenerator
 {
     public static int[] GenerateRandomStats(Item item)
     {
-        var statDistribution = new int[Item.StatEnums.Count()];
+        var statDistribution = new int[Item.StatEnums.Length];
 
         DistributeStats(statDistribution, (int) item.Rarity.MaxStrength, true, 1);
 

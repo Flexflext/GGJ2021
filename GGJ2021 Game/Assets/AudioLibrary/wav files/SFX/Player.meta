@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:GGJ2021 Game/Assets/Animations/EnemyAnims.meta
+guid: 489d9c28d2ae3ee4cbab872a45885edd
+=======
 guid: 24d4989cef13317458516e4168b1f317
+>>>>>>> 3c698dbfe921b3f4e23f65d95aa7006c0e2aa761:GGJ2021 Game/Assets/AudioLibrary/wav files/SFX/Player.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

@@ -29,6 +29,8 @@ public class PlayerAttackScript : MonoBehaviour
 
     public Sound PlayerAttackSound;
 
+    Vector3 LookDir;
+
     void Start()
     {
         Player = FindObjectOfType<PlayerTopDownMovement>();
@@ -58,16 +60,22 @@ public class PlayerAttackScript : MonoBehaviour
             IsAttacking = false;
         }
     }
+    private void FixedUpdate()
+    {
+        GetMousePos();
+    }
 
+    void GetMousePos()
+    {
+        LookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+    }
 
     void PlayerAttackDirection()
     {
         if (Player.SwordPivot.transform.rotation.z > 0 && Player.SwordPivot.transform.rotation.z < 90)
         {
-            if (!Player.PlayerSprite.flipX)
+            if (LookDir.x >= transform.position.x)
             {
-                //Debug.Log("Attack upper Right");
-
                 IsAttackingUpperRight = true;
 
 
@@ -75,10 +83,8 @@ public class PlayerAttackScript : MonoBehaviour
                 IsAttackingLowerLeft = false;
                 IsAttackingLowerRight = false;
             }
-            else if (Player.PlayerSprite.flipX)
+            else if (LookDir.x < transform.position.x)
             {
-                //Debug.Log("Attack upper Left");
-
                 IsAttackingUpperLeft = true;
 
 
@@ -89,10 +95,8 @@ public class PlayerAttackScript : MonoBehaviour
         }
         if (Player.SwordPivot.transform.rotation.z < 0 && Player.SwordPivot.transform.rotation.z > -90)
         {
-            if (!Player.PlayerSprite.flipX)
+            if (LookDir.x >= transform.position.x)
             {
-                //Debug.Log("Attack lower Right");
-
                 IsAttackingLowerRight = true;
 
 
@@ -101,10 +105,8 @@ public class PlayerAttackScript : MonoBehaviour
                 IsAttackingLowerLeft = false;
 
             }
-            else if (Player.PlayerSprite.flipX)
+            else if (LookDir.x < transform.position.x)
             {
-                //Debug.Log("Attack lower Left");
-
                 IsAttackingLowerLeft = true;
 
 
@@ -122,9 +124,9 @@ public class PlayerAttackScript : MonoBehaviour
         {
             Collider2D[] enemiesToDamage;
 
-            AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
+            //AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
 
-            if (Player.PlayerSprite.flipX == false)
+            if (LookDir.x >= transform.position.x)
             {
                 enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
                 CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
@@ -185,7 +187,7 @@ public class PlayerAttackScript : MonoBehaviour
                         }
                     }
                 }
-                else if(enemy.transform.position.x < transform.position.x && Player.PlayerSprite.flipX)
+                else if(enemy.transform.position.x < transform.position.x && LookDir.x < transform.position.x)
                 {
                     if (IsAttackingUpperLeft)
                     {

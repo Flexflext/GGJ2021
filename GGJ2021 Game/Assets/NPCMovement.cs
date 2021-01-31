@@ -8,7 +8,7 @@ public class NPCMovement : MonoBehaviour
     [SerializeField] private float playerCheckRadius;
     [SerializeField] private LayerMask playerLayer;
 
-    [SerializeField] private Transform[] npcWaypoints;
+    [SerializeField] private GameObject waypointHolder;
 
     private Vector3[] waypointPositions;
 
@@ -20,29 +20,31 @@ public class NPCMovement : MonoBehaviour
     private int nextWayPointIndex;
     private bool isReversed;
 
-
     private InfoScriptNPCCanvas canvasInfo;
 
     private void Awake()
     {
-        waypointPositions = new Vector3[npcWaypoints.Length];
-
-        for (int i = 0; i < npcWaypoints.Length; i++)
+        canvasInfo = GetComponentInChildren<InfoScriptNPCCanvas>();
+        
+        int waypointCount = waypointHolder.transform.childCount;
+        waypointPositions = new Vector3[waypointCount];
+        for (int i = 0; i < waypointCount; i++)
         {
-            waypointPositions[i] = npcWaypoints[i].position;
+            Transform waypointTransform = waypointHolder.transform.GetChild(i).GetComponent<Transform>();
+            waypointPositions[i] = waypointTransform.position;
         }
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        canvasInfo = GetComponentInChildren<InfoScriptNPCCanvas>();
-        nextWayPointIndex = Random.Range(0, waypointPositions.Length);
-        this.transform.position = waypointPositions[nextWayPointIndex];
-        wayPoint = transform.position;
+        if (waypointPositions.Length > 0)
+        {
+            nextWayPointIndex = Random.Range(0, waypointPositions.Length);
+            transform.position = waypointPositions[nextWayPointIndex];
+            wayPoint = transform.position;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Physics2D.OverlapCircle(transform.position, playerCheckRadius, playerLayer))
@@ -73,14 +75,13 @@ public class NPCMovement : MonoBehaviour
 
     private void Move()
     {
-        if (!wayPointSet)
-        {
-            SearchNextWayPoint(nextWayPointIndex);
-        }
-
         if (wayPointSet)
         {
             transform.position = Vector3.MoveTowards(transform.position, wayPoint, npcSpeed * Time.deltaTime);
+        }
+        else
+        {
+            SearchNextWayPoint(nextWayPointIndex);
         }
 
         if (transform.position == wayPoint)
@@ -95,11 +96,10 @@ public class NPCMovement : MonoBehaviour
     /// <param name="_waypointindex"> Current index of the Array. </param>
     private void SearchNextWayPoint(int _waypointindex)
     {
-
+        if (waypointPositions.Length == 0) return;
         if (_waypointindex < waypointPositions.Length && !isReversed)
         {
             wayPoint = waypointPositions[_waypointindex];
-
 
             nextWayPointIndex++;
             if (nextWayPointIndex == waypointPositions.Length)
@@ -107,19 +107,19 @@ public class NPCMovement : MonoBehaviour
                 isReversed = true;
                 nextWayPointIndex--;
             }
+
             wayPointSet = true;
-            return;
         }
         else if (_waypointindex < waypointPositions.Length && isReversed)
         {
             wayPoint = waypointPositions[_waypointindex];
-
 
             nextWayPointIndex--;
             if (nextWayPointIndex == 0)
             {
                 isReversed = false;
             }
+
             wayPointSet = true;
         }
     }

@@ -56,7 +56,7 @@ public class InventoryUI : MonoBehaviour
         for (var i = 0; i < EquipmentSprites.Length; i++)
         {
             EquipmentSlot equipSlot = (EquipmentSlot) i;
-            SetEquipped(equipSlot, null);
+            SetEquipped(equipSlot, GetEquippedItemForSlot(backpack, equipSlot));
 
             OnPointer onPointer = EquipmentSprites[i].gameObject.AddComponent<OnPointer>();
             onPointer.AddEnterListener(e =>

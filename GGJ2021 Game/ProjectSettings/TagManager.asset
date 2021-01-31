@@ -7,10 +7,12 @@ TagManager:
   - Potion
   - Item
   - Wall
+  - Enemy
   - Up
   - Down
   - Left
   - Right
+  - Player
   layers:
   - Default
   - TransparentFX
@@ -22,6 +24,8 @@ TagManager:
   - 
   - EnemyLayer
   - MapConfiner
+  - BlockingLayer
+  - 
   - Wall
   - Player
   - 

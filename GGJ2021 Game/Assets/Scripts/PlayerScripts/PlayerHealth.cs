@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Sound damageSound;
+    [SerializeField] private Sound deathSound;
 
     private float _currentHealth;
     private float _maxHealth;
@@ -37,8 +38,12 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    Animator PlayerDamagedAnim;
+
+
     private void Start()
     {
+        PlayerDamagedAnim = GetComponent<Animator>();
         MaxHealth = 3;
         CurrentHealth = MaxHealth;
         StartCoroutine(nameof(RegenerateHealth));
@@ -58,10 +63,12 @@ public class PlayerHealth : MonoBehaviour
     public void PlayerTakesDamge(float _damage)
     {
         CurrentHealth -= _damage;
+        PlayerDamagedAnim.SetTrigger("IsDamaged");
 
         AudioManager.instance.PlaySound(damageSound);
         if (CurrentHealth <= 0)
         {
+            AudioManager.instance.PlaySound(deathSound);
             Destroy(gameObject);
         }
     }
