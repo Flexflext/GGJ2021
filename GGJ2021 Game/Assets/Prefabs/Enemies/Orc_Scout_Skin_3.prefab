@@ -156,8 +156,8 @@ MonoBehaviour:
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
     type: 3}
   KnockbackForce: 0
-  enemyHitSound: {fileID: 0}
-  enemyDeathSound: {fileID: 0}
+  enemyHitSound: {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
+  enemyDeathSound: {fileID: 11400000, guid: 3c438ce6f38a18743835e75490a59c8c, type: 2}
 --- !u!61 &5138921784193425997
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -34033,6 +34033,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2033735105}
     m_Modifications:
+    - target: {fileID: 38755640, guid: 0827e70f47a6e0f4293faeb3fbf9c239, type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 38755640, guid: 0827e70f47a6e0f4293faeb3fbf9c239, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 38755640, guid: 0827e70f47a6e0f4293faeb3fbf9c239, type: 3}
+      propertyPath: BypassReverbZones
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7688674944608407712, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
         type: 3}
       propertyPath: m_RootOrder

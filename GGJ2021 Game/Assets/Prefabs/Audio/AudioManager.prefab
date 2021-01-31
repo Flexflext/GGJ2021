@@ -78,7 +78,7 @@ MonoBehaviour:
   BackgroundAudio: {fileID: 38755640}
   HubMusic: {fileID: 8300000, guid: 77965c9b4248a754ab4e23addd6e6c8d, type: 3}
   DungeonMusic: {fileID: 8300000, guid: 68f07760a25d0f24eb8a58e8b512676c, type: 3}
-  Debugging: 1
+  Debugging: 0
 --- !u!82 &38755640
 AudioSource:
   m_ObjectHideFlags: 0
