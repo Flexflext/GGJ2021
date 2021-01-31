@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
     {
         items = ItemGenerator.GenerateItems(itemHolder, 1000);
         dungeonItems = dungeonItemSpawner.SpawnItems(items);
-        //dungeonItemSpawner.SpawnEnemies();
+        dungeonItemSpawner.SpawnEnemies();
         npcManager.pickLostItems(dungeonItems);
     }
 }

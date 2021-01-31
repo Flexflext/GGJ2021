@@ -149,6 +149,8 @@ public class Backpack : MonoBehaviour
 
     public bool DestroyItem(Item _item)
     {
+        if (!_item) return false;
+        
         int slot = GetInventorySlot(_item);
 
         if (slot != -1)
