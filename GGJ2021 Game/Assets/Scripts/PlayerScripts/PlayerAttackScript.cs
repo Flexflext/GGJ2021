@@ -31,6 +31,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     Vector3 LookDir;
 
+    float AnimSpeedModifier;
 
     //public float MaxDamage
     //{
@@ -70,7 +71,10 @@ public class PlayerAttackScript : MonoBehaviour
         CurrentAttackSpeed = Weapon.AttackSpeed;
         CurrentAttackRange = Weapon.AttackRange;
 
-        WeaponSwingAnim.speed = WeaponSwingAnim.speed += CurrentAttackSpeed;
+        AnimSpeedModifier = WeaponSwingAnim.speed / CurrentAttackSpeed;
+        Debug.Log(AnimSpeedModifier);
+        WeaponSwingAnim.speed += AnimSpeedModifier;
+        Debug.Log(WeaponSwingAnim.speed);
     }
 
     private void Update()
@@ -80,6 +84,8 @@ public class PlayerAttackScript : MonoBehaviour
         PlayerAttackDirection();
 
         AnimationInfo = WeaponSwingAnim.GetCurrentAnimatorStateInfo(0);
+
+
 
         if (!AnimationInfo.IsName("Idle"))
         {
@@ -154,7 +160,7 @@ public class PlayerAttackScript : MonoBehaviour
         {
             Collider2D[] enemiesToDamage;
 
-            AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
+            //AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
 
             if (LookDir.x >= transform.position.x)
             {
