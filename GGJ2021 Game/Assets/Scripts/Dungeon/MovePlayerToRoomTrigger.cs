@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MovePlayerToRoomTrigger : MonoBehaviour
 {
-    private const int XOFFSET = 11;
-    private const int YOFFSET = 10;
+    private const int XOFFSET = 9;
+    private const int YOFFSET = 8;
     private bool IsActive = false;
 
     public bool SetActive { set { IsActive = value; } }
