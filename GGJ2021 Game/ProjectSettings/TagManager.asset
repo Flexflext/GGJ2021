@@ -13,6 +13,7 @@ TagManager:
   - Left
   - Right
   - Player
+  - ToDungeon
   layers:
   - Default
   - TransparentFX

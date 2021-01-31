@@ -39,7 +39,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
-        //dungeonItemSpawner.SpawnEnemies();
+        dungeonItemSpawner.SpawnEnemies();
     }
 
 

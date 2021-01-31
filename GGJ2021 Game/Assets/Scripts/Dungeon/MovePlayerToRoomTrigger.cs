@@ -14,6 +14,12 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
         {
             switch (gameObject.tag)
             {
+                case "ToDungeon":
+                    var dungeonPos = new Vector2(0, 200);
+                    collision.gameObject.transform.position = new Vector3(dungeonPos.x - 0.5F, dungeonPos.y - 4.5F, 0);
+                    AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Dungeon);
+                    StartCoroutine("TriggerTimer");
+                    break;
                 case "Up":
                     TeleportPlayer(new Vector3(0, YOFFSET, 0), collision.transform);
                     break;
@@ -23,6 +29,8 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
                     {
                         collision.transform.position = new Vector3(-6, 14.2F, 0);
                         Game.Instance.DungeonGenerator.GenerateDungeon();
+                        AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
+                        StartCoroutine("TriggerTimer");
                     }
                     else
                     {

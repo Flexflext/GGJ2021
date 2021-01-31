@@ -186,7 +186,7 @@ public class Backpack : MonoBehaviour
 
         return false;
     }
-
+    
     private static void onEquipChanged(InventoryUI.EquipmentSlot equipmentSlot)
     {
         Game.Instance.UIManager.InventoryUI.SetEquipped(equipmentSlot, null);
