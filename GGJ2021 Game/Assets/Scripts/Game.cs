@@ -9,10 +9,19 @@ public class Game : MonoBehaviour
     private UIManager m_UIManager;
     [SerializeField]
     private PlayerManager m_PlayerManager;
+    [SerializeField] 
+    private DungeonItemSpawner dungeonItemSpawner;
+    [SerializeField] 
+    private NpcManager npcManager;
+    [SerializeField]
+    private Transform itemHolder;
 
     public PlayerManager PlayerManager => m_PlayerManager;
 
     public ItemGenerator ItemGenerator;
+
+    private IEnumerable<Item> items;
+    private IEnumerable<Item> dungeonItems;
     
     public UIManager UIManager => m_UIManager;
 
@@ -24,5 +33,12 @@ public class Game : MonoBehaviour
         }
         else if (Instance != this)
             Destroy(this);
+    }
+
+    private void Start()
+    {
+        items = ItemGenerator.GenerateItems(itemHolder, 1000);
+        dungeonItems = dungeonItemSpawner.SpawnItems(items);
+        npcManager.pickLostItems(dungeonItems);
     }
 }
