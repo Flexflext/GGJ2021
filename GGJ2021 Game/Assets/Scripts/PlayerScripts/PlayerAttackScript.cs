@@ -74,11 +74,8 @@ public class PlayerAttackScript : MonoBehaviour
     {
         if (Player.SwordPivot.transform.rotation.z > 0 && Player.SwordPivot.transform.rotation.z < 90)
         {
-            Debug.Log("DDDDDDDDDD");
             if (LookDir.x >= transform.position.x)
             {
-               Debug.Log("Attack upper Right");
-
                 IsAttackingUpperRight = true;
 
 
@@ -88,8 +85,6 @@ public class PlayerAttackScript : MonoBehaviour
             }
             else if (LookDir.x < transform.position.x)
             {
-                Debug.Log("Attack upper Left");
-
                 IsAttackingUpperLeft = true;
 
 
@@ -100,12 +95,8 @@ public class PlayerAttackScript : MonoBehaviour
         }
         if (Player.SwordPivot.transform.rotation.z < 0 && Player.SwordPivot.transform.rotation.z > -90)
         {
-            Debug.Log("HHHHHHHH");
-
             if (LookDir.x >= transform.position.x)
             {
-                Debug.Log("Attack lower Right");
-
                 IsAttackingLowerRight = true;
 
 
@@ -116,8 +107,6 @@ public class PlayerAttackScript : MonoBehaviour
             }
             else if (LookDir.x < transform.position.x)
             {
-                Debug.Log("Attack lower Left");
-
                 IsAttackingLowerLeft = true;
 
 
