@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerTopDownMovement : MonoBehaviour
 {
-    public float MovementSpeedMultiplier;
-
     [SerializeField]
     private float m_MovementSpeed;
 

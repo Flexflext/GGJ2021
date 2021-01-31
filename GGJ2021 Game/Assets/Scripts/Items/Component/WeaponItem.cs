@@ -1,3 +1,3 @@
-﻿public abstract class WeaponItem : Item
+﻿public abstract class WeaponItem : EquipmentItem
 {
 }

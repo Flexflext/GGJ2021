@@ -35,4 +35,8 @@ public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
+    private void OnDestroy()
+    {
+        OnPointerExit(null);
+    }
 }

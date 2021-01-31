@@ -1,16 +1,3 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HeadItem : Item
+﻿public class HeadItem : EquipmentItem
 {
-    public override void GenerateRandomStats()
-    {
-        
-    }
-    
-    public override string GetItemInfo()
-    {
-        return "";
-    }
 }

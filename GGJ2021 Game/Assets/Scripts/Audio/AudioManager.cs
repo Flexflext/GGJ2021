@@ -15,25 +15,28 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        //// Singleton pattern
-        //if (instance == null)
-        //{
-        //    instance = this;
-        //    DontDestroyOnLoad(gameObject);
-        //}
-        //else
-        //{
-        //    Destroy(this);
-        //}
-        
+        // Singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+
         // for every Sound in the SoundsArray a AudioSource is added to the AudioManager
         foreach (Sound s in sounds)
         {
+            if (s == null)
+                return;
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
         }
+
 
     }
 

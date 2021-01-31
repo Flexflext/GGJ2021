@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,14 +13,16 @@ public class InventoryUI : MonoBehaviour
     [Space, Header("Inventory ButtonArrays")] 
     [SerializeField] private Button[] InventoryItemButtons;
     [SerializeField] private Button[] InventoryItemDropButtons;
-    [SerializeField] private GameObject inventoryUi;
+    
+    [Space, Header("Misc")]
+    public TMP_Text PlayerStatText;
 
     void Start()
     {
-        Backpack backpack = Game.Instance.Player.GetComponent<Backpack>();
+        Backpack backpack = Game.Instance.PlayerManager.Backpack;
         for (int i = 0; i < InventoryItemButtons.Length; i++)
         {
-            SetItem(i, null);
+            SetItem(i, backpack.GetItem(i));
 
             var slotId = i;
             Button itemButton = InventoryItemButtons[i];
@@ -39,44 +42,63 @@ public class InventoryUI : MonoBehaviour
             OnPointer onPointer = itemButton.gameObject.AddComponent<OnPointer>();
             onPointer.AddEnterListener(e =>
             {
-                //Debug.Log("Mouse entered " + slotId);
                 var item = backpack.GetItem(slotId);
                 var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
                 itemInfoPanel.SetDisplayItem(item, true);
             });
             onPointer.AddExitListener(e =>
             {
-                //Debug.Log("Mouse exit " + slotId);
                 var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
                 itemInfoPanel.SetDisplayItem(null, true);
             });
         }
-        
-        SetEquipped(EquipmentSlot.Head, null);
-        SetEquipped(EquipmentSlot.Chest, null);
-        SetEquipped(EquipmentSlot.Weapon, null);
+
+        for (var i = 0; i < EquipmentSprites.Length; i++)
+        {
+            EquipmentSlot equipSlot = (EquipmentSlot) i;
+            SetEquipped(equipSlot, null);
+
+            OnPointer onPointer = EquipmentSprites[i].gameObject.AddComponent<OnPointer>();
+            onPointer.AddEnterListener(e =>
+            {
+                var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+                itemInfoPanel.SetDisplayItem(GetEquippedItemForSlot(backpack, equipSlot), true);
+            });
+            onPointer.AddExitListener(e =>
+            {
+                var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
+                itemInfoPanel.SetDisplayItem(null, true);
+            });
+        }
+    }
+
+    private static EquipmentItem GetEquippedItemForSlot(Backpack backpack, EquipmentSlot equipSlot)
+    {
+        switch (equipSlot)
+        {
+            case EquipmentSlot.Head:
+                return backpack.GetEquippedHead();
+            case EquipmentSlot.Chest:
+                return backpack.GetEquippedChest();
+            case EquipmentSlot.Weapon:
+                return backpack.GetEquippedWeapon();
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
     public void SetItem(int slot, Item item)
     {
-        if (item == null)
+        if (item)
         {
-            InventorySprites[slot].enabled = false;
-            InventoryDropSprites[slot].enabled = false;
+            InventorySprites[slot].enabled = true;
+            InventorySprites[slot].sprite = item.Icon;
+            InventoryDropSprites[slot].enabled = true;
         }
         else
         {
-            InventorySprites[slot].enabled = true;
-            InventoryDropSprites[slot].enabled = true;
-            InventorySprites[slot].sprite = item.Icon;
-        }
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            inventoryUi.SetActive(!inventoryUi.activeSelf);
+            InventorySprites[slot].enabled = false;
+            InventoryDropSprites[slot].enabled = false;
         }
     }
 
@@ -86,7 +108,7 @@ public class InventoryUI : MonoBehaviour
         Chest,
         Weapon
     }
-    
+
     public void SetEquipped(EquipmentSlot slot, Item item)
     {
         if (item == null)

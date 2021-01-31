@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpawnProbability: 30
   NameColor: {r: 0, g: 0.7169812, b: 0.0025634407, a: 1}
-  MaxGoldValue: 0
-  MaxStrength: 0
+  MaxGoldValue: 10
+  MaxStrength: 5
   MaxDurability: 0
   MaxUseDurability: 0

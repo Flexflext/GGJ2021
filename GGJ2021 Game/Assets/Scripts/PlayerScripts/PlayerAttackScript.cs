@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerAttackScript : MonoBehaviour
 {
-    public float DamageMultiplier;
-
     public float CurrentAttackDamage;
     public float CurrentAttackRange;
 
@@ -29,6 +27,8 @@ public class PlayerAttackScript : MonoBehaviour
 
     AnimatorStateInfo AnimationInfo;
 
+    public Sound PlayerAttackSound;
+
     void Start()
     {
         Player = FindObjectOfType<PlayerTopDownMovement>();
@@ -44,7 +44,7 @@ public class PlayerAttackScript : MonoBehaviour
     private void Update()
     {
         PlayerAttack();
-
+        
         PlayerAttackDirection();
 
         AnimationInfo = WeaponSwingAnim.GetCurrentAnimatorStateInfo(0);
@@ -122,6 +122,7 @@ public class PlayerAttackScript : MonoBehaviour
         {
             Collider2D[] enemiesToDamage;
 
+            AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
 
             if (Player.PlayerSprite.flipX == false)
             {
