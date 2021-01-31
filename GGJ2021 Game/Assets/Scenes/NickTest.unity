@@ -19879,6 +19879,48 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4547619040880432893, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: DropItemSound
+      value: 
+      objectReference: {fileID: 11400000, guid: ddda4d1482214d6409d5cad8fd2dfd7b,
+        type: 2}
+    - target: {fileID: 4547619040880432893, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: EquipItemSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 63f63c2b3b7cc434fb25623268d1f621,
+        type: 2}
+    - target: {fileID: 4547619040880432893, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: equipItemSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 63f63c2b3b7cc434fb25623268d1f621,
+        type: 2}
+    - target: {fileID: 4547619040880432893, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: ConsumePotSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 45f49128957afe047b8d3abdbf6ff1a3,
+        type: 2}
+    - target: {fileID: 4547619040880432893, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: PickUpItemSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 0e7c69b25ca4d4942ac31de0645cb1cf,
+        type: 2}
+    - target: {fileID: 5786872702734884249, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: deathSound
+      value: 
+      objectReference: {fileID: 11400000, guid: c9c300bfc05d24a40a0292a7d05900b0,
+        type: 2}
+    - target: {fileID: 5786872702734884249, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: damageSound
+      value: 
+      objectReference: {fileID: 11400000, guid: e0f89c1da60058145ad186f19cdd8fe3,
+        type: 2}
     - target: {fileID: 7040449921045486049, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -19949,6 +19991,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7040449921079689379, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: PlayerAttackSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 056f7d65eb28cc444b293a8cd440dab0,
+        type: 2}
     - target: {fileID: 7040449921079689381, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
         type: 3}
       propertyPath: m_Name
@@ -34374,6 +34422,12 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
+        type: 3}
+      propertyPath: sounds.Array.data[7]
+      value: 
+      objectReference: {fileID: 11400000, guid: ddda4d1482214d6409d5cad8fd2dfd7b,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0827e70f47a6e0f4293faeb3fbf9c239, type: 3}
 --- !u!4 &1721089477 stripped
@@ -39651,6 +39705,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_UIManager: {fileID: 577855069}
   m_PlayerManager: {fileID: 547921568}
+  dungeonItemSpawner: {fileID: 0}
+  npcManager: {fileID: 0}
+  itemHolder: {fileID: 0}
   ItemGenerator: {fileID: 0}
 --- !u!4 &2033735105
 Transform:

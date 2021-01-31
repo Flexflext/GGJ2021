@@ -8,27 +8,29 @@ public class Backpack : MonoBehaviour
     public int Size;
     private Item[] Inventory;
 
-    private HeadItem _equippedHead;
-    private ChestItem _equippedChest;
-    private WeaponItem _equippedWeapon;
+    private HeadItem EquippedHead;
+    private ChestItem EquippedChest;
+    private WeaponItem EquippedWeapon;
 
-    private List<Item> _nearbyItemList;
+    private List<Item> NearbyItemList;
 
-    [SerializeField] private Sound consumePotSound;
-    [SerializeField] private Sound equipItemSound;
+    [SerializeField] private Sound ConsumePotSound;
+    [SerializeField] private Sound EquipItemSound;
+    [SerializeField] private Sound PickUpItemSound;
+    [SerializeField] private Sound DropItemSound;
 
     void Start()
     {
         Inventory = new Item[Size];
-        _nearbyItemList = new List<Item>();
+        NearbyItemList = new List<Item>();
     }
 
     private void Update()
     {
         var itemInfoPanel = Game.Instance.UIManager.ItemInfoPanel.GetComponent<ItemInfoPanel>();
-        if (_nearbyItemList.Count > 0)
+        if (NearbyItemList.Count > 0)
         {
-            Item nearest = _nearbyItemList[0];
+            Item nearest = NearbyItemList[0];
             if (Input.GetKeyDown(KeyCode.E))
             {
                 PickupItem(nearest);
@@ -48,13 +50,13 @@ public class Backpack : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Item"))
         {
-            _nearbyItemList.Add(collision.gameObject.GetComponent<Item>());
+            NearbyItemList.Add(collision.gameObject.GetComponent<Item>());
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        _nearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
+        NearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
     }
 
     private int PickupItem(Item _item)
@@ -64,8 +66,9 @@ public class Backpack : MonoBehaviour
             if (!Inventory[i])
             {
                 _item.gameObject.SetActive(false);
-                _nearbyItemList.Remove(_item);
+                NearbyItemList.Remove(_item);
                 SetItem(_item, i);
+                AudioManager.instance.PlaySound(PickUpItemSound);
                 return i;
             }
         }
@@ -88,6 +91,8 @@ public class Backpack : MonoBehaviour
         Inventory[_slot].gameObject.SetActive(true);
         Inventory[_slot].gameObject.transform.position = transform.position;
 
+        AudioManager.instance.PlaySound(DropItemSound);
+
         Inventory[_slot] = null;
     }
 
@@ -96,37 +101,37 @@ public class Backpack : MonoBehaviour
         Item item = Inventory[_slot];
         if (item is IUsable usable)
         {
-            AudioManager.instance.PlaySound(consumePotSound);
+            AudioManager.instance.PlaySound(ConsumePotSound);
             usable.Use(this);
         }
         else if (item is HeadItem head)
         {
-            SetItem(_equippedHead, _slot);
-            _equippedHead = head;
+            SetItem(EquippedHead, _slot);
+            EquippedHead = head;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
-            AudioManager.instance.PlaySound(equipItemSound);
+            AudioManager.instance.PlaySound(EquipItemSound);
         }
         else if (item is ChestItem chest)
         {
-            SetItem(_equippedChest, _slot);
-            _equippedChest = chest;
+            SetItem(EquippedChest, _slot);
+            EquippedChest = chest;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
-            AudioManager.instance.PlaySound(equipItemSound);
+            AudioManager.instance.PlaySound(EquipItemSound);
         }
         else if (item is WeaponItem weapon)
         {
-            SetItem(_equippedWeapon, _slot);
-            _equippedWeapon = weapon;
+            SetItem(EquippedWeapon, _slot);
+            EquippedWeapon = weapon;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Weapon, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
             Game.Instance.PlayerManager.WeaponRenderer.sprite = weapon.Icon;
             Game.Instance.PlayerManager.WeaponRenderer.enabled = true;
-            AudioManager.instance.PlaySound(equipItemSound);
+            AudioManager.instance.PlaySound(EquipItemSound);
         }
     }
 
@@ -146,21 +151,21 @@ public class Backpack : MonoBehaviour
             return true;
         }
 
-        if (_equippedWeapon == _item)
+        if (EquippedWeapon == _item)
         {
-            _equippedWeapon = null;
+            EquippedWeapon = null;
             onEquipChanged(Weapon);
             return true;
         }
-        else if (_equippedChest == _item)
+        else if (EquippedChest == _item)
         {
-            _equippedChest = null;
+            EquippedChest = null;
             onEquipChanged(Chest);
             return true;
         }
-        else if (_equippedHead == _item)
+        else if (EquippedHead == _item)
         {
-            _equippedHead = null;
+            EquippedHead = null;
             onEquipChanged(Head);
             return true;
         }
@@ -194,16 +199,16 @@ public class Backpack : MonoBehaviour
 
     public WeaponItem GetEquippedWeapon()
     {
-        return _equippedWeapon;
+        return EquippedWeapon;
     }
 
     public ChestItem GetEquippedChest()
     {
-        return _equippedChest;
+        return EquippedChest;
     }
 
     public HeadItem GetEquippedHead()
     {
-        return _equippedHead;
+        return EquippedHead;
     }
 }
