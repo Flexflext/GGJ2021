@@ -50,7 +50,7 @@ public class PlayerTopDownMovement : MonoBehaviour
     {
         m_rB.velocity = new Vector2(m_moveDir.x * m_MovementSpeed, m_moveDir.y * m_MovementSpeed);
 
-        PlayerAnim.SetInteger("Direction", GetDirection(m_rB.velocity));
+        //PlayerAnim.SetInteger("Direction", GetDirection(m_rB.velocity));
         PlayerAnim.SetFloat("Horizontal", m_moveDir.x);
         PlayerAnim.SetFloat("Vertical", m_moveDir.y);
         PlayerAnim.SetFloat("Speed", m_moveDir.sqrMagnitude);
