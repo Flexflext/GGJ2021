@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth -= _damage;
         PlayerDamagedAnim.SetTrigger("IsDamaged");
-
+        
         AudioManager.instance.PlaySound(damageSound);
         if (CurrentHealth <= 0)
         {

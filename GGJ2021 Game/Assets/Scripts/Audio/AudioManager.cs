@@ -14,8 +14,16 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds; // Array of Sounds
 
     public AudioSource BackgroundAudio;
-    public AudioClip TestbackgroundMusic;
+    public AudioClip HubMusic;
+    public AudioClip DungeonMusic;
 
+    public bool Debugging;
+
+    public enum EBackgroundMusicThemes
+    {
+        Hub,
+        Dungeon,
+    }
 
     private void Awake()
     {
@@ -72,17 +80,37 @@ public class AudioManager : MonoBehaviour
         s.source.Play();
     }
 
-    public void ChangeBackgroundMusic(AudioClip _bgmusic)
+    public void ChangeBackgroundMusic(EBackgroundMusicThemes _newmusic)
     {
-        //BackgroundAudio.Stop();
-        BackgroundAudio.clip = _bgmusic;
+        switch (_newmusic)
+        {
+            case EBackgroundMusicThemes.Hub:
+                BackgroundAudio.clip = HubMusic;
+                break;
+            case EBackgroundMusicThemes.Dungeon:
+                BackgroundAudio.clip = DungeonMusic;
+                break;
+            default:
+                BackgroundAudio.Stop();
+                break;
+        }
+
         BackgroundAudio.Play();
     }
 
     private void Update()
     {
+        if (!Debugging)
+            return;
+
         if (Input.GetKeyDown(KeyCode.O))
-            ChangeBackgroundMusic(TestbackgroundMusic);
+        {
+            ChangeBackgroundMusic(EBackgroundMusicThemes.Dungeon);
+        }
+        else if (Input.GetKeyDown(KeyCode.I))
+        {
+            ChangeBackgroundMusic(EBackgroundMusicThemes.Hub);
+        }
     }
 
     /// <summary>

@@ -265,6 +265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1d33d9112e4f20a411b2e5beae247f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
 --- !u!1 &1927820652815721816
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,8 +310,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 9
-  consumePotSound: {fileID: 0}
-  equipItemSound: {fileID: 0}
+  ConsumePotSound: {fileID: 0}
+  EquipItemSound: {fileID: 0}
+  PickUpItemSound: {fileID: 0}
+  DropItemSound: {fileID: 0}
 --- !u!114 &5786872702351241656
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1179,43 +1182,5 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
-    - target: {fileID: 7688674944608407713, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: BackgroundAudio
-      value: 
-      objectReference: {fileID: 7688674944214204486}
-    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: backgroundAudio
-      value: 
-      objectReference: {fileID: 7688674944214204486}
-    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: TestbackgroundMusic
-      value: 
-      objectReference: {fileID: 8300000, guid: 4913f396150f14b4e97ab4d15028c353, type: 3}
-    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: sounds.Array.data[5]
-      value: 
-      objectReference: {fileID: 11400000, guid: 45f49128957afe047b8d3abdbf6ff1a3,
-        type: 2}
-    - target: {fileID: 7688674944608407715, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-        type: 3}
-      propertyPath: sounds.Array.data[6]
-      value: 
-      objectReference: {fileID: 11400000, guid: 63f63c2b3b7cc434fb25623268d1f621,
-        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0827e70f47a6e0f4293faeb3fbf9c239, type: 3}
---- !u!82 &7688674944214204486 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 38755640, guid: 0827e70f47a6e0f4293faeb3fbf9c239,
-    type: 3}
-  m_PrefabInstance: {fileID: 7688674944214204485}
-  m_PrefabAsset: {fileID: 0}

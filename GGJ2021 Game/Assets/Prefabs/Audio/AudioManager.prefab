@@ -52,7 +52,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8be80304e44c3cd4490fdf024737eded, type: 2}
   - {fileID: 11400000, guid: 45f49128957afe047b8d3abdbf6ff1a3, type: 2}
   - {fileID: 11400000, guid: 63f63c2b3b7cc434fb25623268d1f621, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: ddda4d1482214d6409d5cad8fd2dfd7b, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
@@ -75,6 +75,10 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  BackgroundAudio: {fileID: 38755640}
+  HubMusic: {fileID: 8300000, guid: 77965c9b4248a754ab4e23addd6e6c8d, type: 3}
+  DungeonMusic: {fileID: 8300000, guid: 68f07760a25d0f24eb8a58e8b512676c, type: 3}
+  Debugging: 1
 --- !u!82 &38755640
 AudioSource:
   m_ObjectHideFlags: 0
