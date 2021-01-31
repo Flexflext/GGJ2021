@@ -23,9 +23,9 @@ public class ItemGenerator : MonoBehaviour
         _itemTypes = Resources.LoadAll<ItemType>("StructuredObjects/ItemTypes").OrderBy(i => i.spawnProbability);
     }
 
-    public IEnumerable<Item> GenerateItems(int amount)
+    public Item[] GenerateItems(Transform itemHolder, int amount)
     {
-        List<Item> items = new List<Item>(amount);
+        Item[] items = new Item[amount];
         for (int i = 0; i < amount; i++)
         {
             var itemName = NameGenerator.generateName();
@@ -33,16 +33,16 @@ public class ItemGenerator : MonoBehaviour
             var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.GenerateSprite(itemRarity, itemType);
 
-            Item item = BuildItem(itemName, itemRarity, itemType, itemSprite);
-            items.Add(item);
+            Item item = BuildItem(itemName, itemRarity, itemType, itemSprite, itemHolder);
+            items[i] = item;
         }
 
         return items;
     }
 
-    private Item BuildItem(string itemName, ItemRarity itemRarity, ItemType itemType, Sprite itemSprite)
+    private Item BuildItem(string itemName, ItemRarity itemRarity, ItemType itemType, Sprite itemSprite, Transform itemHolder)
     {
-        var item = Instantiate(itemPrefab);
+        var item = Instantiate(itemPrefab, itemHolder);
         item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";
 
         var componentClass = Type.GetType(itemType.component);
@@ -87,14 +87,14 @@ public class ItemGenerator : MonoBehaviour
         throw new NotSupportedException(rarity + " not spawnable");
     }
 
-    public EquipmentItem GenerateStarterWeapon()
+    public EquipmentItem GenerateStarterWeapon(Transform itemHolder)
     {
         var itemName = "Rusty Sword";
         var itemRarity = findRarity("Rarity_Common");
         var itemType = findType("Sword");
         var itemSprite = ItemSpriteGenerator.GenerateSprite(itemRarity, itemType);
 
-        EquipmentItem item = (EquipmentItem) BuildItem(itemName, itemRarity, itemType, itemSprite);
+        EquipmentItem item = (EquipmentItem) BuildItem(itemName, itemRarity, itemType, itemSprite, itemHolder);
         item.StatValues = new int[Item.StatEnums.Length];
         item.StatValues[(int) ItemStat.Damage] = 1;
         return item;

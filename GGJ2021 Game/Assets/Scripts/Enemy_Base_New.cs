@@ -5,6 +5,15 @@ using Pathfinding;
 
 public class Enemy_Base_New : MonoBehaviour
 {
+
+    //[SerializeField]
+    //float MaxAttackSpeed;
+    //private float CurrentAttackSpeed;
+
+    [SerializeField]
+    float MaxAttackRange;
+    private float CurrentAttackRange;
+
     [SerializeField]
     float MaxHealth;
     private float CurrentHealth;
@@ -13,17 +22,10 @@ public class Enemy_Base_New : MonoBehaviour
     float MaxDamage;
     private float CurrentDamage;
 
-    [SerializeField]
-    float MaxAttackSpeed;
-    private float CurrentAttackSpeed;
 
     [SerializeField]
     float MaxSpeed;
-    private float CurrentSpeed;
 
-    [SerializeField]
-    float MaxAttackRange;
-    private float CurrentAttackRange;
 
     [SerializeField]
     float AttackRangeModifier;
@@ -53,10 +55,10 @@ public class Enemy_Base_New : MonoBehaviour
         EnemyAnim = GetComponent<Animator>();
 
         CurrentHealth = MaxHealth;
-        CurrentAttackSpeed = MaxAttackSpeed;
         CurrentDamage = MaxDamage;
         AStarPath.maxSpeed = MaxSpeed;
-        CurrentAttackRange = MaxAttackRange;
+        //CurrentAttackSpeed = MaxAttackSpeed;
+        //CurrentAttackRange = MaxAttackRange;
 
 
         StartPos = transform.position;
@@ -69,17 +71,19 @@ public class Enemy_Base_New : MonoBehaviour
             StopCoroutine("EnemyAttackCooldown");
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Vector3.Distance(Player.transform.position, transform.position) <= CurrentAttackRange)
         {
-            CurrentHealth -= 20;
+            Attack();
+            AStarPath.maxSpeed = MaxSpeed;
         }
+        else if (Vector3.Distance(Player.transform.position, transform.position) > CurrentAttackRange)
+            AStarPath.maxSpeed -= AStarPath.maxSpeed;
+    }
 
-        if (CurrentHealth <= 0)
-        {
-            Destroy(gameObject);
+    protected virtual void Attack()
+    {
 
-            GameObject deathAnim = Instantiate(EnemyDeathAnim, transform.position, transform.rotation);
-        }
+
     }
 
 
@@ -92,11 +96,6 @@ public class Enemy_Base_New : MonoBehaviour
             Destroy(gameObject);
 
             GameObject deathAnim = Instantiate(EnemyDeathAnim, transform.position, transform.rotation);
-            AnimatorStateInfo deathAnimLenght = deathAnim.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
-            if (deathAnimLenght.length <= 0)
-            {
-                Destroy(deathAnim);
-            }
         }
     }
 
@@ -132,13 +131,5 @@ public class Enemy_Base_New : MonoBehaviour
                 yield return null;
             }
         }
-    }
-
-
-    private void OnDrawGizmos()
-    {
-
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, CurrentAttackRange);
     }
 }

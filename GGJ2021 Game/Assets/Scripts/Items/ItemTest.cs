@@ -11,10 +11,9 @@ public class ItemTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.X))
         {
-            var items = generator.GenerateItems(100);
+            var items = generator.GenerateItems(transform, 100);
             foreach (var item in items)
             {
-                item.transform.SetParent(transform);
                 item.transform.position += new Vector3(
                     Random.Range(-10F, 10F),
                     Random.Range(-10F, 10F),

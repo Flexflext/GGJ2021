@@ -31,6 +31,36 @@ public class PlayerAttackScript : MonoBehaviour
 
     Vector3 LookDir;
 
+
+    //public float MaxDamage
+    //{
+    //    get => MaxDamage;
+    //    set
+    //    {
+    //        if (MaxDamage != value)
+    //        {
+    //            MaxDamage = value;
+    //            CurrentDamage = Math.Max(MaxDamage, _currentHealth);
+    //            Game.Instance.UIManager.HeartUiManager.OnHealthChange(CurrentDamage, MaxDamage);
+
+    //            Game.Instance.PlayerManager.PlayerStat.GetStatValue(CurrentDamage, MaxDamage);
+    //        }
+    //    }
+    //}
+
+    //public float CurrentDamage
+    //{
+    //    get => CurrentDamage;
+    //    set
+    //    {
+    //        if (CurrentDamage != value)
+    //        {
+    //            CurrentDamage = value;
+    //            Game.Instance.UIManager.HeartUiManager.OnHealthChange(CurrentDamage, MaxDamage);
+    //        }
+    //    }
+    //}
+
     void Start()
     {
         Player = FindObjectOfType<PlayerTopDownMovement>();
@@ -135,7 +165,6 @@ public class PlayerAttackScript : MonoBehaviour
                 if (IsAttackingUpperRight && !IsAttacking)
                 {
                     WeaponSwingAnim.SetTrigger("IsAttackingUpperRight");
-
                 }
                 else if (IsAttackingLowerRight && !IsAttacking)
                 {
@@ -170,9 +199,7 @@ public class PlayerAttackScript : MonoBehaviour
 
                         if (enemy.transform.position.y >= transform.position.y)
                         {
-
-                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
-
+                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerRight)
@@ -181,9 +208,7 @@ public class PlayerAttackScript : MonoBehaviour
 
                         if (enemy.transform.position.y < transform.position.y)
                         {
-
-                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
-
+                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                 }
@@ -196,8 +221,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y >= transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
-
+                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerLeft)
@@ -207,8 +231,7 @@ public class PlayerAttackScript : MonoBehaviour
                         if (enemy.transform.position.y < transform.position.y)
                         {
 
-                            enemy.GetComponent<Enemy_BASE>().EnemyTakesDamage(CurrentAttackDamage);
-
+                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                 }

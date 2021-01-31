@@ -20,8 +20,7 @@ public class PlayerManager : MonoBehaviour
 
     private void Start()
     {
-        EquipmentItem weapon = Game.Instance.ItemGenerator.GenerateStarterWeapon();
-        weapon.transform.parent = transform.parent;
+        EquipmentItem weapon = Game.Instance.ItemGenerator.GenerateStarterWeapon(transform.parent);
         weapon.transform.position = transform.position - new Vector3(0, 1);
     }
 }

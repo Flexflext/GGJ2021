@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Rarity_Rare
   m_EditorClassIdentifier: 
   SpawnProbability: 6
-  NameColor: {r: 0, g: 0.18836021, b: 1, a: 1}
+  NameColor: {r: 0.24056602, g: 0.38351828, b: 1, a: 1}
   MaxGoldValue: 20
   MaxStrength: 10
   MaxDurability: 0

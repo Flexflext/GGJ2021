@@ -620,7 +620,6 @@ GameObject:
   - component: {fileID: 1431425218025175442}
   - component: {fileID: 1431425218025175443}
   - component: {fileID: 1431425218025175444}
-  - component: {fileID: 1431425218025175441}
   m_Layer: 0
   m_Name: QuestNpc
   m_TagString: Untagged

@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using System.Linq;
+using Random = UnityEngine.Random;
 
 public class NameGenerator
 {
@@ -12,7 +14,7 @@ public class NameGenerator
         var stream = new StreamReader(file);
         var lines = new List<string>();
         while (!stream.EndOfStream)
-            lines.Add(stream.ReadLine());
+            lines.Add(FirstCharToUpper(stream.ReadLine()));
         return lines;
     }
 
@@ -21,5 +23,15 @@ public class NameGenerator
         var adjectiveIndex = Random.Range(0, Adjectives.Count);
         var nameIndex = Random.Range(0, Names.Count);
         return Adjectives[adjectiveIndex] + " " + Names[nameIndex];
+    }
+
+    private static string FirstCharToUpper(string input)
+    {
+        switch (input)
+        {
+            case null: throw new ArgumentNullException(nameof(input));
+            case "": throw new ArgumentException($"{nameof(input)} cannot be empty", nameof(input));
+            default: return input.First().ToString().ToUpper() + input.Substring(1);
+        }
     }
 }

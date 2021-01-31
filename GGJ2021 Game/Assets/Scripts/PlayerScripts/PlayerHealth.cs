@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     private float _currentHealth;
     private float _maxHealth;
 
+    Animator PlayerDamagedAnim;
     public float MaxHealth
     {
         get => _maxHealth;
@@ -38,7 +39,6 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    Animator PlayerDamagedAnim;
 
 
     private void Start()
