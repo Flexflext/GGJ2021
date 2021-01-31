@@ -9516,6 +9516,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc_Scout_Skin_1
       objectReference: {fileID: 0}
+    - target: {fileID: 1782597330115922076, guid: d4b25887a7101334ea20bef658d3f63e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b25887a7101334ea20bef658d3f63e, type: 3}
 --- !u!1 &376321821
@@ -43689,6 +43694,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc_Scout_Skin_1 (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1782597330115922076, guid: d4b25887a7101334ea20bef658d3f63e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b25887a7101334ea20bef658d3f63e, type: 3}
 --- !u!1001 &1733155763
@@ -43762,6 +43772,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Orc_Scout_Skin_1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1782597330115922076, guid: d4b25887a7101334ea20bef658d3f63e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b25887a7101334ea20bef658d3f63e, type: 3}
@@ -45937,6 +45952,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Orc_Scout_Skin_1 (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 1782597330115922076, guid: d4b25887a7101334ea20bef658d3f63e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b25887a7101334ea20bef658d3f63e, type: 3}
 --- !u!1001 &1847393582
@@ -45950,6 +45970,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: A_Star
+      objectReference: {fileID: 0}
+    - target: {fileID: 970927397661130204, guid: fa037a0f6a7e31e4ba321711bcefcd1f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 970927397661130206, guid: fa037a0f6a7e31e4ba321711bcefcd1f,
+        type: 3}
+      propertyPath: data.dataString
+      value: UEsDBBQAAAgIAAAIIewwImCQXwIAAAAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF1VE1z2jAQ/SuMziVjGwhxby0Q0gOBCe3k4ouw1liDLHkkOXxk+O9dyTZ26PSEePt29d7uyp+ES1NCapVeas5WigH5PiDuTL4NuuALnOheyS2/QMt558zmjkQ9541arhAPXZpRBVjN0x9yLxw5QLCSPFO6WLA9zJSxBuGMCgMY0sq6bInQ54Cc8GcYu5QznqKpO13wFAeDKx5TkBZ0R22JLS18mETTx2k0DRfDcORTKpkKWpTAnP4uc/TUpIaxp0l01jCci1QJwU0ji9hz6W1vyxw0ON+MU3TppQQPEwRy4PvcOs397HWWGbCNQE3Pc66xXXVZ8lPVPSyoOdTCPqiovIIgGntVddXVP4Rh6MOZVsVLe3EYuEtsztPDGz2n1Nhel/vwvNMe+gYdqTjQnYD3HOSrWmpVSYZBqyuXWhmI5t3fm7dZDumhw2upd2BV/n9WzsPV2z/NBC92vpXjGtgK5TvuNwE0zuYXCvZ7YpoSiDoVfwz8pvv+QjWBZ66NxVDjUjp5O1VpRyUL3zPnprIzpSV4uBFdgqTCnjdYxt7P8C7Wu/Yu8kzd02kub2Lti7hL8XDHD4K70EYdb8MyuTquwOTrygouoRPtAq/Yp5mSsl4x8zXosraVzmjay9pXnH3dLBJlk6dHSkfhNN7txpPRkLI4zmDMJrs0iOJgRPzqcYk2qdjUOpvu4NBkV1zimrUflMFS09JvO9P0uOSXQvX0cZmpbaoB5Lqu0HbIgMZL8FmyBePYny1Yy6UfN/lMiFDpAVhyK5R4p4uT1TTpqiSk5B/KOiQhM/8FSciVXP8CUEsDBBQAAAgIAAAIIexRTrBlbQAAAHgAAAAJACQAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0Bq1YqSy0qzszPU7JSMNEz0jM01VFQSi9KLMgoBooYgjilmSkgdrSSUZqphVliorGhuWVSkompsW5iiqVlWqpJimlSsoGRpYGxUixQfUllQapfYm4qRE9AYklGWmZeSmZeup57UWaKO8hopdhaAFBLAQItABQAAAgIAAAIIewwImCQXwIAAAAFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAIIexRTrBlbQAAAHgAAAAJACQAAAAAAAAAAAAAAKwCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAZAMAAAAA
       objectReference: {fileID: 0}
     - target: {fileID: 970927397661130207, guid: fa037a0f6a7e31e4ba321711bcefcd1f,
         type: 3}
@@ -56678,6 +56708,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb1d33d9112e4f20a411b2e5beae247f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  money: 0
 --- !u!1 &1927820652398921088
 GameObject:
   m_ObjectHideFlags: 0
@@ -94461,8 +94492,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 9
-  consumePotSound: {fileID: 0}
-  equipItemSound: {fileID: 0}
+  ConsumePotSound: {fileID: 0}
+  EquipItemSound: {fileID: 0}
+  PickUpItemSound: {fileID: 0}
+  DropItemSound: {fileID: 0}
 --- !u!212 &4674678460723364078
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -94968,9 +95001,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 5
-  AttackCooldownSpeed: 0
+  AttackCooldownSpeed: 0.5
   AttackRange: 1
-  AttackSpeed: 1.5
+  AttackSpeed: 0.5
 --- !u!4 &7040449920729293485
 Transform:
   m_ObjectHideFlags: 0
