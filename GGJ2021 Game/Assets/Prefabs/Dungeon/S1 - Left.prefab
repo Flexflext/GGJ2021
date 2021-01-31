@@ -99,6 +99,7 @@ GameObject:
   - component: {fileID: 4853278853472717426}
   - component: {fileID: 2435003347406499313}
   - component: {fileID: 5977569892639424029}
+  - component: {fileID: 1447169877}
   m_Layer: 0
   m_Name: Trigger (1)
   m_TagString: Left
@@ -256,6 +257,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!114 &5977569892639424029
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1988971090311087599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1447169877
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

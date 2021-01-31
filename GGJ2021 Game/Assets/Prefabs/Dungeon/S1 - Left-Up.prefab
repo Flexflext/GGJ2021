@@ -9516,6 +9516,7 @@ GameObject:
   - component: {fileID: 3975775407609510916}
   - component: {fileID: 8006778901291733845}
   - component: {fileID: 821080685413118971}
+  - component: {fileID: 1349789201}
   m_Layer: 0
   m_Name: Trigger (2)
   m_TagString: Up
@@ -9677,6 +9678,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!114 &821080685413118971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2720678332923490758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1349789201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9909,6 +9922,7 @@ GameObject:
   - component: {fileID: 2439562671724141581}
   - component: {fileID: 9786760991672784}
   - component: {fileID: 7499502350950619176}
+  - component: {fileID: 1349789202}
   m_Layer: 0
   m_Name: Trigger (1)
   m_TagString: Left
@@ -10070,6 +10084,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!114 &7499502350950619176
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5879166799521610904}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1349789202
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

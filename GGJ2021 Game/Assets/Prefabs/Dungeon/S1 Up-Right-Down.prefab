@@ -808,6 +808,7 @@ GameObject:
   - component: {fileID: 7713851280683233081}
   - component: {fileID: 8619647557771239045}
   - component: {fileID: 8204628273259979220}
+  - component: {fileID: 173823430}
   m_Layer: 0
   m_Name: Trigger (1)
   m_TagString: Up
@@ -964,6 +965,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &173823430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2020002519427771891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2124976343069333181
 GameObject:
   m_ObjectHideFlags: 0
@@ -976,6 +989,7 @@ GameObject:
   - component: {fileID: 266428642119029189}
   - component: {fileID: 3061643880106240113}
   - component: {fileID: 2992023777320796553}
+  - component: {fileID: 173823429}
   m_Layer: 0
   m_Name: Trigger (2)
   m_TagString: Right
@@ -1132,6 +1146,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &173823429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2124976343069333181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5746107904965775215
 GameObject:
   m_ObjectHideFlags: 0
@@ -3715,6 +3741,7 @@ GameObject:
   - component: {fileID: 5746107905142214576}
   - component: {fileID: 5746107905142214577}
   - component: {fileID: 5746107905142214578}
+  - component: {fileID: 173823431}
   m_Layer: 0
   m_Name: Trigger
   m_TagString: Down
@@ -3871,6 +3898,18 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!114 &173823431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746107905142214572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5746107905281178023
 GameObject:
   m_ObjectHideFlags: 0
