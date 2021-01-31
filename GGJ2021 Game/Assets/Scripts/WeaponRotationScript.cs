@@ -4,14 +4,30 @@ using UnityEngine;
 
 public class WeaponRotationScript : MonoBehaviour
 {
-    public Vector3 lookDir;
+    Vector3 LookDir;
 
     PlayerAttackScript Player;
+
+    SpriteRenderer WeaponSprite;
 
     void Update()
     {
         Player = FindObjectOfType<PlayerAttackScript>();
         RotateWeapon();
+
+        WeaponSprite = GetComponentInChildren<SpriteRenderer>();
+    }
+
+    private void FixedUpdate()
+    {
+        if (LookDir.x >= Player.transform.position.x)
+        {
+            WeaponSprite.flipY = false;
+        }
+        else if (LookDir.x < Player.transform.position.x)
+        {
+            WeaponSprite.flipY = true;
+        }
     }
 
 
@@ -19,10 +35,12 @@ public class WeaponRotationScript : MonoBehaviour
     {
         if (!Player.IsAttacking)
         {
-            Vector3 lookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+            LookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
 
-            float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg;
+            float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+
         }
     }
 }
