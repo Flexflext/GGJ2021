@@ -154,19 +154,21 @@ public class PlayerAttackScript : MonoBehaviour
                 {
                     if (IsAttackingUpperRight)
                     {
-                        Debug.Log("Upper Right");
 
                         if (enemy.transform.position.y >= transform.position.y)
                         {
+                            Debug.Log("Upper Right");
+
                             enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerRight)
                     {
-                        Debug.Log("Lower Right");
 
                         if (enemy.transform.position.y < transform.position.y)
                         {
+                            Debug.Log("Lower Right");
+
                             enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
@@ -175,20 +177,20 @@ public class PlayerAttackScript : MonoBehaviour
                 {
                     if (IsAttackingUpperLeft)
                     {
-                        Debug.Log("Upper Left");
 
                         if (enemy.transform.position.y >= transform.position.y)
                         {
+                            Debug.Log("Upper Left");
 
                             enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerLeft)
                     {
-                        Debug.Log("Lower Left");
 
                         if (enemy.transform.position.y < transform.position.y)
-                        {
+                        {                        Debug.Log("Lower Left");
+
 
                             enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
                         }
@@ -208,7 +210,7 @@ public class PlayerAttackScript : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, CurrentAttackRange);
     }
 }
