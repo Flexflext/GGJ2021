@@ -72,9 +72,9 @@ public class PlayerAttackScript : MonoBehaviour
         CurrentAttackRange = Weapon.AttackRange;
 
         AnimSpeedModifier = WeaponSwingAnim.speed / CurrentAttackSpeed;
-        Debug.Log(AnimSpeedModifier);
+        //Debug.Log(AnimSpeedModifier);
         WeaponSwingAnim.speed += AnimSpeedModifier;
-        Debug.Log(WeaponSwingAnim.speed);
+        //Debug.Log(WeaponSwingAnim.speed);
     }
 
     private void Update()

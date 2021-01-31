@@ -151,7 +151,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &371608411
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2081,6 +2081,7 @@ MonoBehaviour:
   - {fileID: 7167797487283641941}
   - {fileID: 7167797488177391022}
   PlayerStatText: {fileID: 7167797488879532168}
+  MoneyText: {fileID: 1087265072065587102}
 --- !u!1 &7167797488393352902
 GameObject:
   m_ObjectHideFlags: 0

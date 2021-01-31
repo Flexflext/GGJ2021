@@ -71,8 +71,10 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             AudioManager.instance.PlaySound(deathSound);
-            //Destroy(gameObject);
+            
+            Game.Instance.PlayerManager.Backpack.ClearBags();
             transform.position = startPos;
+            AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
         }
     }
 

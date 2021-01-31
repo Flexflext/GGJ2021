@@ -16,6 +16,7 @@ public class InventoryUI : MonoBehaviour
     
     [Space, Header("Misc")]
     public TMP_Text PlayerStatText;
+    public TMP_Text MoneyText;
 
     void Start()
     {
@@ -111,14 +112,14 @@ public class InventoryUI : MonoBehaviour
 
     public void SetEquipped(EquipmentSlot slot, Item item)
     {
-        if (!item)
-        {
-            EquipmentSprites[(int) slot].enabled = false;
-        }
-        else
+        if (item)
         {
             EquipmentSprites[(int) slot].enabled = true;
             EquipmentSprites[(int) slot].sprite = item.Icon;
+        }
+        else
+        {
+            EquipmentSprites[(int) slot].enabled = false;
         }
     }
 }

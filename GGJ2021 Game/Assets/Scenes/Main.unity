@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4841,11 +4841,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167797488292045545, guid: 3f0862cfc004d024ea11aa76df7400d1,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7167797488879532171, guid: 3f0862cfc004d024ea11aa76df7400d1,
         type: 3}
@@ -20229,7 +20224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DungeonStartPos: {x: 0, y: 200, z: 0}
   ParentTransform: {fileID: 315873548}
-  MinimalRoomAmount: 50
+  MinimalRoomAmount: 2
   DownRoomPrefabs:
   - {fileID: 496776308269447235, guid: 08be36f3a1244ab4bb47d98dc9d82399, type: 3}
   - {fileID: 5031879929510147689, guid: b8e150c1e2011c54d97d657444680b4e, type: 3}
