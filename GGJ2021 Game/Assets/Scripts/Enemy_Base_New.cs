@@ -25,10 +25,11 @@ public class Enemy_Base_New : MonoBehaviour
 
     [SerializeField]
     float MaxSpeed;
-
+    private float CurrentSpeed;
 
     [SerializeField]
     float AttackRangeModifier;
+
 
     public GameObject EnemyDeathAnim;
 
@@ -37,6 +38,9 @@ public class Enemy_Base_New : MonoBehaviour
     Animator EnemyAnim;
 
     bool EnemyHasCooldown;
+    bool IsHittingWall;
+    bool GotHit;
+
 
     Vector2 StartPos;
 
@@ -46,22 +50,22 @@ public class Enemy_Base_New : MonoBehaviour
     [SerializeField]
     float KnockbackForce;
 
-    [SerializeField]
-    AIPath AStarPath;
 
     [SerializeField] private Sound enemyHitSound;
     [SerializeField] private Sound enemyDeathSound;
 
+
     void Start()
     {
+        Rb = GetComponent<Rigidbody2D>();
         Player = FindObjectOfType<PlayerHealth>();
-        EnemyAnim = GetComponent<Animator>();
+        EnemyAnim = GetComponentInChildren<Animator>();
 
         CurrentHealth = MaxHealth;
         CurrentDamage = MaxDamage;
-        AStarPath.maxSpeed = MaxSpeed;
+        CurrentSpeed = MaxSpeed;
         //CurrentAttackSpeed = MaxAttackSpeed;
-        //CurrentAttackRange = MaxAttackRange;
+        CurrentAttackRange = MaxAttackRange;
 
 
         StartPos = transform.position;
@@ -74,17 +78,64 @@ public class Enemy_Base_New : MonoBehaviour
             StopCoroutine("EnemyAttackCooldown");
         }
 
-        if (Vector3.Distance(Player.transform.position, transform.position) <= CurrentAttackRange)
-        {
-            Attack();
-            AStarPath.maxSpeed = MaxSpeed;
-        }
-        else if (Vector3.Distance(Player.transform.position, transform.position) > CurrentAttackRange)
-            AStarPath.maxSpeed -= AStarPath.maxSpeed;
     }
+
+    private void FixedUpdate()
+    {
+        EnemyMove();
+        Debug.Log(Rb.velocity.x);
+    }
+
+    protected virtual void EnemyMove()
+    {
+        if (Vector3.Distance(Player.transform.position, transform.position) <= CurrentAttackRange && IsHittingWall == false)
+        {
+            CurrentAttackRange += CurrentAttackRange * 2;
+            Attack();
+        }
+    }
+
 
     protected virtual void Attack()
     {
+        transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, CurrentSpeed * Time.deltaTime);
+
+
+        //float speed = Vector2.SqrMagnitude(transform.position);
+
+        //Rb.MovePosition(transform.position + Player.transform.position * CurrentSpeed * Time.deltaTime);
+
+        EnemyAnim.SetFloat("Speed", CurrentSpeed);
+        //EnemyAnim.SetFloat("Horizontal", (StartPos.x + transform.position.x));
+        //EnemyAnim.SetFloat("Vertical", (StartPos.y + transform.position.y));
+
+
+
+        if (Player.transform.position.x > transform.position.x)
+        {
+            Debug.Log("DDDD");
+            EnemyAnim.SetFloat("Horizontal", 1);
+            EnemyAnim.SetFloat("Vertical", 0);
+        }
+        if (Player.transform.position.x < transform.position.x)
+        {
+            Debug.Log("DDDD");
+
+            EnemyAnim.SetFloat("Horizontal", -1);
+            EnemyAnim.SetFloat("Vertical", 0);
+        }
+        if (Player.transform.position.y > transform.position.y)
+        {
+            Debug.Log("DDDD");
+
+            EnemyAnim.SetFloat("Vertical", 1);
+            EnemyAnim.SetFloat("Horizontal", 0);
+        }
+        if (Player.transform.position.y < transform.position.y)
+        {
+            EnemyAnim.SetFloat("Vertical", -1);
+            EnemyAnim.SetFloat("Horizontal", 0);
+        }
 
 
     }
@@ -127,15 +178,21 @@ public class Enemy_Base_New : MonoBehaviour
             if (EnemyHasCooldown == true)
             {
                 Debug.Log("Enemy has cooldown");
-                AStarPath.maxSpeed -= AStarPath.maxSpeed;
+                CurrentSpeed -= CurrentSpeed;
                 yield return new WaitForSeconds(1f);
                 EnemyHasCooldown = false;
             }
             else
             {
-                AStarPath.maxSpeed = MaxSpeed;
+                CurrentSpeed = MaxSpeed;
                 yield return null;
             }
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, CurrentAttackRange);
     }
 }
