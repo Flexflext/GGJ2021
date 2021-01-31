@@ -8,6 +8,7 @@ public class PlayerManager : MonoBehaviour
     public Backpack Backpack { get; private set; }
     public PlayerStatScript PlayerStat { get; private set; }
     public PlayerHealth Health { get; private set; }
+    public bool RecentlyTeleported = false;
     
     public SpriteRenderer WeaponRenderer;
 
