@@ -8,7 +8,6 @@ public class PlayerStatScript : MonoBehaviour
     private int[] _playerStats = new int[Item.StatEnums.Length];
 
     private readonly List<PlayerBuff> _activeBuffs = new List<PlayerBuff>();
-    public int money = 0;
 
     private void Start()
     {
