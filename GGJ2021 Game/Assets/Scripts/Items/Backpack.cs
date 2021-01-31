@@ -169,6 +169,7 @@ public class Backpack : MonoBehaviour
         {
             EquippedWeapon = null;
             onEquipChanged(Weapon);
+            Game.Instance.PlayerManager.WeaponRenderer.enabled = false;
             return true;
         }
         else if (EquippedChest == _item)
@@ -181,6 +182,7 @@ public class Backpack : MonoBehaviour
         {
             EquippedHead = null;
             onEquipChanged(Head);
+            
             return true;
         }
 

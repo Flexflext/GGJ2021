@@ -47,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     {
         startPos = transform.position;
         PlayerDamagedAnim = GetComponent<Animator>();
-        MaxHealth = 3;
+        MaxHealth = 4;
         CurrentHealth = MaxHealth;
         StartCoroutine(nameof(RegenerateHealth));
     }

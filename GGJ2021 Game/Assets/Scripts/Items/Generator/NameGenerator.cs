@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class NameGenerator
 {
-    private static List<string> Adjectives = readFile("Assets/Text/adjectives.txt");
-    private static List<string> Names = readFile("Assets/Text/names.txt");
+    private static List<string> Adjectives = readFile("Assets/Resources/Text/adjectives.txt");
+    private static List<string> Names = readFile("Assets/Resources/Text/names.txt");
 
     private static List<string> readFile(string file)
     {
+        //var test = Resources.Load(file);
         var stream = new StreamReader(file);
         var lines = new List<string>();
         while (!stream.EndOfStream)
@@ -18,7 +20,7 @@ public class NameGenerator
         return lines;
     }
 
-    public static string generateName()
+    public static string GenerateName()
     {
         var adjectiveIndex = Random.Range(0, Adjectives.Count);
         var nameIndex = Random.Range(0, Names.Count);

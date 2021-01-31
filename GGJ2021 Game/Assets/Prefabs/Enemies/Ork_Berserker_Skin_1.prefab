@@ -95,7 +95,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxAttackRange: 2.5
   MaxHealth: 10
-  MaxDamage: 1
+  MaxDamage: 0.5
   MaxSpeed: 2
   AttackRangeModifier: 0
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,

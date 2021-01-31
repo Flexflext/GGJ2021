@@ -28,7 +28,7 @@ public class ItemGenerator : MonoBehaviour
         Item[] items = new Item[amount];
         for (int i = 0; i < amount; i++)
         {
-            var itemName = NameGenerator.generateName();
+            var itemName = NameGenerator.GenerateName();
             var itemRarity = GenerateRarity();
             var itemType = GenerateItemType();
             var itemSprite = ItemSpriteGenerator.GenerateSprite(itemRarity, itemType);
