@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerAttackScript : MonoBehaviour
 {
-    public float CurrentAttackDamage;
-    public float CurrentAttackRange;
-
-    float CurrentAttackCooldown;
-    float CurrentAttackSpeed;
-
-    WeaponStats Weapon;
+    public Transform Weapon;
+    
     public LayerMask EnemyLayer;
 
+    float CurrentAttackCooldown;
+    private float CurrentAttackDamage;
+    private float CurrentAttackRange;
+    
     bool IsAttackingUpperRight;
     bool IsAttackingUpperLeft;
 
@@ -27,54 +26,13 @@ public class PlayerAttackScript : MonoBehaviour
 
     AnimatorStateInfo AnimationInfo;
 
-    public Sound PlayerAttackSound;
-
     Vector3 LookDir;
 
     float AnimSpeedModifier;
 
-    //public float MaxDamage
-    //{
-    //    get => MaxDamage;
-    //    set
-    //    {
-    //        if (MaxDamage != value)
-    //        {
-    //            MaxDamage = value;
-    //            CurrentDamage = Math.Max(MaxDamage, _currentHealth);
-    //            Game.Instance.UIManager.HeartUiManager.OnHealthChange(CurrentDamage, MaxDamage);
-
-    //            Game.Instance.PlayerManager.PlayerStat.GetStatValue(CurrentDamage, MaxDamage);
-    //        }
-    //    }
-    //}
-
-    //public float CurrentDamage
-    //{
-    //    get => CurrentDamage;
-    //    set
-    //    {
-    //        if (CurrentDamage != value)
-    //        {
-    //            CurrentDamage = value;
-    //            Game.Instance.UIManager.HeartUiManager.OnHealthChange(CurrentDamage, MaxDamage);
-    //        }
-    //    }
-    //}
-
     void Start()
     {
         Player = FindObjectOfType<PlayerTopDownMovement>();
-        Weapon = GetComponentInChildren<WeaponStats>();
-
-        CurrentAttackDamage = Weapon.Damage;
-        CurrentAttackSpeed = Weapon.AttackSpeed;
-        CurrentAttackRange = Weapon.AttackRange;
-
-        AnimSpeedModifier = WeaponSwingAnim.speed / CurrentAttackSpeed;
-        //Debug.Log(AnimSpeedModifier);
-        WeaponSwingAnim.speed += AnimSpeedModifier;
-        //Debug.Log(WeaponSwingAnim.speed);
     }
 
     private void Update()
@@ -85,16 +43,7 @@ public class PlayerAttackScript : MonoBehaviour
 
         AnimationInfo = WeaponSwingAnim.GetCurrentAnimatorStateInfo(0);
 
-
-
-        if (!AnimationInfo.IsName("Idle"))
-        {
-            IsAttacking = true;
-        }
-        else
-        {
-            IsAttacking = false;
-        }
+        IsAttacking = !AnimationInfo.IsName("Idle");
     }
     private void FixedUpdate()
     {
@@ -114,7 +63,6 @@ public class PlayerAttackScript : MonoBehaviour
             {
                 IsAttackingUpperRight = true;
 
-
                 IsAttackingUpperLeft = false;
                 IsAttackingLowerLeft = false;
                 IsAttackingLowerRight = false;
@@ -122,7 +70,6 @@ public class PlayerAttackScript : MonoBehaviour
             else if (LookDir.x < transform.position.x)
             {
                 IsAttackingUpperLeft = true;
-
 
                 IsAttackingUpperRight = false;
                 IsAttackingLowerLeft = false;
@@ -156,16 +103,22 @@ public class PlayerAttackScript : MonoBehaviour
 
     void PlayerAttack()
     {
+        CurrentAttackDamage = 5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.Damage);
+        CurrentAttackRange = 1F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackRange);
+        float attackSpeed = 1.5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackSpeed);
+        float currentAttackCooldownSpeed = 1 / attackSpeed;
+        WeaponSwingAnim.speed = attackSpeed;
         if (CurrentAttackCooldown <= 0 && Input.GetKeyDown(KeyCode.Mouse0))
         {
             Collider2D[] enemiesToDamage;
 
+            //Debug.Log("HIT");
             //AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
 
             if (LookDir.x >= transform.position.x)
             {
                 enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
-                CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
+                CurrentAttackCooldown = currentAttackCooldownSpeed;
                 //Debug.Log("I attacked right");
 
                 if (IsAttackingUpperRight && !IsAttacking)
@@ -181,7 +134,7 @@ public class PlayerAttackScript : MonoBehaviour
             else
             {
                 enemiesToDamage = Physics2D.OverlapCircleAll(Weapon.transform.position, CurrentAttackRange, EnemyLayer);
-                CurrentAttackCooldown = Weapon.AttackCooldownSpeed;
+                CurrentAttackCooldown = currentAttackCooldownSpeed;
                 //Debug.Log("I attacked left");
 
                 if (IsAttackingUpperLeft && !IsAttacking)
@@ -258,5 +211,4 @@ public class PlayerAttackScript : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, CurrentAttackRange);
     }
-
 }

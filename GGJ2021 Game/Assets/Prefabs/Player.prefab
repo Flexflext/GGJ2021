@@ -252,7 +252,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198615399347553446}
   - component: {fileID: 4825543148268599230}
-  m_Layer: 13
+  m_Layer: 15
   m_Name: ItemPickupArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7040449920465202772}
   - component: {fileID: 7040449920465202774}
-  - component: {fileID: 7040449920465202773}
   m_Layer: 13
   m_Name: WeaponSprite
   m_TagString: Untagged
@@ -371,22 +370,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7040449920465202773
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7040449920465202795}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57bc8e9fa84032b4596a8cd7ba79b529, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Damage: 5
-  AttackCooldownSpeed: 0
-  AttackRange: 1
-  AttackSpeed: 1.5
 --- !u!1 &7040449921045486054
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,14 +709,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e2a2d1d0ab8dff459c5db80fc8e81de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentAttackDamage: 10
-  CurrentAttackRange: 0
+  Weapon: {fileID: 7040449920465202772}
   EnemyLayer:
     serializedVersion: 2
     m_Bits: 512
   IsAttacking: 0
   WeaponSwingAnim: {fileID: 7040449921936839888}
-  PlayerAttackSound: {fileID: 0}
 --- !u!114 &5786872702734884249
 MonoBehaviour:
   m_ObjectHideFlags: 0
