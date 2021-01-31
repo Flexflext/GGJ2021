@@ -6,17 +6,14 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
 {
     private const int XOFFSET = 9;
     private const int YOFFSET = 8;
+    private WaitForSeconds TriggerTimerInterval = new WaitForSeconds(2f);
     private bool IsActive = false;
 
     public bool SetActive { set { IsActive = value; } }
 
     private void Awake()
     {
-        if (!this.GetComponentInParent<DungeonRoom>().IsStart)
-        {
-            IsActive = false;
-        }
-        else IsActive = true;
+        IsActive = true;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,22 +24,35 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
             switch (this.gameObject.tag)
             {
                 case "Up":
-                    collision.gameObject.transform.position += new Vector3(0, YOFFSET, 0);
+                    TeleportPlayer(new Vector3(0, YOFFSET, 0), collision.transform);
                     break;
                 case "Down":
-                    collision.gameObject.transform.position += new Vector3(0, -YOFFSET, 0);
+                    TeleportPlayer(new Vector3(0, -YOFFSET, 0), collision.transform);
                     break;
                 case "Left":
-                    collision.gameObject.transform.position += new Vector3(-XOFFSET, 0, 0);
+                    TeleportPlayer(new Vector3(-XOFFSET, 0, 0), collision.transform);
                     break;
                 case "Right":
-                    collision.gameObject.transform.position += new Vector3(XOFFSET, 0, 0);
+                    TeleportPlayer(new Vector3(XOFFSET, 0, 0), collision.transform);
                     break;
                 default:
                     Debug.LogError("Could Not Move Player(No tag FOund)");
                     break;
             }
         }
+    }
+
+    private void TeleportPlayer(Vector3 _pos, Transform _transfrom)
+    {
+        _transfrom.position += _pos;
+        StartCoroutine("TriggerTimer");
+    }
+
+    private IEnumerator TriggerTimer()
+    {
+        IsActive = false;
+        yield return TriggerTimerInterval;
+        IsActive = true;
     }
 
     private void OnTriggerExit(Collider other)

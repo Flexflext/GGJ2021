@@ -215,6 +215,7 @@ GameObject:
   - component: {fileID: 3286944390840159215}
   - component: {fileID: 3711326805509422042}
   - component: {fileID: 5443688368512384928}
+  - component: {fileID: 2134113460}
   m_Layer: 0
   m_Name: Trigger (4)
   m_TagString: Right
@@ -372,6 +373,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!114 &5443688368512384928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310807645950938140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2134113460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1907,7 +1920,93 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 8089079253700907003}
+    m_ColliderPaths:
+    - - X: -90000000
+        Y: 50625000
+      - X: -90000000
+        Y: 51875000
+      - X: -88125000
+        Y: 50000000
+      - X: -80625000
+        Y: 50000000
+      - X: -80000000
+        Y: 50625000
+      - X: -80000000
+        Y: 58750000
+      - X: -80625000
+        Y: 60000000
+      - X: -88750000
+        Y: 60000000
+      - X: -90000000
+        Y: 58125000
+      - X: -90000000
+        Y: 58750000
+      - X: -90625000
+        Y: 60000000
+      - X: -98750000
+        Y: 60000000
+      - X: -100000000
+        Y: 58125000
+      - X: -100000000
+        Y: 51875000
+      - X: -98125000
+        Y: 50000000
+      - X: -90625000
+        Y: 50000000
+    - - X: -20000000
+        Y: 60000000
+      - X: -30000000
+        Y: 60000000
+      - X: -30000000
+        Y: 50000000
+      - X: -20000000
+        Y: 50000000
+    - - X: 90000000
+        Y: 51875000
+      - X: 91875000
+        Y: 50000000
+      - X: 98125000
+        Y: 50000000
+      - X: 100000000
+        Y: 51875000
+      - X: 100000000
+        Y: 57500000
+      - X: 98125000
+        Y: 60000000
+      - X: 92500000
+        Y: 60000000
+      - X: 90000000
+        Y: 57500000
+      - X: 88125000
+        Y: 60000000
+      - X: 82500000
+        Y: 60000000
+      - X: 80000000
+        Y: 57500000
+      - X: 80000000
+        Y: 51875000
+      - X: 81875000
+        Y: 50000000
+      - X: 88125000
+        Y: 50000000
+    - - X: -70000000
+        Y: -30000000
+      - X: -100000000
+        Y: -30000000
+      - X: -100000000
+        Y: -40000000
+      - X: -70000000
+        Y: -40000000
+    - - X: 100000000
+        Y: -30000000
+      - X: 70000000
+        Y: -30000000
+      - X: 70000000
+        Y: -40000000
+      - X: 100000000
+        Y: -40000000
   m_CompositePaths:
     m_Paths:
     - - {x: 8.8124895, y: 5}
@@ -4796,7 +4895,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &8089079254746453540
 Transform:
   m_ObjectHideFlags: 0
@@ -10237,7 +10336,57 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths: []
+  m_ColliderPaths:
+  - m_Collider: {fileID: 8089079254746453537}
+    m_ColliderPaths:
+    - - X: 160000000
+        Y: 120000000
+      - X: -160000000
+        Y: 120000000
+      - X: -160000000
+        Y: -100000000
+      - X: 160000000
+        Y: -100000000
+    - - X: -100000000
+        Y: -40000000
+      - X: -100000000
+        Y: 0
+      - X: -120000000
+        Y: 0
+      - X: -120000000
+        Y: 10000000
+      - X: -100000000
+        Y: 10000000
+      - X: -100000000
+        Y: 60000000
+      - X: 100000000
+        Y: 60000000
+      - X: 100000000
+        Y: 10000000
+      - X: 120000000
+        Y: 10000000
+      - X: 120000000
+        Y: 0
+      - X: 100000000
+        Y: 0
+      - X: 100000000
+        Y: -40000000
+    - - X: 80000000
+        Y: 40000000
+      - X: -80000000
+        Y: 40000000
+      - X: -80000000
+        Y: 20000000
+      - X: 80000000
+        Y: 20000000
+    - - X: 80000000
+        Y: 0
+      - X: -80000000
+        Y: 0
+      - X: -80000000
+        Y: -20000000
+      - X: 80000000
+        Y: -20000000
   m_CompositePaths:
     m_Paths:
     - - {x: 15.999971, y: -10}
@@ -10337,6 +10486,7 @@ GameObject:
   - component: {fileID: 4469334548205689003}
   - component: {fileID: 2257466174165229434}
   - component: {fileID: 2815896655795442154}
+  - component: {fileID: 2134113461}
   m_Layer: 0
   m_Name: Trigger (2)
   m_TagString: Left
@@ -10494,6 +10644,18 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
 --- !u!114 &2815896655795442154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8886273179296768826}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 434238de7d72fed4c805220a430313f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2134113461
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
