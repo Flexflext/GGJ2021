@@ -9,20 +9,21 @@ public class Game : MonoBehaviour
     private UIManager m_UIManager;
     [SerializeField]
     private PlayerManager m_PlayerManager;
-    [SerializeField] 
-    private DungeonItemSpawner dungeonItemSpawner;
-    [SerializeField] 
-    private NpcManager npcManager;
     [SerializeField]
-    private Transform itemHolder;
+    public DungeonItemSpawner dungeonItemSpawner;
+    [SerializeField]
+    public NpcManager npcManager;
+    [SerializeField]
+    public Transform itemHolder;
+    [HideInInspector] public DungeonGenerator DungeonGenerator;
 
     public PlayerManager PlayerManager => m_PlayerManager;
 
     public ItemGenerator ItemGenerator;
 
-    private Item[] items;
-    private IEnumerable<Item> dungeonItems;
     
+    public List<Item> dungeonItems;
+
     public UIManager UIManager => m_UIManager;
 
     private void Awake()
@@ -37,9 +38,9 @@ public class Game : MonoBehaviour
 
     private void Start()
     {
-        items = ItemGenerator.GenerateItems(itemHolder, 1000);
-        dungeonItems = dungeonItemSpawner.SpawnItems(items);
-        dungeonItemSpawner.SpawnEnemies();
-        npcManager.pickLostItems(dungeonItems);
+        DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
+        //dungeonItemSpawner.SpawnEnemies();
     }
+
+
 }

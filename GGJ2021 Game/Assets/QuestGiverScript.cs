@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QuestGiverScript : MonoBehaviour
@@ -21,7 +22,7 @@ public class QuestGiverScript : MonoBehaviour
     private bool isReversed;
 
     private InfoScriptNPCCanvas canvasInfo;
-    public Item item;
+    public Item WantedItem;
 
     private void Awake()
     {
@@ -70,10 +71,11 @@ public class QuestGiverScript : MonoBehaviour
 
         if (playerIsNear && Input.GetKeyDown(KeyCode.E))
         {
-            if (Game.Instance.PlayerManager.Backpack.DestroyItem(item))
+            if (Game.Instance.PlayerManager.Backpack.DestroyItem(WantedItem))
             {
                 Game.Instance.UIManager.InventoryUI.gameObject.SetActive(true);
                 Game.Instance.PlayerManager.Backpack.Money += 1;
+                GetNewLostItem();
             }
         }
     }
@@ -142,9 +144,16 @@ public class QuestGiverScript : MonoBehaviour
 
     public void SetItem(Item item)
     {
-        this.item = item;
+        this.WantedItem = item;
         canvasInfo.NameText.text = item.Name;
         canvasInfo.ItemSprite.sprite = item.Icon;
         canvasInfo.NameText.color = item.Rarity.NameColor;
+    }
+
+    public void GetNewLostItem()
+    {
+        Item[] shuffled = Game.Instance.dungeonItems.OrderBy(x => Random.Range(0F, 10F)).ToArray();
+        SetItem(shuffled[0]);
+        Game.Instance.dungeonItems.Remove(this.WantedItem);
     }
 }

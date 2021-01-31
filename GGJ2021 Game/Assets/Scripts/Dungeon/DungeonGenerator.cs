@@ -22,6 +22,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private GameObject[] UpRoomPrefabs;
     [SerializeField] private GameObject[] RightRoomPrefabs;
     [SerializeField] private GameObject[] EndRoomsPrefabs;
+    private Item[] items;
 
     private List<DungeonRoom> OpenRooms = new List<DungeonRoom>();
     private List<DungeonRoom> DungeonRooms = new List<DungeonRoom>();
@@ -52,6 +53,10 @@ public class DungeonGenerator : MonoBehaviour
                 AddRoom(OpenRooms[i]);
             }
         }
+        //TODO: CLEAR this **it
+        items = Game.Instance.ItemGenerator.GenerateItems(Game.Instance.itemHolder, 1000);
+        Game.Instance.dungeonItems = Game.Instance.dungeonItemSpawner.SpawnItems(items);
+        Game.Instance.npcManager.pickLostItems(Game.Instance.dungeonItems);
     }
 
     private void AddRoom(DungeonRoom _thisroom)
@@ -201,16 +206,16 @@ public class DungeonGenerator : MonoBehaviour
         switch (direction)
         {
             case Down:
-                prefabs = !endRoom ? DownRoomPrefabs : new[] {EndRoomsPrefabs[(int) Down]};
+                prefabs = !endRoom ? DownRoomPrefabs : new[] { EndRoomsPrefabs[(int)Down] };
                 break;
             case Left:
-                prefabs = !endRoom ? LeftRoomPrefabs : new[] {EndRoomsPrefabs[(int) Left]};
+                prefabs = !endRoom ? LeftRoomPrefabs : new[] { EndRoomsPrefabs[(int)Left] };
                 break;
             case Up:
-                prefabs = !endRoom ? UpRoomPrefabs : new[] {EndRoomsPrefabs[(int) Up]};
+                prefabs = !endRoom ? UpRoomPrefabs : new[] { EndRoomsPrefabs[(int)Up] };
                 break;
             case Right:
-                prefabs = !endRoom ? RightRoomPrefabs : new[] {EndRoomsPrefabs[(int) Right]};
+                prefabs = !endRoom ? RightRoomPrefabs : new[] { EndRoomsPrefabs[(int)Right] };
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(direction), direction, null);
