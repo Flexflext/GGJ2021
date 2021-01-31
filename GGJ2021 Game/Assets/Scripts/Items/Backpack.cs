@@ -14,6 +14,9 @@ public class Backpack : MonoBehaviour
 
     private List<Item> _nearbyItemList;
 
+    [SerializeField] private Sound consumePotSound;
+    [SerializeField] private Sound equipItemSound;
+
     void Start()
     {
         Inventory = new Item[Size];
@@ -93,6 +96,7 @@ public class Backpack : MonoBehaviour
         Item item = Inventory[_slot];
         if (item is IUsable usable)
         {
+            AudioManager.instance.PlaySound(consumePotSound);
             usable.Use(this);
         }
         else if (item is HeadItem head)
@@ -102,6 +106,7 @@ public class Backpack : MonoBehaviour
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
+            AudioManager.instance.PlaySound(equipItemSound);
         }
         else if (item is ChestItem chest)
         {
@@ -110,6 +115,7 @@ public class Backpack : MonoBehaviour
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
+            AudioManager.instance.PlaySound(equipItemSound);
         }
         else if (item is WeaponItem weapon)
         {
@@ -120,6 +126,7 @@ public class Backpack : MonoBehaviour
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
             Game.Instance.PlayerManager.WeaponRenderer.sprite = weapon.Icon;
             Game.Instance.PlayerManager.WeaponRenderer.enabled = true;
+            AudioManager.instance.PlaySound(equipItemSound);
         }
     }
 

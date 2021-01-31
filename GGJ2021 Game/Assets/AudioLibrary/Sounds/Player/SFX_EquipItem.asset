@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aacecdf70ddbc17489e19316da50ee9e, type: 3}
-  m_Name: SFX_EnemyDeath
+  m_Name: SFX_EquipItem
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: dc2a56dd0a3e51d48bfbb27aaa870366, type: 3}
+  clip: {fileID: 8300000, guid: 4a771b58456b1b44d87161f97a59399d, type: 3}
   volume: 0.1
   pitch: 1
   source: {fileID: 0}

@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
         else
         {
@@ -29,8 +29,9 @@ public class AudioManager : MonoBehaviour
         // for every Sound in the SoundsArray a AudioSource is added to the AudioManager
         foreach (Sound s in sounds)
         {
-            if (s == null)
+            if (s == null) // That array index is empty
                 return;
+
             s.source = gameObject.AddComponent<AudioSource>();
             s.source.clip = s.clip;
             s.source.volume = s.volume;
