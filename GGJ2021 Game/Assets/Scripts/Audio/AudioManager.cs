@@ -13,6 +13,10 @@ public class AudioManager : MonoBehaviour
     [Tooltip("Array of all Sounds.")]
     public Sound[] sounds; // Array of Sounds
 
+    public AudioSource BackgroundAudio;
+    public AudioClip TestbackgroundMusic;
+
+
     private void Awake()
     {
         // Singleton pattern
@@ -25,6 +29,7 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(this);
         }
+
 
         // for every Sound in the SoundsArray a AudioSource is added to the AudioManager
         foreach (Sound s in sounds)
@@ -65,6 +70,19 @@ public class AudioManager : MonoBehaviour
             return;
         }
         s.source.Play();
+    }
+
+    public void ChangeBackgroundMusic(AudioClip _bgmusic)
+    {
+        //BackgroundAudio.Stop();
+        BackgroundAudio.clip = _bgmusic;
+        BackgroundAudio.Play();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+            ChangeBackgroundMusic(TestbackgroundMusic);
     }
 
     /// <summary>
