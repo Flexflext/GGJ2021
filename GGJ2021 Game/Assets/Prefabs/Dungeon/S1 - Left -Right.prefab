@@ -346,7 +346,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1907,93 +1907,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 8089079253700907003}
-    m_ColliderPaths:
-    - - X: -90000000
-        Y: 50625000
-      - X: -90000000
-        Y: 51875000
-      - X: -88125000
-        Y: 50000000
-      - X: -80625000
-        Y: 50000000
-      - X: -80000000
-        Y: 50625000
-      - X: -80000000
-        Y: 58750000
-      - X: -80625000
-        Y: 60000000
-      - X: -88750000
-        Y: 60000000
-      - X: -90000000
-        Y: 58125000
-      - X: -90000000
-        Y: 58750000
-      - X: -90625000
-        Y: 60000000
-      - X: -98750000
-        Y: 60000000
-      - X: -100000000
-        Y: 58125000
-      - X: -100000000
-        Y: 51875000
-      - X: -98125000
-        Y: 50000000
-      - X: -90625000
-        Y: 50000000
-    - - X: -20000000
-        Y: 60000000
-      - X: -30000000
-        Y: 60000000
-      - X: -30000000
-        Y: 50000000
-      - X: -20000000
-        Y: 50000000
-    - - X: 90000000
-        Y: 51875000
-      - X: 91875000
-        Y: 50000000
-      - X: 98125000
-        Y: 50000000
-      - X: 100000000
-        Y: 51875000
-      - X: 100000000
-        Y: 57500000
-      - X: 98125000
-        Y: 60000000
-      - X: 92500000
-        Y: 60000000
-      - X: 90000000
-        Y: 57500000
-      - X: 88125000
-        Y: 60000000
-      - X: 82500000
-        Y: 60000000
-      - X: 80000000
-        Y: 57500000
-      - X: 80000000
-        Y: 51875000
-      - X: 81875000
-        Y: 50000000
-      - X: 88125000
-        Y: 50000000
-    - - X: -70000000
-        Y: -30000000
-      - X: -100000000
-        Y: -30000000
-      - X: -100000000
-        Y: -40000000
-      - X: -70000000
-        Y: -40000000
-    - - X: 100000000
-        Y: -30000000
-      - X: 70000000
-        Y: -30000000
-      - X: 70000000
-        Y: -40000000
-      - X: 100000000
-        Y: -40000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 8.8124895, y: 5}
@@ -4882,7 +4796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8089079254746453540
 Transform:
   m_ObjectHideFlags: 0
@@ -10323,57 +10237,7 @@ CompositeCollider2D:
   m_GeometryType: 0
   m_GenerationType: 0
   m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 8089079254746453537}
-    m_ColliderPaths:
-    - - X: 160000000
-        Y: 120000000
-      - X: -160000000
-        Y: 120000000
-      - X: -160000000
-        Y: -100000000
-      - X: 160000000
-        Y: -100000000
-    - - X: -100000000
-        Y: -40000000
-      - X: -100000000
-        Y: 0
-      - X: -120000000
-        Y: 0
-      - X: -120000000
-        Y: 10000000
-      - X: -100000000
-        Y: 10000000
-      - X: -100000000
-        Y: 60000000
-      - X: 100000000
-        Y: 60000000
-      - X: 100000000
-        Y: 10000000
-      - X: 120000000
-        Y: 10000000
-      - X: 120000000
-        Y: 0
-      - X: 100000000
-        Y: 0
-      - X: 100000000
-        Y: -40000000
-    - - X: 80000000
-        Y: 40000000
-      - X: -80000000
-        Y: 40000000
-      - X: -80000000
-        Y: 20000000
-      - X: 80000000
-        Y: 20000000
-    - - X: 80000000
-        Y: 0
-      - X: -80000000
-        Y: 0
-      - X: -80000000
-        Y: -20000000
-      - X: 80000000
-        Y: -20000000
+  m_ColliderPaths: []
   m_CompositePaths:
     m_Paths:
     - - {x: 15.999971, y: -10}
@@ -10604,7 +10468,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 6
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
