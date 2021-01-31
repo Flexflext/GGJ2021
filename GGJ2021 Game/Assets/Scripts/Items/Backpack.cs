@@ -18,11 +18,23 @@ public class Backpack : MonoBehaviour
     [SerializeField] private Sound EquipItemSound;
     [SerializeField] private Sound PickUpItemSound;
     [SerializeField] private Sound DropItemSound;
+    
+    private int _money = 0;
+    public int Money
+    {
+        get => _money;
+        set
+        {
+            _money = value;
+            Game.Instance.UIManager.InventoryUI.MoneyText.text = $"{_money}";
+        }
+    }
 
     void Start()
     {
         Inventory = new Item[Size];
         NearbyItemList = new List<Item>();
+        Money = 0;
     }
 
     private void Update()
@@ -210,5 +222,19 @@ public class Backpack : MonoBehaviour
     public HeadItem GetEquippedHead()
     {
         return EquippedHead;
+    }
+
+    public void ClearBags()
+    {
+        foreach (Item item in Inventory)
+        {
+            DestroyItem(item);
+        }
+
+        DestroyItem(EquippedHead);
+        DestroyItem(EquippedChest);
+        DestroyItem(EquippedWeapon);
+
+        Money = 0;
     }
 }

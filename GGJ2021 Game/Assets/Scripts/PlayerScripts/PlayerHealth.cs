@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+
     [SerializeField] private Sound damageSound;
     [SerializeField] private Sound deathSound;
 
@@ -39,10 +40,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-
+    private Vector3 startPos;
 
     private void Start()
     {
+        startPos = transform.position;
         PlayerDamagedAnim = GetComponent<Animator>();
         MaxHealth = 3;
         CurrentHealth = MaxHealth;
@@ -69,7 +71,10 @@ public class PlayerHealth : MonoBehaviour
         if (CurrentHealth <= 0)
         {
             AudioManager.instance.PlaySound(deathSound);
-            Destroy(gameObject);
+            
+            Game.Instance.PlayerManager.Backpack.ClearBags();
+            transform.position = startPos;
+            AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
         }
     }
 

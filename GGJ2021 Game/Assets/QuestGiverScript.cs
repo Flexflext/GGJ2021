@@ -70,8 +70,10 @@ public class QuestGiverScript : MonoBehaviour
 
         if (playerIsNear && Input.GetKeyDown(KeyCode.E))
         {
-            Game.Instance.PlayerManager.Backpack.DestroyItem(item);
-            Game.Instance.PlayerManager.PlayerStat.money += 1;
+            if (Game.Instance.PlayerManager.Backpack.DestroyItem(item))
+            {
+                Game.Instance.PlayerManager.Backpack.Money += 1;
+            }
         }
     }
 

@@ -8,19 +8,22 @@ public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 {
     private List<Action<PointerEventData>> enterListeners = new List<Action<PointerEventData>>();
     private List<Action<PointerEventData>> exitListeners = new List<Action<PointerEventData>>();
-        
+
+    private bool focused = false;
+
     public void AddEnterListener(Action<PointerEventData> action)
     {
         enterListeners.Add(action);
     }
-    
+
     public void AddExitListener(Action<PointerEventData> action)
     {
         exitListeners.Add(action);
     }
-    
+
     public void OnPointerEnter(PointerEventData eventData)
     {
+        focused = true;
         foreach (var listener in enterListeners)
         {
             listener.Invoke(eventData);
@@ -29,14 +32,21 @@ public class OnPointer : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
+        focused = false;
         foreach (var listener in exitListeners)
         {
             listener.Invoke(eventData);
         }
     }
 
+
+    private void OnDisable()
+    {
+        if (focused) OnPointerExit(null);
+    }
+
     private void OnDestroy()
     {
-        OnPointerExit(null);
+        if (focused) OnPointerExit(null);
     }
 }
