@@ -5,10 +5,10 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class NameGenerator
+public class NameGenerator : MonoBehaviour
 {
-    private static List<string> Adjectives = readFile("Assets/Resources/Text/adjectives.txt");
-    private static List<string> Names = readFile("Assets/Resources/Text/names.txt");
+    private static string[] Adjectives;
+    private static string[] Names;
 
     private static List<string> readFile(string file)
     {
@@ -22,9 +22,23 @@ public class NameGenerator
 
     public static string GenerateName()
     {
-        var adjectiveIndex = Random.Range(0, Adjectives.Count);
-        var nameIndex = Random.Range(0, Names.Count);
+        if (Adjectives == null || Names == null)
+        {
+            Adjectives = splitLines(Game.Instance.adjectives.text);
+            Names = splitLines(Game.Instance.names.text);
+        }
+
+        var adjectiveIndex = Random.Range(0, Adjectives.Length);
+        var nameIndex = Random.Range(0, Names.Length);
         return Adjectives[adjectiveIndex] + " " + Names[nameIndex];
+    }
+
+    private static string[] splitLines(string text)
+    {
+        return text.Split(
+            new[] {"\r\n", "\r", "\n"},
+            StringSplitOptions.None
+        );
     }
 
     private static string FirstCharToUpper(string input)

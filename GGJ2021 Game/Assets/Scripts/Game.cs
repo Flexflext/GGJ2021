@@ -21,6 +21,9 @@ public class Game : MonoBehaviour
 
     public ItemGenerator ItemGenerator;
 
+    public TextAsset adjectives;
+    public TextAsset names;
+    
     
     public List<Item> dungeonItems;
 

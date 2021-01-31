@@ -59,6 +59,7 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
 
     private IEnumerator TriggerTimer()
     {
+        if (Game.Instance.PlayerManager.RecentlyTeleported) yield break;
         Game.Instance.PlayerManager.RecentlyTeleported = true;
         yield return TriggerTimerInterval;
         Game.Instance.PlayerManager.RecentlyTeleported = false;
