@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3393478312080253045}
   - component: {fileID: 3393478312080253046}
   - component: {fileID: 3393478312080253047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ork_Berserker_Skin_1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -174,11 +174,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d8e111193949418b4f74bf519f029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxAttackRange: 0
   MaxHealth: 100
   MaxDamage: 5
-  MaxAttackSpeed: 3
   MaxSpeed: 3
-  MaxAttackRange: 0
   AttackRangeModifier: 0
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
     type: 3}

@@ -91,6 +91,8 @@ public class Enemy_Base_New : MonoBehaviour
     {
         CurrentHealth -= _damage;
 
+        Debug.Log("Enemy Takes " + _damage);
+
         if (CurrentHealth <= 0)
         {
             Destroy(gameObject);
