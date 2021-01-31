@@ -1,11 +1,13 @@
 ﻿
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
 public class DungeonItemSpawner : MonoBehaviour
 {
+    [SerializeField]
+    private List<GameObject> EnemyPrefab;
+    
     public IEnumerable<Item> SpawnItems(Item[] items)
     {
         List<Item> spawned = new List<Item>();
@@ -19,5 +21,15 @@ public class DungeonItemSpawner : MonoBehaviour
         }
 
         return spawned;
+    }
+
+    public void SpawnEnemies()
+    {
+        IEnemySpawnPoint[] spawnPoints = gameObject.GetComponentsInChildren<IEnemySpawnPoint>();
+        foreach (IEnemySpawnPoint spawnPoint in spawnPoints)
+        {
+            GameObject enemy = Instantiate(EnemyPrefab[Random.Range(0, EnemyPrefab.Count)], spawnPoint.transform.parent);
+            enemy.transform.position = spawnPoint.transform.position;
+        }
     }
 }
