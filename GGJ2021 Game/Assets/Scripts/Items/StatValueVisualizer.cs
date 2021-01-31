@@ -3,16 +3,15 @@ using System.Text;
 
 public class StatValueVisualizer
 {
-    // private static Dictionary<ItemStats, string> statTranslations = new Dictionary<ItemStats, string>
-    // {
-    //     {ItemStats.Damage, "Damage"},
-    //     {ItemStats.Health, "Damage"},
-    //     {ItemStats.AttackRange, "Damage"},
-    //     {ItemStats.HealthRegen, "Damage"},
-    //     {ItemStats.Damage, "Damage"},
-    //     {ItemStats.Damage, "Damage"},
-    //     {ItemStats.Damage, "Damage"},
-    // };
+    private static Dictionary<ItemStat, string> statTranslations = new Dictionary<ItemStat, string>
+    {
+        {ItemStat.Health, "Health"},
+        {ItemStat.HealthRegen, "HealthReg"},
+        {ItemStat.Damage, "Damage"},
+        {ItemStat.MovementSpeed, "Speed"},
+        {ItemStat.AttackSpeed, "AttackSpeed"},
+        {ItemStat.AttackRange, "Range"},
+    };
 
     public static string ToString(int[] statValues)
     {
@@ -22,7 +21,7 @@ public class StatValueVisualizer
             int statValue = statValues[(int) statEnum];
             if (statValue != 0)
             {
-                sb.Append($"{statEnum.ToString()}: {statValue}\n");
+                sb.Append($"{statTranslations[statEnum]}: {statValue}\n");
             }
         }
 

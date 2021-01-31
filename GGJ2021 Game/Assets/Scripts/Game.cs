@@ -20,7 +20,7 @@ public class Game : MonoBehaviour
 
     public ItemGenerator ItemGenerator;
 
-    private IEnumerable<Item> items;
+    private Item[] items;
     private IEnumerable<Item> dungeonItems;
     
     public UIManager UIManager => m_UIManager;

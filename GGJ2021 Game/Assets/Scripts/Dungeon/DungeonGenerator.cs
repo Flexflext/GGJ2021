@@ -14,7 +14,6 @@ public class DungeonGenerator : MonoBehaviour
     private const int XOFFSET = 32;
     private const int YOFFSET = 22;
 
-
     [SerializeField] private Vector3 DungeonStartPos;
     [SerializeField] private Transform ParentTransform;
     [SerializeField] private int MinimalRoomAmount;

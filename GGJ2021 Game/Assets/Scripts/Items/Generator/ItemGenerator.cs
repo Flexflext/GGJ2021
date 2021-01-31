@@ -23,9 +23,9 @@ public class ItemGenerator : MonoBehaviour
         _itemTypes = Resources.LoadAll<ItemType>("StructuredObjects/ItemTypes").OrderBy(i => i.spawnProbability);
     }
 
-    public IEnumerable<Item> GenerateItems(Transform itemHolder, int amount)
+    public Item[] GenerateItems(Transform itemHolder, int amount)
     {
-        List<Item> items = new List<Item>(amount);
+        Item[] items = new Item[amount];
         for (int i = 0; i < amount; i++)
         {
             var itemName = NameGenerator.generateName();
@@ -34,7 +34,7 @@ public class ItemGenerator : MonoBehaviour
             var itemSprite = ItemSpriteGenerator.GenerateSprite(itemRarity, itemType);
 
             Item item = BuildItem(itemName, itemRarity, itemType, itemSprite, itemHolder);
-            items.Add(item);
+            items[i] = item;
         }
 
         return items;
