@@ -60,16 +60,16 @@ public class DungeonGenerator : MonoBehaviour
         for (int i = 0; i < _thisroom.Connections.Length; i++)
         {
             if (_thisroom.Origin == _thisroom.Connections[i]) continue;
-            CreateRoom(_thisroom.Connections[i], roomPos);
+            Connection direction = _thisroom.Connections[i];
+            CreateRoom(direction, GetAdjacentRoomPos(roomPos, direction));
         }
 
         OpenRooms.Remove(_thisroom);
     }
 
-    private DungeonRoom CreateRoom(Connection direction, Vector3 originPos)
+    private DungeonRoom CreateRoom(Connection direction, Vector3 newPos)
     {
         Connection origin = InvertConnection(direction);
-        Vector3 newPos = GetAdjacentRoomPos(originPos, direction);
         bool endRoom = DungeonRooms.Count >= MinimalRoomAmount;
         GameObject[] roomPrefabs = GetRoomPrefabs(origin, endRoom);
 
