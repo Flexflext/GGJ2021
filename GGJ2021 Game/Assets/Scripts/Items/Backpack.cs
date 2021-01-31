@@ -19,12 +19,22 @@ public class Backpack : MonoBehaviour
     [SerializeField] private Sound PickUpItemSound;
     [SerializeField] private Sound DropItemSound;
     
-    public int Money = 0;
+    private int _money = 0;
+    public int Money
+    {
+        get => _money;
+        set
+        {
+            _money = value;
+            Game.Instance.UIManager.InventoryUI.MoneyText.text = $"{_money}";
+        }
+    }
 
     void Start()
     {
         Inventory = new Item[Size];
         NearbyItemList = new List<Item>();
+        Money = 0;
     }
 
     private void Update()

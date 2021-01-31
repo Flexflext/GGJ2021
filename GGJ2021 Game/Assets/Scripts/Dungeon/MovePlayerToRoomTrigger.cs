@@ -10,15 +10,24 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && !Game.Instance.PlayerManager.RecentlyTeleported)
+        if (collision.CompareTag("Player") && !Game.Instance.PlayerManager.RecentlyTeleported)
         {
-            switch (this.gameObject.tag)
+            switch (gameObject.tag)
             {
                 case "Up":
                     TeleportPlayer(new Vector3(0, YOFFSET, 0), collision.transform);
                     break;
                 case "Down":
-                    TeleportPlayer(new Vector3(0, -YOFFSET, 0), collision.transform);
+                    DungeonRoom dungeonRoom = gameObject.transform.parent.GetComponent<DungeonRoom>();
+                    if (dungeonRoom.IsStart)
+                    {
+                        collision.transform.position = new Vector3(-6, 14.2F, 0);
+                    }
+                    else
+                    {
+                        TeleportPlayer(new Vector3(0, -YOFFSET, 0), collision.transform);
+                    }
+
                     break;
                 case "Left":
                     TeleportPlayer(new Vector3(-XOFFSET, 0, 0), collision.transform);
