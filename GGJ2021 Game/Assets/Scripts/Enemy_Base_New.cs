@@ -49,6 +49,9 @@ public class Enemy_Base_New : MonoBehaviour
     [SerializeField]
     AIPath AStarPath;
 
+    [SerializeField] private Sound enemyHitSound;
+    [SerializeField] private Sound enemyDeathSound;
+
     void Start()
     {
         Player = FindObjectOfType<PlayerHealth>();
@@ -93,10 +96,13 @@ public class Enemy_Base_New : MonoBehaviour
 
         if (CurrentHealth <= 0)
         {
+            AudioManager.instance.PlaySound(enemyDeathSound);
             Destroy(gameObject);
 
             GameObject deathAnim = Instantiate(EnemyDeathAnim, transform.position, transform.rotation);
         }
+        AudioManager.instance.PlaySound(enemyHitSound);
+
     }
 
 
