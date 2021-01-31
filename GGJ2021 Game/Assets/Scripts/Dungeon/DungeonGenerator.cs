@@ -97,6 +97,7 @@ public class DungeonGenerator : MonoBehaviour
         }
 
         GameObject room = Instantiate(fittingRoom, newPos, Quaternion.identity, ParentTransform);
+        room.SetActive(true);
         DungeonRoom droom = room.GetComponent<DungeonRoom>();
         droom.Origin = origin;
 
