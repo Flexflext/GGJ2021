@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &970927397661130204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 970927397661130207}
+  - component: {fileID: 970927397661130206}
+  - component: {fileID: 970927397661130201}
+  m_Layer: 0
+  m_Name: A_Star
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &970927397661130207
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970927397661130204}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &970927397661130206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970927397661130204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78396926cbbfc4ac3b48fc5fc34a87d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  data:
+    dataString: UEsDBBQAAAgIAAAIIez+EEmQaQIAAAsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMty4jAQ/BVK5yXlB8R4b7uEkD0QqLBbufgirDFWIUsuPcIjxb+vJNvYISfEdM+oe2bkT0S5qiHXQi4lJStBAP0cIXdGP0Y9+AInvBd8Sy/Qcd4p0aUjYc95w5oKGw9dmhIVaEnzX3zPHDmwQcNpIWS1IHuYC6WVDReYKbCQFNplcxv6HKGT/RmnLuVsT1HiThd7SoPR1R5z4BpkT+2IHS18mEbJYxIl4WIcxj7F8Jzhqgbi9PeZ8axNDVNP49ZZy3AucsEYVa0spM+1t72tS5DgfBOKrUsvxdFLoPtSO8XD3HVRKNCtPInPT1TaZjVF0W/RdLDC6tDI+sDM+PuDaOI1NVVX3wjj0MOFFNVLd3EYuEt0SfPDGz7nWOlBj4fhp6/KDT9idsA7Bu8l8FexlMJwYkEtjUs1CqKn/u/N27yE/NDHG6l3QVN/n1T4kMxmYZw+xotxkLRjc4auvhenOaPVzvEfJk1gy4Rvvl8KkHZMf6x6vzKqrWujTtI/BX/xfrhbLfBMpdIWai1zp3UnjHRUtPANdNaMngvJwYdbBzVwzPR5Y8vo+4HeYYNr75Bn7F5Re3mLdY/jLsWHe34Q3EEbcbxNTpXiuAJVro1mlEMv2gGvtk9zwXmzb+or6LK2RhY4H2TtDSVf1wxFxXT2iHEcJuluN5nGY0zStIAJme7yIEqDGPk9pNzaxGzT6Gy7Y4fG++Lc7lz3bRktJa796hOJj0t6qcRAH+WF2OYSgK+bCl2HFEh7iX2hZEGo7c8WtKbcjxt9ZoiJ/AAkuxXKvNPFSUuc9VUyVNMPoV0kQ3P/McnQFV3/A1BLAwQUAAAICAAACCHsUU6wZW0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNVRUEovSizIKAaKGII4pZkpIHa0klGaqYVZYqKxobllUpKJqbFuYoqlZVqqSYppUrKBkaWBsVIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAACCHs/hBJkGkCAAALBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAACCHsUU6wZW0AAAB4AAAACQAkAAAAAAAAAAAAAAC2AgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAG4DAAAAAA==
+    upgradeData: 
+    file_cachedStartup: {fileID: 0}
+    data_cachedStartup: 
+    cacheStartup: 0
+  showNavGraphs: 1
+  showUnwalkableNodes: 1
+  debugMode: 0
+  debugFloor: 0
+  debugRoof: 1
+  manualDebugFloorRoof: 0
+  showSearchTree: 0
+  unwalkableNodeDebugSize: 0.3
+  logPathResults: 1
+  maxNearestNodeDistance: 100
+  scanOnStartup: 1
+  fullGetNearestSearch: 0
+  prioritizeGraphs: 0
+  prioritizeGraphsLimit: 1
+  colorSettings:
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
+    _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
+    _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
+    _ConnectionHighLerp: {r: 1, g: 0, b: 0, a: 0.5}
+    _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
+    _AreaColors:
+    - {r: 0, g: 0, b: 0, a: 0}
+  tagNames: []
+  heuristic: 2
+  heuristicScale: 1
+  threadCount: 1
+  maxFrameTime: 10
+  batchGraphUpdates: 0
+  graphUpdateBatchingInterval: 0.2
+  euclideanEmbedding:
+    mode: 0
+    seed: 0
+    pivotPointRoot: {fileID: 0}
+    spreadOutCount: 1
+  showGraphs: 1
+--- !u!114 &970927397661130201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 970927397661130204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 805757a139c65bd4fac6d02aded8d7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AstarStart: {fileID: 970927397661130206}

@@ -130,7 +130,7 @@ public class Backpack : MonoBehaviour
         }
     }
 
-    public void DestroyItem(Item _item)
+    public bool DestroyItem(Item _item)
     {
         int slot = GetInventorySlot(_item);
 
@@ -143,7 +143,35 @@ public class Backpack : MonoBehaviour
 
             Inventory[slot] = null;
             Destroy(_item.gameObject);
+            return true;
         }
+
+        if (_equippedWeapon == _item)
+        {
+            _equippedWeapon = null;
+            onEquipChanged(Weapon);
+            return true;
+        }
+        else if (_equippedChest == _item)
+        {
+            _equippedChest = null;
+            onEquipChanged(Chest);
+            return true;
+        }
+        else if (_equippedHead == _item)
+        {
+            _equippedHead = null;
+            onEquipChanged(Head);
+            return true;
+        }
+
+        return false;
+    }
+
+    private static void onEquipChanged(InventoryUI.EquipmentSlot equipmentSlot)
+    {
+        Game.Instance.UIManager.InventoryUI.SetEquipped(equipmentSlot, null);
+        Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
     }
 
     private int GetInventorySlot(Item _item)

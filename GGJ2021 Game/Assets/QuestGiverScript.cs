@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCMovement : MonoBehaviour
+public class QuestGiverScript : MonoBehaviour
 {
     [SerializeField] private float npcSpeed;
     [SerializeField] private float playerCheckRadius;
@@ -21,11 +21,12 @@ public class NPCMovement : MonoBehaviour
     private bool isReversed;
 
     private InfoScriptNPCCanvas canvasInfo;
+    public Item item;
 
     private void Awake()
     {
         canvasInfo = GetComponentInChildren<InfoScriptNPCCanvas>();
-        
+
         int waypointCount = waypointHolder.transform.childCount;
         waypointPositions = new Vector3[waypointCount];
         for (int i = 0; i < waypointCount; i++)
@@ -65,6 +66,12 @@ public class NPCMovement : MonoBehaviour
         else
         {
             Stop();
+        }
+
+        if (playerIsNear && Input.GetKeyDown(KeyCode.E))
+        {
+            Game.Instance.PlayerManager.Backpack.DestroyItem(item);
+            Game.Instance.PlayerManager.PlayerStat.money += 1;
         }
     }
 
@@ -128,5 +135,13 @@ public class NPCMovement : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerCheckRadius);
+    }
+
+    public void SetItem(Item item)
+    {
+        this.item = item;
+        canvasInfo.NameText.text = item.Name;
+        canvasInfo.ItemSprite.sprite = item.Icon;
+        canvasInfo.NameText.color = item.Rarity.NameColor;
     }
 }
