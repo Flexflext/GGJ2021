@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Pathfinding;
 
 public class Enemy_Base_New : MonoBehaviour
 {
@@ -83,7 +82,6 @@ public class Enemy_Base_New : MonoBehaviour
     private void FixedUpdate()
     {
         EnemyMove();
-        Debug.Log(Rb.velocity.x);
     }
 
     protected virtual void EnemyMove()
