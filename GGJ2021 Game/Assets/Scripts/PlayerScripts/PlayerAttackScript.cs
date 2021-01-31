@@ -154,7 +154,7 @@ public class PlayerAttackScript : MonoBehaviour
         {
             Collider2D[] enemiesToDamage;
 
-            //AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
+            AudioManager.instance.PlaySound(PlayerAttackSound); // player attack sfx
 
             if (LookDir.x >= transform.position.x)
             {
