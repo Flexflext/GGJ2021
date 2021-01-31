@@ -73,6 +73,7 @@ public class QuestGiverScript : MonoBehaviour
         {
             if (Game.Instance.PlayerManager.Backpack.DestroyItem(WantedItem))
             {
+                Game.Instance.UIManager.InventoryUI.gameObject.SetActive(true);
                 Game.Instance.PlayerManager.Backpack.Money += 1;
                 GetNewLostItem();
             }

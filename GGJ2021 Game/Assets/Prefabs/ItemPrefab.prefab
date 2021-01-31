@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 680296905651521109}
   - component: {fileID: 9157318899709252341}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ItemGlow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,7 +83,7 @@ GameObject:
   - component: {fileID: 3078121839801432608}
   - component: {fileID: 4146371679845100177}
   - component: {fileID: 2599561268803495298}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: ItemPrefab
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 264191715
-  m_SortingLayer: 0
+  m_SortingLayer: 1
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 2f9a22d89b3965240a87b51459d25852, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

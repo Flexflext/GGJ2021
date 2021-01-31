@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1955375607371508163}
   - component: {fileID: 1955375607371508164}
   - component: {fileID: 1955375607371508168}
-  - component: {fileID: 1955375607371508165}
   m_Layer: 0
   m_Name: Ork_Berserker_Skin_4_GFX
   m_TagString: Untagged
@@ -103,19 +102,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1955375607371508165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955375607371508162}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdad2c8f06ea58c4cac8d7c08eeef0fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  EnemyAiPath: {fileID: 1955375608232632832}
 --- !u!1 &1955375608232632861
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,11 +113,8 @@ GameObject:
   - component: {fileID: 1955375608232632862}
   - component: {fileID: 1955375608232632836}
   - component: {fileID: 1955375608232632835}
-  - component: {fileID: 1955375608232632834}
-  - component: {fileID: 1955375608232632833}
-  - component: {fileID: 1955375608232632832}
   - component: {fileID: 1955375608232632863}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ork_Berserker_Skin_4
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -194,90 +177,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &1955375608232632834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955375608232632861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9679e68a0f1144e79c664d9a11ca121, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  target: {fileID: 7040449921079689378, guid: 3d1061608d6bd544a9aa60c1bcd11af1, type: 3}
---- !u!114 &1955375608232632833
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955375608232632861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
---- !u!114 &1955375608232632832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1955375608232632861}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6eb1402c17e84a9282a7f0f62eb584f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
-  radius: 0.5
-  height: 2
-  repathRate: 0.5
-  canSearch: 1
-  canMove: 1
-  maxSpeed: 1
-  gravity: {x: NaN, y: NaN, z: NaN}
-  groundMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  centerOffsetCompatibility: NaN
-  orientation: 1
-  enableRotation: 1
-  targetCompatibility: {fileID: 0}
-  maxAcceleration: -2.5
-  rotationSpeed: 360
-  slowdownDistance: 0.6
-  pickNextWaypointDist: 2
-  endReachedDistance: 0.2
-  alwaysDrawGizmos: 0
-  slowWhenNotFacingTarget: 1
-  whenCloseToDestination: 0
-  constrainInsideGraph: 0
 --- !u!114 &1955375608232632863
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,13 +195,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239d8e111193949418b4f74bf519f029, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 100
-  MaxDamage: 5
-  MaxAttackSpeed: 3
-  MaxSpeed: 3
-  MaxAttackRange: 0
+  MaxAttackRange: 2.5
+  MaxHealth: 20
+  MaxDamage: 10
+  MaxSpeed: 1
   AttackRangeModifier: 0
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
     type: 3}
   KnockbackForce: 0
-  AStarPath: {fileID: 1955375608232632832}
+  enemyHitSound: {fileID: 0}
+  enemyDeathSound: {fileID: 0}

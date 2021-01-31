@@ -66,8 +66,9 @@ public class PlayerHealth : MonoBehaviour
     {
         CurrentHealth -= _damage;
         PlayerDamagedAnim.SetTrigger("IsDamaged");
-        
         AudioManager.instance.PlaySound(damageSound);
+
+        if (true) return;
         if (CurrentHealth <= 0)
         {
             AudioManager.instance.PlaySound(deathSound);
@@ -75,6 +76,7 @@ public class PlayerHealth : MonoBehaviour
             Game.Instance.PlayerManager.Backpack.ClearBags();
             transform.position = startPos;
             AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
+            CurrentHealth = MaxHealth;
         }
     }
 
