@@ -42,11 +42,8 @@ public class PlayerHealth : MonoBehaviour
 
     private void Start()
     {
-<<<<<<< HEAD
         PlayerDamagedAnim = GetComponent<Animator>();
-=======
         MaxHealth = 3;
->>>>>>> 3c698dbfe921b3f4e23f65d95aa7006c0e2aa761
         CurrentHealth = MaxHealth;
         StartCoroutine(nameof(RegenerateHealth));
     }
