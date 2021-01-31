@@ -19,7 +19,7 @@ public class PlayerTopDownMovement : MonoBehaviour
     private Animator PlayerAnim;
 
     private AnimationClip[] animations;
-    
+
     private void Awake()
     {
         PlayerAnim = GetComponent<Animator>();
@@ -49,14 +49,19 @@ public class PlayerTopDownMovement : MonoBehaviour
     private void Move()
     {
         m_rB.velocity = new Vector2(m_moveDir.x * m_MovementSpeed, m_moveDir.y * m_MovementSpeed);
+        float speed = m_moveDir.sqrMagnitude;
 
-        //PlayerAnim.SetInteger("Direction", GetDirection(m_rB.velocity));
-        PlayerAnim.SetFloat("Horizontal", m_moveDir.x);
-        PlayerAnim.SetFloat("Vertical", m_moveDir.y);
-        PlayerAnim.SetFloat("Speed", m_moveDir.sqrMagnitude);
-
-        // AnimatorStateInfo currentState = PlayerAnim.GetCurrentAnimatorStateInfo(0);
-        // Debug.Log(currentState);
+        PlayerAnim.SetFloat("Speed", speed);
+        if (speed > 0.01F)
+        {
+            PlayerAnim.SetFloat("Horizontal", m_moveDir.x);
+            PlayerAnim.SetFloat("Vertical", m_moveDir.y);
+            PlayerAnim.SetBool("IsWalking", true);
+        }
+        else
+        {
+            PlayerAnim.SetBool("IsWalking", false);
+        }
     }
 
     private int GetDirection(Vector2 v)
