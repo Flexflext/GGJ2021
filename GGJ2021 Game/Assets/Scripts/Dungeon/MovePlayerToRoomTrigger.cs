@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class MovePlayerToRoomTrigger : MonoBehaviour
 {
-    private const int XOFFSET = 9;
-    private const int YOFFSET = 8;
-    private WaitForSeconds TriggerTimerInterval = new WaitForSeconds(2f);
-    private bool IsActive = false;
-
-    public bool SetActive { set { IsActive = value; } }
-
-    private void Awake()
-    {
-        IsActive = true;
-    }
+    private const int XOFFSET = 10;
+    private const int YOFFSET = 10;
+    private WaitForSeconds TriggerTimerInterval = new WaitForSeconds(0.3f);
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && !Game.Instance.PlayerManager.RecentlyTeleported)
         {
             switch (this.gameObject.tag)
             {
@@ -42,21 +33,16 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
         }
     }
 
-    private void TeleportPlayer(Vector3 _pos, Transform _transfrom)
+    private void TeleportPlayer(Vector3 _offset, Transform _transfrom)
     {
-        _transfrom.position += _pos;
+        _transfrom.position += _offset;
         StartCoroutine("TriggerTimer");
     }
 
     private IEnumerator TriggerTimer()
     {
-        IsActive = false;
+        Game.Instance.PlayerManager.RecentlyTeleported = true;
         yield return TriggerTimerInterval;
-        IsActive = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        IsActive = true;
+        Game.Instance.PlayerManager.RecentlyTeleported = false;
     }
 }
