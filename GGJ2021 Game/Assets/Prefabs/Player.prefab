@@ -727,8 +727,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d75ad326357c5ce40b2697601e03a4da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageSound: {fileID: 0}
-  deathSound: {fileID: 0}
+  damageSound: {fileID: 11400000, guid: e0f89c1da60058145ad186f19cdd8fe3, type: 2}
+  deathSound: {fileID: 11400000, guid: c9c300bfc05d24a40a0292a7d05900b0, type: 2}
 --- !u!114 &4547619040880432893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,10 +742,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 9
-  ConsumePotSound: {fileID: 0}
-  EquipItemSound: {fileID: 0}
-  PickUpItemSound: {fileID: 0}
-  DropItemSound: {fileID: 0}
+  ConsumePotSound: {fileID: 11400000, guid: 45f49128957afe047b8d3abdbf6ff1a3, type: 2}
+  EquipItemSound: {fileID: 11400000, guid: 63f63c2b3b7cc434fb25623268d1f621, type: 2}
+  PickUpItemSound: {fileID: 11400000, guid: 0e7c69b25ca4d4942ac31de0645cb1cf, type: 2}
+  DropItemSound: {fileID: 11400000, guid: ddda4d1482214d6409d5cad8fd2dfd7b, type: 2}
 --- !u!114 &1077297384373713420
 MonoBehaviour:
   m_ObjectHideFlags: 0
