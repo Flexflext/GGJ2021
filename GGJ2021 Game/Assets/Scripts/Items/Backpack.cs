@@ -18,6 +18,8 @@ public class Backpack : MonoBehaviour
     [SerializeField] private Sound EquipItemSound;
     [SerializeField] private Sound PickUpItemSound;
     [SerializeField] private Sound DropItemSound;
+    
+    public int Money = 0;
 
     void Start()
     {
@@ -210,5 +212,19 @@ public class Backpack : MonoBehaviour
     public HeadItem GetEquippedHead()
     {
         return EquippedHead;
+    }
+
+    public void ClearBags()
+    {
+        foreach (Item item in Inventory)
+        {
+            DestroyItem(item);
+        }
+
+        DestroyItem(EquippedHead);
+        DestroyItem(EquippedChest);
+        DestroyItem(EquippedWeapon);
+
+        Money = 0;
     }
 }
