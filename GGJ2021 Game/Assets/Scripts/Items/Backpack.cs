@@ -78,6 +78,7 @@ public class Backpack : MonoBehaviour
             if (!Inventory[i])
             {
                 _item.gameObject.SetActive(false);
+                _item.gameObject.transform.SetParent(gameObject.transform);
                 NearbyItemList.Remove(_item);
                 SetItem(_item, i);
                 AudioManager.instance.PlaySound(PickUpItemSound);
