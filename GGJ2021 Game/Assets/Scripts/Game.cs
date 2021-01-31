@@ -11,6 +11,8 @@ public class Game : MonoBehaviour
     private PlayerManager m_PlayerManager;
 
     public PlayerManager PlayerManager => m_PlayerManager;
+
+    public ItemGenerator ItemGenerator;
     
     public UIManager UIManager => m_UIManager;
 

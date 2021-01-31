@@ -28,9 +28,7 @@ public class Backpack : MonoBehaviour
             Item nearest = _nearbyItemList[0];
             if (Input.GetKeyDown(KeyCode.E))
             {
-                bool success = AddItem(nearest);
-                nearest.gameObject.SetActive(!success);
-                _nearbyItemList.Remove(nearest);
+                PickupItem(nearest);
             }
             else
             {
@@ -56,21 +54,23 @@ public class Backpack : MonoBehaviour
         _nearbyItemList.Remove(collision.gameObject.GetComponent<Item>());
     }
 
-    private bool AddItem(Item _item)
+    private int PickupItem(Item _item)
     {
         for (var i = 0; i < Inventory.Length; i++)
         {
             if (!Inventory[i])
             {
-                setItem(_item, i);
-                return true;
+                _item.gameObject.SetActive(false);
+                _nearbyItemList.Remove(_item);
+                SetItem(_item, i);
+                return i;
             }
         }
 
-        return false;
+        return -1;
     }
 
-    private Item setItem(Item _item, int i)
+    private Item SetItem(Item _item, int i)
     {
         var previous = Inventory[i];
         Inventory[i] = _item;
@@ -97,7 +97,7 @@ public class Backpack : MonoBehaviour
         }
         else if (item is HeadItem head)
         {
-            setItem(_equippedHead, _slot);
+            SetItem(_equippedHead, _slot);
             _equippedHead = head;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Head, item);
@@ -105,7 +105,7 @@ public class Backpack : MonoBehaviour
         }
         else if (item is ChestItem chest)
         {
-            setItem(_equippedChest, _slot);
+            SetItem(_equippedChest, _slot);
             _equippedChest = chest;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Chest, item);
@@ -113,11 +113,13 @@ public class Backpack : MonoBehaviour
         }
         else if (item is WeaponItem weapon)
         {
-            setItem(_equippedWeapon, _slot);
+            SetItem(_equippedWeapon, _slot);
             _equippedWeapon = weapon;
 
             Game.Instance.UIManager.InventoryUI.SetEquipped(Weapon, item);
             Game.Instance.PlayerManager.PlayerStat.RecalculateStats();
+            Game.Instance.PlayerManager.WeaponRenderer.sprite = weapon.Icon;
+            Game.Instance.PlayerManager.WeaponRenderer.enabled = true;
         }
     }
 

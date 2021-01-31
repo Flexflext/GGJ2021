@@ -29,11 +29,6 @@ public abstract class Item : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        GenerateRandomStats();
-    }
-
     public abstract string GetItemInfo();
 
     public abstract void GenerateRandomStats();

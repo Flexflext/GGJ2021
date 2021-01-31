@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerTopDownMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float m_MovementSpeed;
+    [SerializeField] private float m_MovementSpeed;
 
     private Vector2 m_moveDir;
 
@@ -13,61 +12,30 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     public SpriteRenderer PlayerSprite;
 
-    SpriteRenderer WeaponSprite;
-
-    Camera PlayerCam;
-
     public GameObject SwordPivot;
+
+    [SerializeField] private GameObject Equipment;
 
     private Animator PlayerAnim;
 
+    private AnimationClip[] animations;
+    
     private void Awake()
     {
         PlayerAnim = GetComponent<Animator>();
-        WeaponSprite = GetComponentInChildren<WeaponStats>().GetComponent<SpriteRenderer>();
         PlayerSprite = GetComponent<SpriteRenderer>();
-        PlayerCam = GetComponentInChildren<Camera>();
         m_rB = GetComponent<Rigidbody2D>();
     }
 
 
-    // Update is called once per frame
     void Update()
     {
         ManageInputs();
-
-        FlipPlayer();
     }
 
     private void FixedUpdate()
     {
         Move();
-
-    }
-
-    void FlipPlayer()
-    {
-        //if (Input.GetAxisRaw("Horizontal") == -1)
-        //{
-        //    PlayerSprite.flipX = true;
-        //}
-        //else
-        //{
-        //    PlayerSprite.flipX = false;
-        //}
-
-        Vector3 lookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
-        if (lookDir.x < 0)
-        {
-            PlayerSprite.flipX = true;
-            WeaponSprite.flipY = true;
-        }
-        else
-        {
-            PlayerSprite.flipX = false;
-            WeaponSprite.flipY = false;
-        }
     }
 
     private void ManageInputs()
@@ -82,8 +50,20 @@ public class PlayerTopDownMovement : MonoBehaviour
     {
         m_rB.velocity = new Vector2(m_moveDir.x * m_MovementSpeed, m_moveDir.y * m_MovementSpeed);
 
+        PlayerAnim.SetInteger("Direction", GetDirection(m_rB.velocity));
         PlayerAnim.SetFloat("Horizontal", m_moveDir.x);
         PlayerAnim.SetFloat("Vertical", m_moveDir.y);
         PlayerAnim.SetFloat("Speed", m_moveDir.sqrMagnitude);
+
+        // AnimatorStateInfo currentState = PlayerAnim.GetCurrentAnimatorStateInfo(0);
+        // Debug.Log(currentState);
+    }
+
+    private int GetDirection(Vector2 v)
+    {
+        if (v.x > 0) return 3;
+        if (v.x < 0) return 1;
+        if (v.y > 0) return 2;
+        return 0;
     }
 }
