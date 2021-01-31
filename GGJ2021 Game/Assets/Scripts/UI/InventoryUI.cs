@@ -111,7 +111,7 @@ public class InventoryUI : MonoBehaviour
 
     public void SetEquipped(EquipmentSlot slot, Item item)
     {
-        if (item == null)
+        if (!item)
         {
             EquipmentSprites[(int) slot].enabled = false;
         }

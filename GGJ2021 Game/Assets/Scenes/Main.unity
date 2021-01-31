@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -4079,7 +4079,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c3ec9d9cc64ebf42ba1bcd0713eaacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPrefab: []
+  EnemyPrefab:
+  - {fileID: 1782597330115922076, guid: d4b25887a7101334ea20bef658d3f63e, type: 3}
+  - {fileID: 8780694453349134368, guid: d1c632e323357354c9fff9b2c0d30363, type: 3}
+  - {fileID: 5138921784193425996, guid: ddc756a73e10d9c42898127ada9ad6ac, type: 3}
+  - {fileID: 3084801865276564498, guid: 5c6786c596d83cc4da711e0d9eae7524, type: 3}
+  - {fileID: 3393478312080253041, guid: bd55a91a938fb984b8891e50156d62c1, type: 3}
+  - {fileID: 6576377315550507631, guid: 1797b34e4466dba4794d84b6ceafcf09, type: 3}
+  - {fileID: 7988466247733640951, guid: 1118508548bd97c48951a18244f6db08, type: 3}
+  - {fileID: 1955375608232632861, guid: aa284fdf7879f7f4bb77b6af6aaa3892, type: 3}
 --- !u!1 &334137932
 GameObject:
   m_ObjectHideFlags: 0
