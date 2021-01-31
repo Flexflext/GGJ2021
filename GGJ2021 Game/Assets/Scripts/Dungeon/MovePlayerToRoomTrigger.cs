@@ -22,6 +22,7 @@ public class MovePlayerToRoomTrigger : MonoBehaviour
                     if (dungeonRoom.IsStart)
                     {
                         collision.transform.position = new Vector3(-6, 14.2F, 0);
+                        Game.Instance.DungeonGenerator.GenerateDungeon();
                     }
                     else
                     {

@@ -14,12 +14,16 @@ public class NpcManager : MonoBehaviour
         QuestGiverScript = GetComponentsInChildren<QuestGiverScript>();
     }
 
-    public void pickLostItems(IEnumerable<Item> dungeonItems)
+    public void pickLostItems(List<Item> dungeonItems)
     {
         Item[] shuffled = dungeonItems.OrderBy(x => Random.Range(0F, 10F)).ToArray();
         for (int i = 0; i < QuestGiverScript.Length; i++)
         {
-            QuestGiverScript[i].SetItem(shuffled[i]);
+            if (!Game.Instance.PlayerManager.Backpack.FindItem(QuestGiverScript[i].WantedItem))
+            {
+                QuestGiverScript[i].SetItem(shuffled[i]);
+                dungeonItems.Remove(QuestGiverScript[i].WantedItem);
+            }
         }
     }
 }

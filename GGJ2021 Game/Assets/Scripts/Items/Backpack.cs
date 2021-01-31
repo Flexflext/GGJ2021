@@ -148,7 +148,7 @@ public class Backpack : MonoBehaviour
     }
 
     public bool DestroyItem(Item _item)
-    {
+    {   
         int slot = GetInventorySlot(_item);
 
         if (slot != -1)
@@ -159,7 +159,7 @@ public class Backpack : MonoBehaviour
             Game.Instance.UIManager.InventoryUI.SetItem(slot, null);
 
             Inventory[slot] = null;
-            Destroy(_item.gameObject);
+           // Destroy(_item.gameObject);
             return true;
         }
 
@@ -236,5 +236,33 @@ public class Backpack : MonoBehaviour
         DestroyItem(EquippedWeapon);
 
         Money = 0;
+    }
+
+    public bool FindItem(Item _item)
+    {
+        if (!_item) return false;
+
+        int slot = GetInventorySlot(_item);
+        if (slot != -1)
+        {
+            return true;
+        }
+
+        if (EquippedWeapon == _item)
+        {
+            return true;
+        }
+
+        if (EquippedChest == _item)
+        {
+            return true;
+        }
+
+        if (EquippedHead == _item)
+        {
+            return true;
+        }
+
+        return false;
     }
 }

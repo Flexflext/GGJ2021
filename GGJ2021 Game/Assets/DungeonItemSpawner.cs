@@ -8,7 +8,7 @@ public class DungeonItemSpawner : MonoBehaviour
     [SerializeField]
     private List<GameObject> EnemyPrefab;
     
-    public IEnumerable<Item> SpawnItems(Item[] items)
+    public List<Item> SpawnItems(Item[] items)
     {
         List<Item> spawned = new List<Item>();
         IItemSpawnPoint[] spawnPoints = gameObject.GetComponentsInChildren<IItemSpawnPoint>();
