@@ -86,18 +86,26 @@ public class Enemy_Base_New : MonoBehaviour
 
     protected virtual void EnemyMove()
     {
-        if (Vector3.Distance(Player.transform.position, transform.position) <= CurrentAttackRange && IsHittingWall == false)
+        if (Vector3.Distance(Player.transform.position, transform.position) <= CurrentAttackRange)
         {
-            CurrentAttackRange += CurrentAttackRange * 2;
+            //CurrentAttackRange += CurrentAttackRange * 1.5f;
             Attack();
+        }
+        else if (Vector3.Distance(Player.transform.position, transform.position) > CurrentAttackRange)
+        {
+            MoveToStartPos();
         }
     }
 
+    void MoveToStartPos()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, StartPos, 1 * Time.deltaTime);
+
+    }
 
     protected virtual void Attack()
     {
         transform.position = Vector2.MoveTowards(transform.position, Player.transform.position, CurrentSpeed * Time.deltaTime);
-
 
         EnemyAnim.SetFloat("Speed", CurrentSpeed);
 
@@ -123,8 +131,6 @@ public class Enemy_Base_New : MonoBehaviour
             EnemyAnim.SetFloat("Vertical", -1);
             EnemyAnim.SetFloat("Horizontal", 0);
         }
-
-
     }
 
 
@@ -150,7 +156,6 @@ public class Enemy_Base_New : MonoBehaviour
     {
         PlayerHealth playerHit = collision.collider.GetComponent<PlayerHealth>();
 
-
         if (collision.collider.GetComponent<PlayerHealth>())
         {
             playerHit.PlayerTakesDamge(CurrentDamage);
@@ -158,6 +163,7 @@ public class Enemy_Base_New : MonoBehaviour
             StartCoroutine("EnemyAttackCooldown");
         }
     }
+
 
 
     IEnumerator EnemyAttackCooldown()
