@@ -713,22 +713,7 @@ MonoBehaviour:
     m_Bits: 8192
   waypointHolder: {fileID: 1431425217349037238}
   playerIsNear: 0
---- !u!114 &1431425218025175441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1431425218025175445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b07726c113f804a42a21d357dcbb52c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ItemImage: {fileID: -4443858332881662250, guid: 508a1a8afb3382845be3ab1daaeca1b6,
-    type: 3}
-  RarityColor: {r: 0, g: 1, b: 0.32071114, a: 1}
-  ItemName: ' Hallo Hallo'
+  item: {fileID: 0}
 --- !u!1 &4879560129120085233
 GameObject:
   m_ObjectHideFlags: 0
