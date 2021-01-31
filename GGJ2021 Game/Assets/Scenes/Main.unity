@@ -20378,6 +20378,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4825543148268599230, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 7040449921045486049, guid: 3d1061608d6bd544a9aa60c1bcd11af1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -20463,7 +20468,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7040449920465202773, guid: 3d1061608d6bd544a9aa60c1bcd11af1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3d1061608d6bd544a9aa60c1bcd11af1, type: 3}
 --- !u!1 &1408550889
 GameObject:

@@ -111,21 +111,16 @@ public class Enemy_Base_New : MonoBehaviour
 
         if (Player.transform.position.x > transform.position.x)
         {
-            Debug.Log("DDDD");
             EnemyAnim.SetFloat("Horizontal", 1);
             EnemyAnim.SetFloat("Vertical", 0);
         }
         if (Player.transform.position.x < transform.position.x)
         {
-            Debug.Log("DDDD");
-
             EnemyAnim.SetFloat("Horizontal", -1);
             EnemyAnim.SetFloat("Vertical", 0);
         }
         if (Player.transform.position.y > transform.position.y)
         {
-            Debug.Log("DDDD");
-
             EnemyAnim.SetFloat("Vertical", 1);
             EnemyAnim.SetFloat("Horizontal", 0);
         }

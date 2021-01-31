@@ -7,7 +7,6 @@ public class DungeonTeleporterScript : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("collided");
         if (collision.CompareTag("Player"))
         {
             var dungeonPos = new Vector2(0, 200);
