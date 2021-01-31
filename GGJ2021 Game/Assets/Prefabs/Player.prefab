@@ -682,7 +682,7 @@ MonoBehaviour:
   CurrentAttackRange: 0
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   IsAttacking: 0
   WeaponSwingAnim: {fileID: 7040449921936839888}
   PlayerAttackSound: {fileID: 0}
@@ -699,6 +699,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageSound: {fileID: 0}
+  deathSound: {fileID: 0}
 --- !u!114 &4547619040880432893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,6 +713,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 9
+  consumePotSound: {fileID: 0}
+  equipItemSound: {fileID: 0}
 --- !u!114 &1077297384373713420
 MonoBehaviour:
   m_ObjectHideFlags: 0
