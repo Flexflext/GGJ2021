@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3053946902814436226}
   - component: {fileID: 864755633154746770}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Global Volume
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7737329247986991470}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Equipment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3729770217441262730}
   - component: {fileID: 2102956360141058495}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: HeadSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5040896273565905639}
   - component: {fileID: 4674678460632288279}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ChestSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 7040449920465202772}
   - component: {fileID: 7040449920465202774}
   - component: {fileID: 7040449920465202773}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WeaponSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ SpriteRenderer:
   m_Size: {x: 0.5, y: 0.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &7040449920465202773
@@ -353,7 +353,7 @@ GameObject:
   - component: {fileID: 7040449921045486055}
   - component: {fileID: 7040449921045486050}
   - component: {fileID: 7040449921045486051}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -368,7 +368,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7040449921045486054}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -4}
+  m_LocalPosition: {x: -4.04, y: -6.06, z: -4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3053946902814436226}
@@ -510,7 +510,7 @@ GameObject:
   - component: {fileID: 4547619040880432893}
   - component: {fileID: 1077297384373713420}
   - component: {fileID: 8582324692753812966}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -682,7 +682,7 @@ MonoBehaviour:
   CurrentAttackRange: 0
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   IsAttacking: 0
   WeaponSwingAnim: {fileID: 7040449921936839888}
   PlayerAttackSound: {fileID: 0}
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 7040449921936839894}
   - component: {fileID: 7040449921936839895}
   - component: {fileID: 7040449921936839888}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -782,7 +782,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95e91bf4174e9214bbaf0094c8cc95b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lookDir: {x: 0, y: 0, z: 0}
+  PlayerAttackScript: {fileID: 7040449921079689379}
 --- !u!95 &7040449921936839888
 Animator:
   serializedVersion: 3
@@ -811,7 +811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7040449922080538173}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: WeaponHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}

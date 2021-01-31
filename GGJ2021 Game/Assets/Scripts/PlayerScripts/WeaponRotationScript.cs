@@ -6,25 +6,25 @@ public class WeaponRotationScript : MonoBehaviour
 {
     Vector3 LookDir;
 
-    PlayerAttackScript Player;
+    [SerializeField] private PlayerAttackScript PlayerAttackScript;
 
     SpriteRenderer WeaponSprite;
 
     void Update()
     {
-        Player = FindObjectOfType<PlayerAttackScript>();
         RotateWeapon();
 
-        WeaponSprite = GetComponentInChildren<SpriteRenderer>();
+        WeaponSprite = GetComponentInChildren<SpriteRenderer>(true);
     }
 
     private void FixedUpdate()
     {
-        if (LookDir.x >= Player.transform.position.x)
+        if (!WeaponSprite) return;
+        if (LookDir.x >= PlayerAttackScript.transform.position.x)
         {
             WeaponSprite.flipY = false;
         }
-        else if (LookDir.x < Player.transform.position.x)
+        else if (LookDir.x < PlayerAttackScript.transform.position.x)
         {
             WeaponSprite.flipY = true;
         }
@@ -33,14 +33,12 @@ public class WeaponRotationScript : MonoBehaviour
 
     void RotateWeapon()
     {
-        if (!Player.IsAttacking)
+        if (!PlayerAttackScript.IsAttacking)
         {
             LookDir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
 
             float angle = Mathf.Atan2(LookDir.y, LookDir.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
-
         }
     }
 }
