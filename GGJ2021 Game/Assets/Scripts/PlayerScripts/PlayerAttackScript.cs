@@ -159,7 +159,7 @@ public class PlayerAttackScript : MonoBehaviour
                         {
                             Debug.Log("Upper Right");
 
-                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerRight)
@@ -169,7 +169,7 @@ public class PlayerAttackScript : MonoBehaviour
                         {
                             Debug.Log("Lower Right");
 
-                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }
                     }
                 }
@@ -182,7 +182,7 @@ public class PlayerAttackScript : MonoBehaviour
                         {
                             Debug.Log("Upper Left");
 
-                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerLeft)
@@ -192,7 +192,7 @@ public class PlayerAttackScript : MonoBehaviour
                         {                        Debug.Log("Lower Left");
 
 
-                            enemy.GetComponent<Enemy_Base_New>().EnemyTakesDamage(CurrentAttackDamage);
+                            enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }
                     }
                 }

@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 5138921784193426354}
   - component: {fileID: 5138921784193425997}
   - component: {fileID: 5138921784193426359}
+  - component: {fileID: 4577069428705303100}
   m_Layer: 8
   m_Name: Orc_Scout_Skin_3
   m_TagString: Enemy
@@ -145,14 +146,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 5138921784193425996}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239d8e111193949418b4f74bf519f029, type: 3}
+  m_Script: {fileID: 11500000, guid: 14ce7491b4edc5d4aa37d19ee7c4fdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxAttackRange: 2.5
+  MaxAttackSpeed: 3
   MaxHealth: 10
-  MaxDamage: 0.5
-  MaxSpeed: 1.5
-  AttackRangeModifier: 0
+  MaxDamage: 2
+  MaxSpeed: 2
+  AttackRangeModifier: 2
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
     type: 3}
   KnockbackForce: 0
@@ -205,3 +206,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &4577069428705303100
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5138921784193425996}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3

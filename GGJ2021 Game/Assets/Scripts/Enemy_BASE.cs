@@ -5,28 +5,22 @@ using UnityEngine.Tilemaps;
 
 public class Enemy_BASE : MonoBehaviour
 {
-    [SerializeField]
-    float MaxHealth;
+    [SerializeField] float MaxHealth;
     private float CurrentHealth;
 
-    [SerializeField]
-    float MaxDamage;
+    [SerializeField] float MaxDamage;
     private float CurrentDamage;
 
-    [SerializeField]
-    float MaxAttackSpeed;
+    [SerializeField] float MaxAttackSpeed;
     private float CurrentAttackSpeed;
 
-    [SerializeField]
-    float MaxSpeed;
+    [SerializeField] float MaxSpeed;
     private float CurrentSpeed;
 
-    [SerializeField]
-    float MaxAttackRange;
+    [SerializeField] float MaxAttackRange;
     private float CurrentAttackRange;
 
-    [SerializeField]
-    float AttackRangeModifier;
+    [SerializeField] float AttackRangeModifier;
 
     public GameObject EnemyDeathAnim;
 
@@ -168,9 +162,9 @@ public class Enemy_BASE : MonoBehaviour
 
         Debug.Log(Bubble.Length);
 
-        if (Bubble.Length == 1 )
+        if (Bubble.Length == 1)
         {
-            
+
             Tilemap gridLayout = Bubble[0].transform.GetComponent<Tilemap>();
 
             CellPosition = gridLayout.WorldToCell(transform.position);
@@ -390,6 +384,14 @@ public class Enemy_BASE : MonoBehaviour
         }
     }
 
+    //Triggers when player Enters AggroRangeTrigger
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            EnemyMove();
+        }
+    }
 
     private void OnDrawGizmos()
     {

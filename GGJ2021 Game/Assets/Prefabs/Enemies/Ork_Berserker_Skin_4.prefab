@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 1955375608232632836}
   - component: {fileID: 1955375608232632835}
   - component: {fileID: 1955375608232632863}
+  - component: {fileID: 1169783660587064746}
   m_Layer: 8
   m_Name: Ork_Berserker_Skin_4
   m_TagString: Enemy
@@ -192,16 +193,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 1955375608232632861}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 239d8e111193949418b4f74bf519f029, type: 3}
+  m_Script: {fileID: 11500000, guid: 14ce7491b4edc5d4aa37d19ee7c4fdab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxAttackRange: 2.5
+  MaxAttackSpeed: 3
   MaxHealth: 10
-  MaxDamage: 0.5
-  MaxSpeed: 1.5
-  AttackRangeModifier: 0
+  MaxDamage: 2
+  MaxSpeed: 2
+  AttackRangeModifier: 2
   EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
     type: 3}
   KnockbackForce: 0
   enemyHitSound: {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
   enemyDeathSound: {fileID: 11400000, guid: 3c438ce6f38a18743835e75490a59c8c, type: 2}
+--- !u!58 &1169783660587064746
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1955375608232632861}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3
