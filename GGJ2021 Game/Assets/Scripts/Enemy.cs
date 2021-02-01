@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-        SetMoveDir(Destination);
+       // SetMoveDir(Destination);
     }
 
     //protected virtual void Move(Vector2 _pos)
