@@ -21,6 +21,9 @@ public class Game : MonoBehaviour
 
     public ItemGenerator ItemGenerator;
 
+    public TextAsset adjectives;
+    public TextAsset names;
+    
     
     public List<Item> dungeonItems;
 
@@ -39,7 +42,7 @@ public class Game : MonoBehaviour
     private void Start()
     {
         DungeonGenerator = GetComponentInChildren<DungeonGenerator>();
-        //dungeonItemSpawner.SpawnEnemies();
+        dungeonItemSpawner.SpawnEnemies();
     }
 
 

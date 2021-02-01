@@ -104,7 +104,7 @@ public class PlayerAttackScript : MonoBehaviour
     void PlayerAttack()
     {
         CurrentAttackDamage = 5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.Damage);
-        CurrentAttackRange = 1F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackRange);
+        CurrentAttackRange = 2F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackRange);
         float attackSpeed = 1.5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackSpeed);
         float currentAttackCooldownSpeed = 1 / attackSpeed;
         WeaponSwingAnim.speed = attackSpeed;

@@ -48,7 +48,7 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private void Move()
     {
-        float movementStat = Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.MovementSpeed) * 2F;
+        float movementStat = Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.MovementSpeed) * 1.5F;
         float accel = m_MovementSpeed + movementStat;
         m_rB.velocity = new Vector2(m_moveDir.x * accel, m_moveDir.y * accel);
         float speedSqr = m_moveDir.sqrMagnitude;

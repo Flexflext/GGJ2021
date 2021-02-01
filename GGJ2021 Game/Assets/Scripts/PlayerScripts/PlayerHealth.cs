@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -46,7 +47,7 @@ public class PlayerHealth : MonoBehaviour
     {
         startPos = transform.position;
         PlayerDamagedAnim = GetComponent<Animator>();
-        MaxHealth = 3;
+        MaxHealth = 4;
         CurrentHealth = MaxHealth;
         StartCoroutine(nameof(RegenerateHealth));
     }
@@ -68,24 +69,29 @@ public class PlayerHealth : MonoBehaviour
         PlayerDamagedAnim.SetTrigger("IsDamaged");
         AudioManager.instance.PlaySound(damageSound);
 
-        if (true) return;
         if (CurrentHealth <= 0)
         {
             AudioManager.instance.PlaySound(deathSound);
             
             Game.Instance.PlayerManager.Backpack.ClearBags();
-            transform.position = startPos;
-            AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
+            ResetPosition();
             CurrentHealth = MaxHealth;
         }
     }
 
+    
+    private void ResetPosition()
+    {
+        transform.position = startPos;
+        AudioManager.instance.ChangeBackgroundMusic(AudioManager.EBackgroundMusicThemes.Hub);
+    }
+
     private void Update()
     {
-        // if (Input.GetKeyDown(KeyCode.K))
-        // {
-        //     MaxHealth += 1;
-        // }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            ResetPosition();
+        }
     }
 
     public void OnStatUpdated(PlayerStatScript statScript)

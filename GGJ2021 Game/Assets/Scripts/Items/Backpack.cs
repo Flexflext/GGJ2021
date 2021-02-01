@@ -78,6 +78,7 @@ public class Backpack : MonoBehaviour
             if (!Inventory[i])
             {
                 _item.gameObject.SetActive(false);
+                _item.gameObject.transform.SetParent(gameObject.transform);
                 NearbyItemList.Remove(_item);
                 SetItem(_item, i);
                 AudioManager.instance.PlaySound(PickUpItemSound);
@@ -169,6 +170,7 @@ public class Backpack : MonoBehaviour
         {
             EquippedWeapon = null;
             onEquipChanged(Weapon);
+            Game.Instance.PlayerManager.WeaponRenderer.enabled = false;
             return true;
         }
         else if (EquippedChest == _item)
@@ -181,12 +183,13 @@ public class Backpack : MonoBehaviour
         {
             EquippedHead = null;
             onEquipChanged(Head);
+            
             return true;
         }
 
         return false;
     }
-
+    
     private static void onEquipChanged(InventoryUI.EquipmentSlot equipmentSlot)
     {
         Game.Instance.UIManager.InventoryUI.SetEquipped(equipmentSlot, null);
