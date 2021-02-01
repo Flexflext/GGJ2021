@@ -1,8 +1,10 @@
 # The Dungeon Finder
+### This game was build during the [Global Game Jam 2021](https://globalgamejam.org/2021/games/bo-gruppe-3-wip-7)
+
 
 People have lost their possessions! Go in the dungeon, find the loot and give it back...or don't...
 
-Controls:
+### Controls:
 
 W - Move Up
 S - move mown
