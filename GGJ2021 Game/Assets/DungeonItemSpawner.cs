@@ -18,6 +18,7 @@ public class DungeonItemSpawner : MonoBehaviour
             if (index >= items.Length) break;
             items[index].transform.SetParent(shuffledSpawnPoints[index].transform, false);
             spawned.Add(items[index]);
+            items[index].gameObject.SetActive(true);
         }
 
         return spawned;

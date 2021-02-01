@@ -43,6 +43,7 @@ public class ItemGenerator : MonoBehaviour
     private Item BuildItem(string itemName, ItemRarity itemRarity, ItemType itemType, Sprite itemSprite, Transform itemHolder)
     {
         var item = Instantiate(itemPrefab, itemHolder);
+        item.SetActive(false);
         item.name = $"{itemName} ({itemRarity.name}, {itemType.name})";
 
         var componentClass = Type.GetType(itemType.component);
