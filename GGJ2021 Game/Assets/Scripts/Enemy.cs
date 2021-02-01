@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
     [SerializeField]
     float MaxAttackSpeed;
-    private float AttackSpeed;
+    private float AttackSpeed = 2;
     private WaitForSeconds AttckSpeedCooldown;
 
     [SerializeField] float MaxHealth = 10;
@@ -16,7 +16,7 @@ public class Enemy : MonoBehaviour
     private float Damage;
 
     [SerializeField] float MaxSpeed;
-    private float Speed = 2;
+    private float Speed = 3;
 
     [SerializeField] float AttackRangeModifier = 2;
 
@@ -32,7 +32,9 @@ public class Enemy : MonoBehaviour
     private bool GotHit;
 
 
-    private Vector2 StartPos;
+    private Vector3 StartPos;
+    private Vector3 MoveDir;
+    private Vector3 Destination;
 
     private Rigidbody2D Rigidbody2D;
 
@@ -62,11 +64,30 @@ public class Enemy : MonoBehaviour
         AttckSpeedCooldown = new WaitForSeconds(3 / AttackSpeed);
     }
 
-    protected virtual void Move(Vector3 _pos)
+    private void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, _pos, Speed * Time.deltaTime);
+        SetMoveDir(Destination);
+    }
 
-        SetAnimatorValues(_pos);
+    //protected virtual void Move(Vector2 _pos)
+    //{
+    //    Rigidbody2D.MovePosition(Vector2.MoveTowards(transform.position, _pos, Speed * Time.deltaTime));
+    //    SetAnimatorValues(_pos);
+    //}
+
+    private IEnumerator CMove()
+    {
+        while (this.transform.position != Destination)
+        {
+            Rigidbody2D.MovePosition(Vector2.MoveTowards(this.transform.position, Destination, Speed * Time.deltaTime));
+            SetAnimatorValues();
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    private void SetMoveDir(Vector3 _destination)
+    {
+        MoveDir = this.transform.position - _destination;
     }
 
     protected virtual void Attack(PlayerHealth _playerhealth)
@@ -74,7 +95,7 @@ public class Enemy : MonoBehaviour
         if (_playerhealth)
         {
             _playerhealth.PlayerTakesDamge(Damage);
-            StartCoroutine("AttackCooldown");
+            StartCoroutine(CAttackCooldown());
         }
     }
 
@@ -93,38 +114,33 @@ public class Enemy : MonoBehaviour
         AudioManager.instance.PlaySound(enemyHitSound);
     }
 
-    IEnumerator AttackCooldown()
+    IEnumerator CAttackCooldown()
     {
         Attacked = true;
-        Speed -= Speed;
-
         yield return AttckSpeedCooldown;
-
         Attacked = false;
-        Speed = MaxSpeed;
-        yield break;
     }
 
-    private void SetAnimatorValues(Vector3 _pos)
+    private void SetAnimatorValues()
     {
-        EnemyAnim.SetFloat("Speed", Speed);
+        EnemyAnim.SetFloat("Speed", MoveDir.magnitude);
 
-        if (_pos.x > transform.position.x)
+        if (Destination.x > transform.position.x)
         {
             EnemyAnim.SetFloat("Horizontal", 1);
             EnemyAnim.SetFloat("Vertical", 0);
         }
-        if (_pos.x < transform.position.x)
+        if (Destination.x < transform.position.x)
         {
             EnemyAnim.SetFloat("Horizontal", -1);
             EnemyAnim.SetFloat("Vertical", 0);
         }
-        if (_pos.y > transform.position.y)
+        if (Destination.y > transform.position.y)
         {
             EnemyAnim.SetFloat("Vertical", 1);
             EnemyAnim.SetFloat("Horizontal", 0);
         }
-        if (_pos.y < transform.position.y)
+        if (Destination.y < transform.position.y)
         {
             EnemyAnim.SetFloat("Vertical", -1);
             EnemyAnim.SetFloat("Horizontal", 0);
@@ -135,14 +151,27 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D _collision)
     {
-        Attack(_collision.gameObject.GetComponent<PlayerHealth>());
+        if (_collision.gameObject.tag == "Player")
+        {
+            Attack(_collision.collider.GetComponent<PlayerHealth>());
+        }
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D _collision)
+    {
+        if (_collision.gameObject.tag == "Player")
+        {
+            Destination = _collision.transform.position;
+            StartCoroutine(CMove());
+        }
     }
 
     private void OnTriggerStay2D(Collider2D _collision)
     {
         if (_collision.gameObject.tag == "Player")
         {
-            Move(_collision.transform.position);
+            Destination = _collision.transform.position;
         }
     }
 
@@ -150,7 +179,7 @@ public class Enemy : MonoBehaviour
     {
         if (_collision.gameObject.tag == "Player")
         {
-            Move(StartPos);
+            Destination = StartPos;
         }
     }
     #endregion

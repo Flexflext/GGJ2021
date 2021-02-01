@@ -7,6 +7,7 @@ public class PlayerTopDownMovement : MonoBehaviour
     [SerializeField] private float m_MovementSpeed;
 
     private Vector2 m_moveDir;
+    private Vector2 CollisionDir;
 
     private Rigidbody2D m_rB;
 
@@ -19,6 +20,8 @@ public class PlayerTopDownMovement : MonoBehaviour
     private Animator PlayerAnim;
 
     private AnimationClip[] animations;
+
+    private bool CanMove = true;
 
     private void Awake()
     {
@@ -35,7 +38,10 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (CanMove)
+        {
+            Move();
+        }
     }
 
     private void ManageInputs()
@@ -48,7 +54,7 @@ public class PlayerTopDownMovement : MonoBehaviour
 
     private void Move()
     {
-        float movementStat = Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.MovementSpeed) * 1.5F;
+        float movementStat = Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.MovementSpeed);
         float accel = m_MovementSpeed + movementStat;
         m_rB.velocity = new Vector2(m_moveDir.x * accel, m_moveDir.y * accel);
         float speedSqr = m_moveDir.sqrMagnitude;
@@ -65,4 +71,20 @@ public class PlayerTopDownMovement : MonoBehaviour
             PlayerAnim.SetBool("IsWalking", false);
         }
     }
+
+    //private void OnCollisionEnter2D(Collision2D _collision)
+    //{
+    //    if (_collision.gameObject.tag == "Enemy")
+    //    {
+    //        CanMove = false;
+    //    }
+    //}
+
+    //private void OnCollisionExit2D(Collision2D _collision)
+    //{
+    //    if (_collision.gameObject.tag == "Enemy")
+    //    {
+    //        CanMove = true;
+    //    }
+    //}
 }
