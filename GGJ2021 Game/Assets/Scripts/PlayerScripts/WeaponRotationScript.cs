@@ -18,8 +18,7 @@ public class WeaponRotationScript : MonoBehaviour
     }
 
     private void FixedUpdate()
-    {
-        if (!WeaponSprite) return;
+    {        if (!WeaponSprite) return;
         if (LookDir.x >= PlayerAttackScript.transform.position.x)
         {
             WeaponSprite.flipY = false;

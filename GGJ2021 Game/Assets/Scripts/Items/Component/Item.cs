@@ -7,7 +7,7 @@ using UnityEngine.Experimental.Rendering.Universal;
 
 public abstract class Item : MonoBehaviour
 {
-    public static ItemStat[] StatEnums = Enum.GetValues(typeof(ItemStat)).Cast<ItemStat>().ToArray();
+    public static Attribute[] StatEnums = Enum.GetValues(typeof(Attribute)).Cast<Attribute>().ToArray();
 
     public string Name;
     

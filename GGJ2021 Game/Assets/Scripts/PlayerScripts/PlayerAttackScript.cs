@@ -5,13 +5,13 @@ using UnityEngine;
 public class PlayerAttackScript : MonoBehaviour
 {
     public Transform Weapon;
-    
+
     public LayerMask EnemyLayer;
 
     float CurrentAttackCooldown;
     private float CurrentAttackDamage;
     private float CurrentAttackRange;
-    
+
     bool IsAttackingUpperRight;
     bool IsAttackingUpperLeft;
 
@@ -38,7 +38,7 @@ public class PlayerAttackScript : MonoBehaviour
     private void Update()
     {
         PlayerAttack();
-        
+
         PlayerAttackDirection();
 
         AnimationInfo = WeaponSwingAnim.GetCurrentAnimatorStateInfo(0);
@@ -46,8 +46,7 @@ public class PlayerAttackScript : MonoBehaviour
         IsAttacking = !AnimationInfo.IsName("Idle");
     }
     private void FixedUpdate()
-    {
-        GetMousePos();
+    {        GetMousePos();
     }
 
     void GetMousePos()
@@ -103,9 +102,9 @@ public class PlayerAttackScript : MonoBehaviour
 
     void PlayerAttack()
     {
-        CurrentAttackDamage = 5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.Damage);
-        CurrentAttackRange = 2F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackRange);
-        float attackSpeed = 1.5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.AttackSpeed);
+        CurrentAttackDamage = 5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(Attribute.AttackPower);
+        CurrentAttackRange = 2F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(Attribute.AttackRange);
+        float attackSpeed = 1.5F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(Attribute.AttackSpeed);
         float currentAttackCooldownSpeed = 1 / attackSpeed;
         WeaponSwingAnim.speed = attackSpeed;
         if (CurrentAttackCooldown <= 0 && Input.GetKeyDown(KeyCode.Mouse0))
@@ -173,7 +172,7 @@ public class PlayerAttackScript : MonoBehaviour
                         }
                     }
                 }
-                else if(enemy.transform.position.x < transform.position.x && LookDir.x < transform.position.x)
+                else if (enemy.transform.position.x < transform.position.x && LookDir.x < transform.position.x)
                 {
                     if (IsAttackingUpperLeft)
                     {
@@ -182,15 +181,15 @@ public class PlayerAttackScript : MonoBehaviour
                         {
                             Debug.Log("Upper Left");
 
-                            enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
+                            //enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }
                     }
                     else if (IsAttackingLowerLeft)
                     {
 
                         if (enemy.transform.position.y < transform.position.y)
-                        {                        Debug.Log("Lower Left");
-
+                        {
+                            Debug.Log("Lower Left");
 
                             enemy.GetComponent<Enemy>().TakeDamage(CurrentAttackDamage);
                         }

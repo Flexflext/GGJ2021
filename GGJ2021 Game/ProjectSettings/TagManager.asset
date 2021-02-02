@@ -14,6 +14,7 @@ TagManager:
   - Right
   - Player
   - ToDungeon
+  - Player
   layers:
   - Default
   - TransparentFX
@@ -34,7 +35,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - DungeonLight
   - 
   - 
   - 
@@ -53,4 +54,7 @@ TagManager:
     locked: 0
   - name: Items
     uniqueID: 264191715
+    locked: 0
+  - name: DungeonLightting
+    uniqueID: 632022509
     locked: 0

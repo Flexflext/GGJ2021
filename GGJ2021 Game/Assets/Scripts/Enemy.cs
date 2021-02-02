@@ -18,11 +18,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] float MaxSpeed;
     private float Speed = 3;
 
-    [SerializeField] float AttackRangeModifier = 2;
-
-
-    public GameObject EnemyDeathAnim;
-
     private PlayerHealth Player;
 
     private Animator EnemyAnim;
@@ -103,13 +98,13 @@ public class Enemy : MonoBehaviour
     {
         Health -= _damage;
         EnemyAnim.SetTrigger("IsDamaged");
-
+        Debug.Log("SeTrigger");
         if (Health <= 0)
         {
             AudioManager.instance.PlaySound(enemyDeathSound);
             Destroy(gameObject);
 
-            GameObject deathAnim = Instantiate(EnemyDeathAnim, transform.position, transform.rotation);
+            //GameObject deathAnim = Instantiate(EnemyDeathAnim, transform.position, transform.rotation);
         }
         AudioManager.instance.PlaySound(enemyHitSound);
     }
@@ -158,14 +153,14 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter2D(Collider2D _collision)
-    {
-        if (_collision.gameObject.tag == "Player")
-        {
-            Destination = _collision.transform.position;
-            StartCoroutine(CMove());
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D _collision)
+    //{
+    //    if (_collision.gameObject.tag == "Player")
+    //    {
+    //        Destination = _collision.transform.position;
+    //        StartCoroutine(CMove());
+    //    }
+    //}
 
     private void OnTriggerStay2D(Collider2D _collision)
     {

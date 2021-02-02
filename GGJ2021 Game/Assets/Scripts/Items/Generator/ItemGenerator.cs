@@ -97,7 +97,7 @@ public class ItemGenerator : MonoBehaviour
 
         EquipmentItem item = (EquipmentItem) BuildItem(itemName, itemRarity, itemType, itemSprite, itemHolder);
         item.StatValues = new int[Item.StatEnums.Length];
-        item.StatValues[(int) ItemStat.Damage] = 1;
+        item.StatValues[(int) Attribute.AttackPower] = 1;
         return item;
     }
 

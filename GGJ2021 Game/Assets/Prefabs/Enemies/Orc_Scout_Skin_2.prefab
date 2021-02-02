@@ -115,6 +115,8 @@ GameObject:
   - component: {fileID: 8780694453349134375}
   - component: {fileID: 8780694453349134377}
   - component: {fileID: 4289829795545775052}
+  - component: {fileID: -8693593455108694306}
+  - component: {fileID: -2253873782876013356}
   m_Layer: 8
   m_Name: Orc_Scout_Skin_2
   m_TagString: Enemy
@@ -144,7 +146,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8780694453349134368}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 14ce7491b4edc5d4aa37d19ee7c4fdab, type: 3}
   m_Name: 
@@ -153,12 +155,9 @@ MonoBehaviour:
   MaxHealth: 10
   MaxDamage: 2
   MaxSpeed: 2
-  AttackRangeModifier: 2
-  EnemyDeathAnim: {fileID: 1032723483358807502, guid: fdba8e888082fd84592f1fb241a6b346,
-    type: 3}
   KnockbackForce: 0
-  enemyHitSound: {fileID: 11400000, guid: dd7b1f5bd4084d44b9900ae746cb49ac, type: 2}
-  enemyDeathSound: {fileID: 11400000, guid: 3c438ce6f38a18743835e75490a59c8c, type: 2}
+  enemyHitSound: {fileID: 0}
+  enemyDeathSound: {fileID: 0}
 --- !u!61 &8780694453349134375
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -193,7 +192,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8780694453349134368}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -222,3 +221,45 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 4.5
+--- !u!114 &-8693593455108694306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780694453349134368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7960fffdea65874cb75c8d4ec5a9c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 2
+  m_AttackPower: 2
+  m_MoveSpeed: 2
+  m_AttackSpeed: 2
+  m_AttackSound: {fileID: 11400000, guid: f511b296f3fdc444fb2c731eef3c29be, type: 2}
+  m_WalkSound: {fileID: 0}
+  m_HitSound: {fileID: 11400000, guid: a889e7097618c9148817f1d5a3242130, type: 2}
+  m_DeathSound: {fileID: 11400000, guid: 3cc2390a6ff126a4c8c0990402f3af79, type: 2}
+--- !u!195 &-2253873782876013356
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780694453349134368}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0.2
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 3
