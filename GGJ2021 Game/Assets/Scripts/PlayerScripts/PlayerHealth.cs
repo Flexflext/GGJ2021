@@ -57,7 +57,7 @@ public class PlayerHealth : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1);
-            float regen = 0.3F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(ItemStat.HealthRegen);
+            float regen = 0.3F + Game.Instance.PlayerManager.PlayerStat.GetStatValue(Attribute.HealthRegen);
             CurrentHealth = Mathf.Clamp(CurrentHealth + regen, 1, MaxHealth);
         }
     }
@@ -96,6 +96,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void OnStatUpdated(PlayerStatScript statScript)
     {
-        MaxHealth = 3 + statScript.GetStatValue(ItemStat.Health);
+        MaxHealth = 3 + statScript.GetStatValue(Attribute.Health);
     }
 }

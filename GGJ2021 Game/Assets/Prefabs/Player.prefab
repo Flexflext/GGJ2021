@@ -398,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7040449921045486054}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.04, y: -6.06, z: -9}
+  m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3053946902814436226}
@@ -414,8 +414,8 @@ Camera:
   m_GameObject: {fileID: 7040449921045486054}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.08627451, g: 0.04705883, b: 0.16078432, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -540,6 +540,8 @@ GameObject:
   - component: {fileID: 4547619040880432893}
   - component: {fileID: 1077297384373713420}
   - component: {fileID: 8582324692753812966}
+  - component: {fileID: 1361421451}
+  - component: {fileID: 5694519808971987623}
   m_Layer: 13
   m_Name: Player
   m_TagString: Player
@@ -603,7 +605,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 8ec2b58ffc4ff214387321a03626350c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -693,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c9cbc8f42c61a46b44ce8c65325b91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MovementSpeed: 5
+  m_MovementSpeed: 8
   PlayerSprite: {fileID: 7040449921079689377}
   SwordPivot: {fileID: 7040449921936839893}
   Equipment: {fileID: 0}
@@ -712,7 +714,7 @@ MonoBehaviour:
   Weapon: {fileID: 7040449920465202772}
   EnemyLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 256
   IsAttacking: 0
   WeaponSwingAnim: {fileID: 7040449921936839888}
 --- !u!114 &5786872702734884249
@@ -772,6 +774,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RecentlyTeleported: 0
   WeaponRenderer: {fileID: 7040449920465202774}
+--- !u!195 &1361421451
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040449921079689381}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.1
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0.47
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
+--- !u!114 &5694519808971987623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7040449921079689381}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6e508fda85116443b12a36b4c6d2116, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MaxHealth: 5
+  m_AttackPower: 5
+  m_MoveSpeed: 5
+  m_AttackSpeed: 5
+  m_AttackSound: {fileID: 0}
+  m_WalkSound: {fileID: 0}
+  m_HitSound: {fileID: 0}
+  m_DeathSound: {fileID: 0}
 --- !u!1 &7040449921936839893
 GameObject:
   m_ObjectHideFlags: 0

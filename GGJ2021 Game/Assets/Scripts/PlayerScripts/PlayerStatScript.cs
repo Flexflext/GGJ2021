@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class PlayerStatScript : MonoBehaviour
 {
-    private int[] _playerStats = new int[Item.StatEnums.Length];
+    private int[] m_PlayerStats = new int[Item.StatEnums.Length];
+    public int GetStatValue(Attribute _attribute) { return m_PlayerStats[(int)_attribute]; }
+
 
     private readonly List<PlayerBuff> _activeBuffs = new List<PlayerBuff>();
 
@@ -28,7 +30,7 @@ public class PlayerStatScript : MonoBehaviour
             SumStat(buff.StatValues, playerStats);
         }
 
-        _playerStats = playerStats;
+        m_PlayerStats = playerStats;
 
         Game.Instance.UIManager.InventoryUI.PlayerStatText.SetText(StatValueVisualizer.ToString(playerStats));
         Game.Instance.PlayerManager.Health.OnStatUpdated(this);
@@ -73,10 +75,5 @@ public class PlayerStatScript : MonoBehaviour
         RecalculateStats();
         var buffPanel = Game.Instance.UIManager.BuffPanel.GetComponent<BuffPanelScript>();
         buffPanel.addBuff(playerBuff);
-    }
-
-    public int GetStatValue(ItemStat stat)
-    {
-        return _playerStats[(int) stat];
     }
 }

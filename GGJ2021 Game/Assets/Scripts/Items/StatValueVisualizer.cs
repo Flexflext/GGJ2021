@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class StatValueVisualizer
 {
-    private static Dictionary<ItemStat, string> statTranslations = new Dictionary<ItemStat, string>
+    private static Dictionary<Attribute, string> statTranslations = new Dictionary<Attribute, string>
     {
-        {ItemStat.Health, "Health"},
-        {ItemStat.HealthRegen, "HealthReg"},
-        {ItemStat.Damage, "Damage"},
-        {ItemStat.MovementSpeed, "Speed"},
-        {ItemStat.AttackSpeed, "AttackSpeed"},
-        {ItemStat.AttackRange, "Range"},
+        {Attribute.Health, "Health"},
+        {Attribute.HealthRegen, "HealthReg"},
+        {Attribute.AttackPower, "Damage"},
+        {Attribute.MovementSpeed, "Speed"},
+        {Attribute.AttackSpeed, "AttackSpeed"},
+        {Attribute.AttackRange, "Range"},
     };
 
     private static string LowGreenColorHex = "66ff72";
@@ -38,7 +38,7 @@ public class StatValueVisualizer
     public static string ToString(int[] statValues)
     {
         var sb = new StringBuilder();
-        foreach (ItemStat statEnum in Item.StatEnums)
+        foreach (Attribute statEnum in Item.StatEnums)
         {
             int statValue = statValues[(int)statEnum];
             if (statValue != 0)

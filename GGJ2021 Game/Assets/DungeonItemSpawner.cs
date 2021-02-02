@@ -15,9 +15,10 @@ public class DungeonItemSpawner : MonoBehaviour
         IItemSpawnPoint[] shuffledSpawnPoints = spawnPoints.OrderBy(x => Random.Range(0F, 10F)).ToArray();
         for (int index = 0; index < shuffledSpawnPoints.Length; index++)
         {
-            if(index >= items.Length) break;
+            if (index >= items.Length) break;
             items[index].transform.SetParent(shuffledSpawnPoints[index].transform, false);
             spawned.Add(items[index]);
+            items[index].gameObject.SetActive(true);
         }
 
         return spawned;

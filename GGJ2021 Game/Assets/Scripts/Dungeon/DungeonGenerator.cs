@@ -5,6 +5,7 @@ using UnityEngine;
 using static DungeonRoom;
 using static DungeonRoom.Connection;
 using Random = UnityEngine.Random;
+using UnityEngine.AI;
 
 public class DungeonGenerator : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class DungeonGenerator : MonoBehaviour
     [SerializeField] private GameObject[] UpRoomPrefabs;
     [SerializeField] private GameObject[] RightRoomPrefabs;
     [SerializeField] private GameObject[] EndRoomsPrefabs;
+    [SerializeField] public NavMeshSurface2d m_NavMeshSurface2D;
     private Item[] items;
 
     private List<DungeonRoom> OpenRooms = new List<DungeonRoom>();
@@ -35,7 +37,7 @@ public class DungeonGenerator : MonoBehaviour
     [ContextMenu("GenerateDungeon")]
     public void GenerateDungeon()
     {
-        foreach (Transform child in ParentTransform)
+        foreach (DungeonRoom child in ParentTransform)
         {
             Destroy(child.gameObject);
         }
@@ -53,9 +55,14 @@ public class DungeonGenerator : MonoBehaviour
                 AddRoom(OpenRooms[i]);
             }
         }
+
+        m_NavMeshSurface2D.compressBounds = true;
+        m_NavMeshSurface2D.overrideTileSize = true;
+        m_NavMeshSurface2D.tileSize = 32;
+        m_NavMeshSurface2D.BuildNavMesh();
         //TODO: CLEAR this **it
-        items = Game.Instance.ItemGenerator.GenerateItems(Game.Instance.itemHolder, 1000);
-        Game.Instance.dungeonItems = Game.Instance.dungeonItemSpawner.SpawnItems(items);
+       // items = Game.Instance.ItemGenerator.GenerateItems(Game.Instance.itemHolder, 1000);
+     //   Game.Instance.dungeonItems = Game.Instance.dungeonItemSpawner.SpawnItems(items);
         Game.Instance.npcManager.pickLostItems(Game.Instance.dungeonItems);
     }
 
